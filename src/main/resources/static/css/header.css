@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard-Regular';
+}
+
+header ul li{
+    list-style: none;
+}
+
+#header_top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 110px;
+}
+
+#header_top img{
+    /*width: 7vw;*/
+    width: 110px;
+    position: relative;
+    top: 7px;
+}
+
+#header_top>form{
+    margin-top: 50px;
+}
+
+#search{
+    margin-right: 1vw;
+    padding: 8px;
+    border: 2px solid #12a60d;
+    border-radius: 7px;
+    opacity: 0.8;
+    font-size: 18px;
+}
+
+#search:focus {
+    outline: none;
+}
+
+#search_txt{
+    width: 13vw;
+    border: 2px solid #12a60d;
+    border-radius: 20px;
+    padding: 8px 35px 8px 10px;
+    font-size: 18px;
+}
+
+#search_txt:focus{
+    outline: none;
+}
+
+#search_icon{
+    position: relative;
+    right: 35px;
+    border: none;
+    background-color: transparent;
+    color: #12a60d;
+}
+
+#header_top ul{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+#header_top ul li{
+    padding: 10px;
+}
+
+#header_top a{
+    text-decoration: none;
+}
+
+
+/* nav 바 시작 */
+#header_nav ul{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 35px 0;
+}
+
+#header_nav a{
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 1.3rem;
+    color: #292929;
+}
+
+#header_nav a:hover
+, #header_nav a:active{
+    color: #12a60d;
+}

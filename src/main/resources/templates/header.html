@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+</head>
+<body>
+	<header>
+		<div th:id="header_top">
+			<a th:href="@{/main}"><img th:src="@{images/logo.png}" alt="로고이미지"></a>
+			<form th:method="get" th:action="@{/search}">
+				<select th:name="search" th:id="search">
+					<option th:text="입시"></option>
+					<option th:text="학원홍보"></option>
+				</select>
+				<input type="text" th:name="search_txt" th:id="search_txt">
+				<button type="submit" id="search_icon">
+					<i class="fa-solid fa-magnifying-glass fa-lg"></i>
+				</button>
+			</form>
+			<ul>
+				<li><a th:href="@{/login}" th:text="로그인"></a></li>
+				<li><a th:href="@{/join}" th:text="회원가입"></a></li>
+			</ul>
+		</div>
+		<div th:id="header_nav">
+			<ul>
+				<li><a th:href="@{'#'}" th:text="입시"></a></li>
+				<li><a th:href="@{'#'}" th:text="학원홍보"></a></li>
+				<li><a th:href="@{'#'}" th:text="공지사항"></a></li>
+			</ul>
+		</div>
+	</header>
+</body>
+</html>
