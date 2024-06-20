@@ -15,5 +15,5 @@ public class AcademyDTO {
     private Long readNo;
     private LocalDateTime createAt;
     private String imgPath;
-    private Long uid;
+    private String nickname;
 }
