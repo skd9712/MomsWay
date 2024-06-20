@@ -1,0 +1,85 @@
+body {
+    margin: 5vh 20vw;
+}
+
+.boardtop {
+    text-align: center;
+    background: #F5C943;
+    border-radius: 40px 0;
+    padding: 3%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #444040;
+}
+
+.noticetop, .acalist {
+    margin: 0 7%;
+    list-style: none;
+    padding: 0;
+}
+
+.noticetop {
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+}
+
+.acalist {
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+}
+
+.noticetop li, .acalist li {
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    padding: 1.5%;
+}
+
+li span {
+    display: inline-block;
+}
+
+.noticetop li span:nth-child(2) {
+    width: 68.5%;
+}
+
+.acalist li span:nth-child(1), .noticetop li span:nth-child(1){
+    width: 5%;
+    text-align: center;
+}
+
+.acalist li span:nth-child(2){
+    width: 47%;
+}
+
+.acalist li span:nth-child(3){
+    width: 21%;
+    text-align: center;
+}
+
+.acalist li span:nth-child(4), .noticetop li span:nth-child(3){
+    width: 15%;
+    text-align: center;
+}
+
+.acalist li span:nth-child(5){
+    width: 7%;
+    text-align: center;
+}
+
+.paging {
+    text-align: center;
+    padding: 2%;
+}
+
+.paging a, .paging span {
+    display: inline-block;
+    padding: 2px;
+}
+
+#writebtn {
+    display: inline-block;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px lightgrey;
+    padding: 1%;
+
+    position: relative;
+    left: 27%;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <link rel="stylesheet" th:href="@{/css/academy/academy.css}">
+</head>
+<body>
+<header></header>
+<div id="academywrap">
+    <div class="boardtop">학원홍보</div>
+    <div class="list">
+        <ul class="noticetop">
+            <li>
+                <span>📌</span>
+                <span>${item.title}</span>
+                <span>${item.createAt}</span>
+            </li>
+            <li>
+                <span>📌</span>
+                <span>학원홍보 게시판 이용 가이드</span>
+                <span>2024.06.20</span>
+            </li>
+        </ul>
+        <ul class="acalist">
+            <li>
+                <span>5</span>
+                <span>[대치] A-Pass 수학학원 소수정예반 모집</span>
+                <span>A-Pass</span>
+                <span>2024.06.20</span>
+                <span>4345</span>
+            </li>
+            <li>
+                <span>4</span>
+                <span>목동 과학탐구 집중 단과반</span>
+                <span>김천재학원</span>
+                <span>2024.06.19</span>
+                <span>70</span>
+            </li>
+            <li>
+                <span>3</span>
+                <span>의치한약수 대비 선행반 모집</span>
+                <span>대치해법수학</span>
+                <span>2024.06.19</span>
+                <span>70</span>
+            </li>
+            <li>
+                <span>2</span>
+                <span>블라썸 영어학원</span>
+                <span>블라썸</span>
+                <span>2024.06.19</span>
+                <span>20</span>
+            </li>
+            <li>
+                <span>1</span>
+                <span>명품 입시컨설팅 (선착순 모집)</span>
+                <span>명품</span>
+                <span>2024.06.19</span>
+                <span>740</span>
+            </li>
+            <li>
+                <span>0</span>
+                <span>${item.title}</span>
+                <span>저진짜집에가고싶어요학원</span>
+                <span>2024.06.19</span>
+                <span>7</span>
+            </li>
+            <li>
+                <span>${item.aid}</span>
+                <span>${item.title}</span>
+                <span>${item.nickname}</span>
+                <span>${item.createAt}</span>
+                <span>${item.readNo}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="boardbottom">
+        <div class="paging">
+            <a href="#"> < </a>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <a href="#"> > </a>
+            <button id="writebtn">글쓰기</button>
+        </div>
+    </div>
+    <footer></footer>
+</div>
+</body>
+
+</html>
