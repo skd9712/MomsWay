@@ -4,6 +4,7 @@ import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.NoticeDTO;
 import com.momsway.service.MainService;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +22,8 @@ public class MainController {
     @GetMapping("/main")
     public String main(){
 
-//        /* 입시 인기글(좋아요순) 5개 */
-//        List<EntExamDTO> entLikeList=mainService.entExamLikeSortList();
+        /* 입시 인기글(좋아요순) 5개 */
+//        List<Tuple> entLikeList=mainService.entExamLikeSortList();
 //
 //        /* 공지사항 최신순 5개 */
 //        List<NoticeDTO> noticeList=mainService.noticeLatestList();
