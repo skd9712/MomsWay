@@ -62,4 +62,16 @@ public class NoticeServiceImpl implements NoticeService{
                 .imgPaths(imgPaths)
                 .build();
     }
+
+    @Override
+    public int delNotice(Long nid) {
+        int result = 0;
+        try{
+            noticeRepository.deleteById(nid);
+            result = 1;
+        }catch (Exception e){
+
+        }
+        return result;
+    }
 }

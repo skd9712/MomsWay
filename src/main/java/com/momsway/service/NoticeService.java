@@ -14,4 +14,5 @@ public interface NoticeService {
 
     NoticeDTO findByNid(Long nid);
 
+    int delNotice(Long nid);
 }

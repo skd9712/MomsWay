@@ -1,0 +1,34 @@
+
+.noticelist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.noticelist li {
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    padding: 1.5%;
+}
+
+/* 카테고리 */
+.noticelist li span:nth-child(1) {
+    width: 7%;
+    text-align: center;
+}
+
+/* 타이틀 */
+.noticelist li span:nth-child(2) {
+    width: 47%;
+}
+
+/* 작성일 */
+.noticelist li span:nth-child(3) {
+    width: 5%;
+    text-align: center;
+}
+
+/* 조회수 */
+.noticelist li span:nth-child(4) {
+    width: 5%;
+    text-align: center;
+}
