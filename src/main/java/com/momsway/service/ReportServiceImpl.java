@@ -58,6 +58,7 @@ public class ReportServiceImpl implements ReportService {
                     .uid(item.getReportUser().getUid())
                     .eid(item.getReportEntExam().getEid())
                     .status(item.getStatus())
+                    .comment(item.getComment())
                     .build();
             return build;
         }).collect(Collectors.toList());
@@ -66,13 +67,5 @@ public class ReportServiceImpl implements ReportService {
         return collect;
     }
 
-//    @Override
-//    public List<ReportDTO> reportlist() {
-//       List<Report> reporboardlist=reportRepository.findAllReport();
-//       List<ReportDTO> reportDTOList=reporboardlist.stream()
-//               .map(item -> modelMapper.map(item,ReportDTO.class))
-//               .collect(Collectors.toList());
-//        return reportDTOList;
-//    }
 
 }

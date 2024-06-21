@@ -1,0 +1,72 @@
+#reportwrap{
+    margin: 5vh 20vw;
+}
+.boardtop {
+    text-align: center;
+    background: #F5C943;
+    border-radius: 40px 0;
+    padding: 3%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #444040;
+}
+.list {
+    margin: 0 3%;
+    border-bottom: 2px solid #58B27B;
+}
+
+.reporttop, .reportlist{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 54vw;
+}
+.reporttop{
+    background: #58B27B;
+}
+.reporttop li, .reportlist li{
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    padding: 1.5%;
+}
+li span {
+    display: inline-block;
+}
+
+.reporttop li span:nth-child(1), .reportlist li span:nth-child(1){
+    width: 10%;
+    text-align: center;
+}
+.reporttop li span:nth-child(2), .reportlist li span:nth-child(2){
+    width: 16%;
+    text-align: center;
+}
+.reporttop li span:nth-child(3), .reportlist li span:nth-child(3){
+    width: 13%;
+    text-align: center;
+}
+.reporttop li span:nth-child(4), .reportlist li span:nth-child(4){
+    width: 30%;
+    text-align: center;
+}
+.reporttop li span:nth-child(5), .reportlist li span:nth-child(5){
+    width: 16%;
+    text-align: center;
+}
+.reporttop li span:nth-child(6), .reportlist li span:nth-child(6){
+    width: 10%;
+    text-align: center;
+}
+.repdel{
+    background-color: #f88686;
+}
+.paging {
+    text-align: center;
+    padding: 2%;
+}
+
+.paging a, .paging span {
+    display: inline-block;
+    padding: 2px;
+    text-decoration: none;
+    color: #444040;
+}
