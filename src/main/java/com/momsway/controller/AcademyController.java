@@ -9,4 +9,9 @@ public class AcademyController {
     public String academy(){
         return "academy";
     }
+
+    @GetMapping("/academy/uid")
+    public String detail(){
+        return "acadetail";
+    }
 }
