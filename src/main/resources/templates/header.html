@@ -7,8 +7,8 @@
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 </head>
 <body>
-	<header>
-		<div th:id="header_top">
+	<header th:fragment="header_template">
+		<div id="header_top">
 			<a th:href="@{/main}"><img th:src="@{images/logo.png}" alt="로고이미지"></a>
 			<form th:method="get" th:action="@{/search}">
 				<select th:name="search" th:id="search">
@@ -27,9 +27,9 @@
 		</div>
 		<div th:id="header_nav">
 			<ul>
-				<li><a th:href="@{'#'}" th:text="입시"></a></li>
-				<li><a th:href="@{'#'}" th:text="학원홍보"></a></li>
-				<li><a th:href="@{'#'}" th:text="공지사항"></a></li>
+				<li><a th:href="@{'#'}">입시</a></li>
+				<li><a th:href="@{'#'}">학원홍보</a></li>
+				<li><a th:href="@{'#'}">공지사항</a></li>
 			</ul>
 		</div>
 	</header>

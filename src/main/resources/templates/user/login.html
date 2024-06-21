@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
+	<link rel="stylesheet" th:href="@{/css/user/login.css}">
 </head>
 <body>
-
+<header layout:fragment="header" th:replace="header :: header_template"></header>
+<div th:id="wrap">
+	<div id="middle_body">
+		<div id="login_box">
+			<h1>LOGIN</h1>
+			<div class="login_line"></div>
+			<form th:method="post" th:action="@{/login_result}" id="login_form">
+				<ul>
+					<li>
+						<input type="email" th:name="email" th:id="email" th:placeholder="이메일">
+					</li>
+					<li>
+						<input type="password" th:name="pwd" th:id="pwd" th:placeholder="비밀번호">
+					</li>
+					<li>
+						<button type="submit" id="submit">로그인</button>
+					</li>
+				</ul>
+			</form>
+			<a th:href="@{/join}">회원가입</a>
+		</div>
+	</div>
+	<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
+</div>
 </body>
 </html>

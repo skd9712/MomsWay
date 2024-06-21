@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+	<footer th:fragment="footer_template">
+		<div id="footer_box">
+			<ul class="footer_top">
+				<li><a th:href="@{'#'}">이용약관</a></li>
+				<li><a th:href="@{'#'}">개인정보처리방침</a></li>
+				<li><a th:href="@{'#'}">고객센터</a></li>
+			</ul>
+			<div class="line"></div>
+			<ul class="footer_middle">
+				<li>
+					<p>(주) 맘스웨이</p>
+					<p>대표자 김천재</p>
+				</li>
+				<li>
+					<p>사업자등록번호: 123-45-67890</p>
+					<p>통신판매신고번호 제00-000호</p>
+					<p>부가통신사업신고 012345</p>
+				</li>
+				<li>
+					<p>서울시 금천구 디지털로9길 23 마리오아울렛 2관</p>
+				</li>
+			</ul>
+			<p class="copyright">Copyright ⓒ MOMSWAY</p>
+		</div>
+	</footer>
+</body>
+</html>
