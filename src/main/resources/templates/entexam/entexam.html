@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{css/board/board.css}">
+    <script th:src="@{js/entexam/entexam.js}"></script>
+</head>
+<body>
+<header></header>
+<div id="entexamwrap">
+    <div class="boardtop">입시</div>
+    <div class="list">
+        <ul class="noticetop">
+            <li th:each="t:${toplist}">
+                <th:block th:if="${t.category.equals('EVENT')}">
+                    <span>🎁</span>
+                </th:block>
+                <th:block th:if="${t.category.equals('NOTICE')}">
+                    <span>📌</span>
+                </th:block>
+                <span th:text="${t.title}"/>
+                <span th:text="${#temporals.format(t.createAt,'yyyy-MM-dd')}"/>
+            </li>
+        </ul>
+        <ul class="boardlist" th:each="item:${entlist}">
+            <li>
+                <span th:text="${item.eid}"></span>
+                <span th:text="${item.title}"></span>
+                <span th:text="${item.nickname}"></span>
+                <span th:text="${#temporals.format(item.createAt,'yyyy-MM-dd')}"></span>
+                <span th:text="${item.readNo}"></span>
+            </li>
+        </ul>
+
+    </div>
+    <div class="boardbottom">
+        <div class="paging">
+            <th:block th:if="${startPage>1}">
+                <a th:href="@{/entexam(page=${startPage}-1)}" th:text="이전"></a>
+            </th:block>
+            <th:block th:each="index:${#numbers.sequence(startPage,endPage)}">
+                <span th:if="${index==entlist.pageable.getPageNumber()+1}"
+                      th:text="${index}"></span>
+                <th:block th:if="${index!=entlist.pageable.getPageNumber()+1}">
+                    <a th:href="@{/entexam(page=${index})}" th:text="${index}"></a>
+                </th:block>
+            </th:block>
+            <th:block th:if="${endPage<entlist.getTotalPages()}">
+                <a th:href="@{/entexam(page=${endPage}+1)}" th:text="다음"></a>
+            </th:block>
+        </div>
+        <button id="writebtn" type="button">글쓰기</button>
+    </div>
+    <footer></footer>
+</div>
+</body>
+</html>

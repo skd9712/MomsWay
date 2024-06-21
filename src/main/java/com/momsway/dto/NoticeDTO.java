@@ -15,8 +15,18 @@ public class NoticeDTO {
     private String category;
     private String title;
     private String content;
-    private String readNo;
+    private Long readNo;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private List<String> imgPaths;
+
+    public NoticeDTO(Long nid, Boolean notify, String category,
+                     String title,Long readNo, LocalDateTime createAt){
+        this.nid=nid;
+        this.notify=notify;
+        this.title=title;
+        this.readNo=readNo;
+        this.createAt=createAt;
+        this.category=category;
+    }
 }

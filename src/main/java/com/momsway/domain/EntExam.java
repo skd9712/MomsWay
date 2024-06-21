@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name="ent_exam")
 @NoArgsConstructor
 @Getter
+@Setter
 public class EntExam extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

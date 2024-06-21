@@ -1,0 +1,40 @@
+body{
+    margin: 5vh 20vw;
+}
+.boardtop{
+    text-align: center;
+    background: #F5C943;
+    border-radius: 40px 0;
+    padding: 3%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #444040;
+}
+.list{
+    margin: 0 7%;
+}
+.noticetop, .entlist{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.noticetop{
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+}
+.entlist{
+    border-bottom: 2px solid #58B27B;
+}
+.noticetop li, .acalist{
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    padding: 1.5%;
+}
+li span{
+    display: inline-block;
+}
+.noticetop li span:nth-child(2) {
+    width: 68.5%;
+}
+.entlist li span:nth-child(1), .noticetop li span:nth-child(1){
+    width: 5%;
+    text-align: center;
+}

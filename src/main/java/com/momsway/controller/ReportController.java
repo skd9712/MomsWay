@@ -5,20 +5,30 @@ import com.momsway.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class ReportController {
     private final ReportService reportService;
+    /** 신고리스트 불러오기 */
+
+
     @GetMapping("/report")
-    public String report(){
+    public String report(Model model) {
+        List<ReportDTO> reportlist = reportService.findAllReport();
+        model.addAttribute("reportlist", reportlist);
         // 신고 리스트 불러오는 로직
-        return "reportlist";
+        return "report/reportlist";
     }
+
+//    @GetMapping("/report/{rid}")
+//    public String detail(@PathVariable Long rid, Model model){
+//        ReportDTO dto=
+//    }
 
     @PostMapping("/delreport")
     public @ResponseBody ResponseEntity<Integer> delReport(@RequestBody ReportDTO dto){
@@ -26,4 +36,6 @@ public class ReportController {
         int result = reportService.delReport(dto);
         return ResponseEntity.ok().body(result);
     }
+
+
 }

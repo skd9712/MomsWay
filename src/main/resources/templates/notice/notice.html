@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <link rel="stylesheet" th:href="@{/css/academy/academy.css}">
+</head>
+<body>
+<header></header>
+<div id="academywrap">
+    <div class="boardtop">공지사항</div>
+    <div class="list">
+        <ul class="noticetop">
+            <li th:each="t:${toplist}">
+                <th:block th:if="${t.category.equals('EVENT')}">
+                    <span>🎁</span>
+                </th:block>
+                <th:block th:if="${t.category.equals('NOTICE')}">
+                    <span>📌</span>
+                </th:block>
+                <span><a th:href="@{|/notice/${t.nid}|}" th:text="${t.title}"/></span>
+                <span th:text="${#temporals.format(t.createAt,'yyyy-MM-dd')}"/>
+            </li>
+        </ul>
+        <ul class="acalist">
+            <li th:each="i:${list}">
+                <th:block th:if="${i.category.equals('EVENT')}">
+                    <span>이벤트</span>
+                </th:block>
+                <th:block th:if="${i.category.equals('NOTICE')}">
+                    <span>공지</span>
+                </th:block>
+                <span><a th:href="@{|/notice/${i.nid}|}" th:text="${i.title}"/></span>
+                <span>${item.nickname}</span>
+                <span th:text="${#temporals.format(i.createAt,'yyyy-MM-dd')}"/>
+                <span th:text="${i.readNo}"/>
+            </li>
+        </ul>
+    </div>
+    <div class="boardbottom">
+        <div class="paging">
+            <th:block th:if="${startPage>1}">
+                <a th:href="@{/notice(page=${startPage}-1)}" th:text="이전"/>
+            </th:block>
+            <th:block th:each="idx:${#numbers.sequence(startPage,endPage)}">
+                <span class="curr" th:if="${idx==list.pageable.getPageNumber()+1}" th:text="${idx}"/>
+                <span th:if="${idx!=list.pageable.getPageNumber()+1}">
+            <a th:href="@{/notice(page=${idx})}" th:text="${idx}"/>
+        </span>
+            </th:block>
+            <th:block th:if="${endPage<list.totalPages}">
+                <a th:href="@{/notice(page=${endPage+1})}" th:text="다음"/>
+            </th:block>
+            <button id="writebtn" type="button">글쓰기</button>
+        </div>
+    </div>
+    <footer></footer>
+</div>
+</body>
+
+</html>

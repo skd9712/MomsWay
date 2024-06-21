@@ -14,9 +14,10 @@ body {
 
 .list {
     margin: 0 7%;
+    border-bottom: 2px solid #58B27B;
 }
 
-.noticetop, .acalist {
+.noticetop, .boardlist {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -26,11 +27,7 @@ body {
     border-bottom: 1px solid rgba(153, 153, 153, 0.5);
 }
 
-.acalist {
-    border-bottom: 2px solid #58B27B;
-}
-
-.noticetop li, .acalist li {
+.noticetop li, .boardlist li {
     border-bottom: 1px solid rgba(153, 153, 153, 0.5);
     padding: 1.5%;
 }
@@ -43,26 +40,26 @@ li span {
     width: 68.5%;
 }
 
-.acalist li span:nth-child(1), .noticetop li span:nth-child(1){
+.boardlist li span:nth-child(1), .noticetop li span:nth-child(1){
     width: 5%;
     text-align: center;
 }
 
-.acalist li span:nth-child(2){
+.boardlist li span:nth-child(2){
     width: 47%;
 }
 
-.acalist li span:nth-child(3){
+.boardlist li span:nth-child(3){
     width: 21%;
     text-align: center;
 }
 
-.acalist li span:nth-child(4), .noticetop li span:nth-child(3){
+.boardlist li span:nth-child(4), .noticetop li span:nth-child(3){
     width: 15%;
     text-align: center;
 }
 
-.acalist li span:nth-child(5){
+.boardlist li span:nth-child(5){
     width: 7%;
     text-align: center;
 }
