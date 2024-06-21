@@ -1,0 +1,137 @@
+body {
+    margin: 5vh 20vw;
+}
+
+.dttop {
+    text-align: center;
+    background: #F5C943;
+    border-radius: 40px 0;
+    padding: 3%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #444040;
+}
+.dttop button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#mod {
+    background-color: #4CAF50; /* 수정 버튼의 배경색 */
+}
+
+#mod:hover {
+    background-color: #45a049; /* 수정 버튼 호버 색상 */
+}
+
+#del {
+    background-color: #f44336; /* 삭제 버튼의 배경색 */
+}
+
+#del:hover {
+    background-color: #e53935; /* 삭제 버튼 호버 색상 */
+}
+.dtbody {
+    margin: 0 7%;
+}
+
+.dtinfo {
+    padding: 1.5%;
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+}
+
+.dtinfo span {
+    display: inline-block;
+    margin-right: 3%;
+}
+
+.dtinfo span:nth-child(1) {
+    color: #58B27B;
+    font-weight: 600;
+}
+
+.infospan {
+    float: right;
+}
+
+
+.dtcontent{
+    padding: 7% 0 7% 0;
+}
+
+.dtcontent img {
+    border: 1px solid;
+}
+.functions {
+    border-bottom: 2px solid #58B27B;
+    padding: 2%;
+}
+
+.dtreply {
+    padding: 4%;
+}
+
+.replylist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.replybox {
+    display: inline-block;
+    width: 80%;
+    height: 80px;
+}
+
+#writeReply {
+    display: inline-block;
+    width: 15%;
+    height: 87px;
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#writeReply:hover{
+    background-color: #45a049;
+}
+.replylist li {
+    padding: 1.5%;
+}
+
+.replylist li:nth-child(odd) {
+    margin-top: 3%;
+}
+
+.replylist li:nth-child(even) {
+    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    padding-bottom: 3%;
+}
+.replylist button{
+    background: white;
+    border: none;
+}
+.tolist {
+    text-align: center;
+    padding: 5%;
+}
+
+.tolist a{
+    display: inline-block;
+    width: 100px;
+    background-color: #F5C943;
+    padding: 2%;
+    text-decoration: none;
+    color: #444040;
+}
+

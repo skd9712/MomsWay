@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import static com.momsway.domain.QEntExam.*;
+import static com.momsway.domain.QUser.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,8 +26,9 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
     @Override
     public Page<EntExamDTO> orderlist(Pageable pageable) {
         BooleanBuilder builder = new BooleanBuilder();
-        List<EntExamDTO> list = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.eid, entExam.title, entExam.createAt, entExam.readNo))
+        List<EntExamDTO> list = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.eid, entExam.title,user.nickname, entExam.createAt, entExam.readNo))
                 .from(entExam)
+                .innerJoin(entExam.entExamUser, user)
                 .orderBy(entExam.eid.desc())
                 .where(builder)
                 .offset(pageable.getOffset())

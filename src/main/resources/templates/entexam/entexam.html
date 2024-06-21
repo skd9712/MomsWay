@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/entexam/entexam.css}">
+    <link rel="stylesheet" th:href="@{css/board/board.css}">
+    <!--    <link rel="stylesheet" th:href="@{/css/entexam/entexam.css}">-->
 </head>
 <body>
 <header></header>
@@ -17,13 +18,19 @@
                 <span>날짜</span>
             </li>
         </ul>
-        <ul class="entlist" th:each="item:${entList}">
-            <li th:text="${item.eid}"></li>
-            <li th:text="${item.title}"></li>
-            <li th:text="${#temporals.format(item.createAt,'yyyy-MM-dd HH:mm')}"></li>
-            <li th:text="${item.readNo}"></li>
+        <ul class="boardlist" th:each="item:${entList}">
+            <li>
+                <span th:text="${item.eid}"></span>
+                <span th:text="${item.title}"></span>
+                <span th:text="${item.nickname}"></span>
+                <span th:text="${#temporals.format(item.createAt,'yyyy-MM-dd')}"></span>
+                <span th:text="${item.readNo}"></span>
+            </li>
         </ul>
-        <div>
+
+    </div>
+    <div class="boardbottom">
+        <div class="paging">
             <th:block th:if="${startPage>1}">
                 <a th:href="@{/entexam(page=${startPage}-1)}" th:text="이전"></a>
             </th:block>
@@ -40,6 +47,7 @@
         </div>
         <button id="writebtn" type="button">글쓰기</button>
     </div>
+    <footer></footer>
 </div>
 </body>
 </html>
