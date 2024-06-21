@@ -15,25 +15,25 @@
 	<div id="middle_body">
 		<div id="join_box">
 			<h1>회원가입</h1>
-			<form th:method="post" th:action="@{'#'}" id="login_form">
+			<form th:method="post" th:action="@{'#'}" id="join_form">
 				<ul>
 					<li>
 						<label>이메일</label>
-						<input type="email" th:name="email" th:id="email">
+						<input type="email" th:name="email" th:id="email" th:class="join_input">
 					</li>
 					<li>
 						<label>비밀번호</label>
-						<input type="password" th:name="pwd" th:id="pwd">
+						<input type="password" th:name="pwd" th:id="pwd" th:class="join_input">
 					</li>
 					<li>
 						<label>닉네임</label>
-						<input type="text" th:name="nickname" th:id="nickname">
+						<input type="text" th:name="nickname" th:id="nickname" th:class="join_input">
 					</li>
 					<li>
 						<label>회원유형</label>
 						<select th:name="role" th:id="role">
-							<option>학부모</option>
-							<option>학원</option>
+							<option th:value="PARENT">학부모</option>
+							<option th:value="ACADEMY">학원</option>
 						</select>
 					</li>
 					<li>
@@ -95,6 +95,10 @@
 							제7조 [약관의 해석]
 							이 약관에서 정하지 아니한 사항과 이 약관의 해석에 관하여는 「콘텐츠산업진흥법」, 「전자상거래 등에서의 소비자보호에 관한 법률」, 「학원의 설립ㆍ운영 및 과외교습에 관한 법률」,「약관의 규제에 관한 법률」, 기타 관계법령 및 상관습에 따릅니다.
 						</p>
+					</li>
+					<li>
+						<label for="check">동의함</label>
+						<input type="checkbox" id="check">
 					</li>
 					<li>
 						<button type="submit" id="submit">회원가입</button>

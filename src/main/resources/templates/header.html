@@ -12,8 +12,8 @@
 			<a th:href="@{/main}"><img th:src="@{images/logo.png}" alt="로고이미지"></a>
 			<form th:method="get" th:action="@{/search}">
 				<select th:name="search" th:id="search">
-					<option th:text="입시"></option>
-					<option th:text="학원홍보"></option>
+					<option th:value="EntExam">입시</option>
+					<option th:value="Academy">학원홍보</option>
 				</select>
 				<input type="text" th:name="search_txt" th:id="search_txt">
 				<button type="submit" id="search_icon">
