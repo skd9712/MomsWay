@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/academy/acadetail.css}">
+</head>
+<body>
+<header></header>
+<div id="noticedetailwrap">
+    <div class="dttop">
+        <span th:text="${dto.title}"></span>
+        <button type="submit" id="mod">수정</button>
+        <button type="button" id="del">삭제</button>
+    </div>
+    <div class="dtbody">
+        <div class="dtinfo">
+            <span> 웹애플리케이션개발 </span>
+            <span class="infospan" th:text="|조회 ${dto.readNo}|"> 조회 109 </span>
+            <span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"> 2024.06.21 09:10</span>
+        </div>
+        <div class="dtcontent">
+            <th:block th:each="img:${dto.imgPaths}">
+                <img th:src="@{|/images/${img}|}" alt="acaimg">
+            </th:block>
+            <p>A-Pass 학원은 고등학교 수학만을 전문으로 가르치고 있습니다.
+
+                여름방학 기간동안 스프린트 형식으로 문제 풀이에 집중하는 소수정예반을 모집합니다.
+                수학에 몰입하는 경험과 문제 접근력을 훈련하는 학습 커리큘럼으로 구성되어 있어
+                기본 개념을 마친 학생이 수강 대상인 점 참고 바랍니다.
+
+                연락처 000-0000-0000
+                이메일 apply@apass.com</p>
+        </div>
+        <div class="tolist">
+            <a href="/notice">목록으로</a>
+        </div>
+    </div>
+    <footer></footer>
+</div>
+</body>
+</html>
