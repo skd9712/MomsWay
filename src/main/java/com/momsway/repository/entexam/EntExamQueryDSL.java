@@ -16,7 +16,8 @@ public interface EntExamQueryDSL {
 
     Page<EntExamDTO> orderlist(Pageable pageable);
 
+    EntExamDTO findByEid(Long eid);
 
-//    List<EntExam> orderlist();
+
 
 }

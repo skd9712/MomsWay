@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:id="entexamdetailwrap">
+    <div class="dttop">
+        <span th:text="${dto.title}"></span>
+        <button type="submit" id="mod">수정</button>
+        <button type="button" id="del">삭제</button>
+    </div>
+    <div class="dtbody">
+        <div class="dtinfo">
+            <span class="infospan" th:text="${dto.nickname}"></span>
+            <span class="infospan" th:text="|조회 ${dto.readNo}|"></span>
+            <span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
+        </div>
+        <div class="dtcontent">
+            <th:block th:each="img:${dto.imgPath}">
+                <img th:src="@{'/getimages/'+${img}}" alt="img">
+            </th:block>
+            <p th:text="${dto.content}"></p>
+        </div>
+        <div class="tolist">
+            <a href="/entexam">목록으로</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

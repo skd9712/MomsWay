@@ -12,11 +12,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Controller
@@ -25,6 +31,9 @@ import java.util.List;
 public class EntExamController {
     @Value("D:\\backend/upload_img")
     private String saveFolder;
+
+    @Value("D:\\backend/upload_img")
+    private String filePath;
     private final LikeService likeService;
     private final EntExamService entExamService;
     private final NoticeService noticeService;
@@ -45,12 +54,33 @@ public class EntExamController {
     public String insertEnt(){
         return "entexam/insertent";
     }
-    @PostMapping("insertent")
+    @PostMapping("/insertent")
     public String entresult(EntExamDTO dto, Model model){
         log.info("....upload file path: {}",saveFolder);
         long result = entExamService.upload(saveFolder,dto);
         log.info("...upload file length:{}",result);
         return "redirect:/entexam";
+    }
+    @GetMapping("/entdetail/{eid}")
+    public String entexamDetail(@PathVariable Long eid,Model model){
+        EntExamDTO dto = entExamService.findByEid(eid);
+        model.addAttribute("dto",dto);
+        return "entexam/entexamdetail";
+    }
+    @GetMapping(value = "/getimages/{filename}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String filename){
+        InputStream in = null;
+        ResponseEntity<byte[]> entity = null;
+        try {
+            in = new FileInputStream(filePath+"/"+filename);
+            HttpHeaders headers = new HttpHeaders();
+            entity = new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(in)
+                    ,headers, HttpStatus.OK);
+        }catch (IOException e){
+            System.out.println(e);
+            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return entity;
     }
     /*
         list (html 리턴)

@@ -66,20 +66,16 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
         return new PageImpl<>(list,pageable,totalCount);
     }
 
+    @Override
+    public EntExamDTO findByEid(Long eid) {
+        EntExamDTO entExamDTO = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.eid, entExam.title, entExam.content, entExam.createAt, entExam.readNo, user.nickname,entExam.imgPath))
+                .from(entExam)
+                .innerJoin(entExam.entExamUser, user)
+                .where(entExam.eid.eq(eid))
+                .fetchOne();
+        return entExamDTO;
 
-//    @Override
-//    public List<EntExam> orderlist() {
-//        List<Tuple> fetch
-//                = queryFactory.select(entExam.eid, entExam.title, entExam.createAt, entExam.readNo).from(entExam).orderBy(entExam.eid.desc()).fetch();
-//
-//        return fetch.stream().map(tuple -> {
-//            EntExam entExam = new EntExam();
-//            entExam.setEid(tuple.get(QEntExam.entExam.eid));
-//            entExam.setTitle(tuple.get(QEntExam.entExam.title));
-//            entExam.setCreateAt(tuple.get(QEntExam.entExam.createAt));
-//            entExam.setReadNo(tuple.get(QEntExam.entExam.readNo));
-//            return entExam;
-//        }).collect(Collectors.toList());
-//    }
+    }
+
 
 }
