@@ -17,6 +17,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Repository;
+import org.thymeleaf.spring6.expression.Fields;
+
 import static com.momsway.domain.QEntExam.*;
 import static com.momsway.domain.QUser.*;
 
@@ -34,18 +36,23 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
     @Override
     public List<Tuple> entExamLikeSortList() {
 
-        List<Tuple> entLikeSortList
-                = queryFactory.select(entExam, entLike.count())
-                .from(entExam)
-                .innerJoin(entExam.entExamEntLikes, entLike)
-                .fetchJoin()
-                .groupBy(entLike.likeEntExam.eid)
-                .orderBy(entLike.count().desc())
-                .offset(0)
-                .limit(5)
-                .fetch();
+//
+//        List<Tuple> list = queryFactory.select(
+//                        entExam.eid
+//                        , entExam.title
+//                        , entLike.lid.count()
+//                )
+//                .from(entExam)
+//                .innerJoin(entExam.entExamEntLikes, entLike)
+//                .fetchJoin()
+//                .groupBy(entLike.likeEntExam.eid)
+//                .orderBy(entLike.count().desc())
+//                .offset(0)
+//                .limit(5)
+//                .fetch();
 
-        return entLikeSortList;
+
+        return null;
     }
   
     @Override

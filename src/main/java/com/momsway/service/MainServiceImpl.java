@@ -2,6 +2,7 @@ package com.momsway.service;
 
 import com.momsway.domain.EntExam;
 import com.momsway.dto.EntExamDTO;
+import com.momsway.dto.LikeDTO;
 import com.momsway.repository.entexam.EntExamRepository;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,16 @@ public class MainServiceImpl implements MainService{
     private final ModelMapper modelMapper;
 
     @Override
-    public List<Tuple> entExamLikeSortList() {
+    public List<Object[]> entExamLikeSortList() {
         List<Tuple> entExamList
                 = entExamRepository.entExamLikeSortList();
 
-        return entExamList;
+//        List<Object[]> list = entExamList.stream().map(item -> {
+//            Object[] o = item.toArray();
+//            return o;
+//        }).collect(Collectors.toList());
+
+
+        return null;
     }
 }
