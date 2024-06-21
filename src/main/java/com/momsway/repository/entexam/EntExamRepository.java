@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface EntExamRepository extends JpaRepository<EntExam,Long>, EntExamQueryDSL {
+    @Override
+    <S extends EntExam> S save(S entity);
 
     @Override
     List<EntExam> findAll();

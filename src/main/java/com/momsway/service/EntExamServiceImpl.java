@@ -13,11 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,15 +29,6 @@ import java.util.stream.Collectors;
 public class EntExamServiceImpl implements EntExamService{
     private final EntExamRepository entExamRepository;
     private final ModelMapper modelMapper;
-//    @Override
-//    public List<EntExamDTO> entlist() {
-//
-//        List<EntExam> entList = entExamRepository.orderlist();
-//        List<EntExamDTO> entDTOList = entList.stream().map(item ->
-//                        modelMapper.map(item, EntExamDTO.class))
-//                .collect(Collectors.toList());
-//        return entDTOList;
-//    }
 
     @Override
     public Page<EntExamDTO> entlist(Pageable pageable) {
@@ -48,6 +42,7 @@ public class EntExamServiceImpl implements EntExamService{
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .imgPath(dto.getImgPath())
+                .readNo(0L)
                 .build();
         EntExam savedEntity = entExamRepository.save(entity);
         List<String> fnames = new ArrayList<>();
@@ -64,21 +59,44 @@ public class EntExamServiceImpl implements EntExamService{
         return fnames.size();
     }
 
+    @Override
+    public EntExamDTO findByEid(Long eid) {
+        EntExamDTO detail = entExamRepository.findByEid(eid);
+
+        return EntExamDTO.builder()
+                .eid(detail.getEid())
+                .title(detail.getTitle())
+                .content(detail.getContent())
+                .readNo(detail.getReadNo())
+                .createAt(detail.getCreateAt())
+                .imgPath(detail.getImgPath())
+                .nickname(detail.getNickname())
+                .build();
+    }
+
     private List<String> fileUpload(String saveFolder, List<MultipartFile> files) {
-        List<String> fileNames = new ArrayList<>();
-        for(MultipartFile file: files){
-            if(!file.isEmpty()){
-                String fileName = file.getOriginalFilename();
-                File dest = new File(saveFolder,fileName);
-                try {
-                    file.transferTo(dest);
-                    fileNames.add(dest.getAbsolutePath());
-                }catch (IOException e){
-                    System.out.println(e);
-                }
-            }
+        List<File> saveFile = new ArrayList<>();
+        List<String> saveFileNames = new ArrayList<>();
+        for(int i =0;i< files.size();i++){
+            UUID uuid = UUID.randomUUID();
+            String fname = files.get(i).getOriginalFilename();
+            URLEncoder.encode(fname, StandardCharsets.UTF_8)
+                    .replace("+","%20");
+            String filename = uuid+"_"+fname;
+            saveFile.add(new File(saveFolder,filename));
+            saveFileNames.add(filename);
         }
-        return fileNames;
+        try {
+            for(int i =0;i< files.size();i++){
+                files.get(i).transferTo(saveFile.get(i));
+            }
+        }catch (IOException e){
+            System.out.println(e);
+            for (int i =0;i<files.size();i++)
+                saveFile.get(i).delete();
+        }
+        return saveFileNames;
+
     }
 
 

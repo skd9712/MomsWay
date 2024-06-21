@@ -26,7 +26,7 @@
         <ul class="boardlist" th:each="item:${entlist}">
             <li>
                 <span th:text="${item.eid}"></span>
-                <span th:text="${item.title}"></span>
+                <a th:href="@{'/entdetail/'+${item.eid}}"><span th:text="${item.title}"></span></a>
                 <span th:text="${item.nickname}"></span>
                 <span th:text="${#temporals.format(item.createAt,'yyyy-MM-dd')}"></span>
                 <span th:text="${item.readNo}"></span>

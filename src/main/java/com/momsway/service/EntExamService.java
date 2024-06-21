@@ -10,4 +10,6 @@ public interface EntExamService {
     Page<EntExamDTO> entlist(Pageable pageable);
 
     long upload(String saveFolder, EntExamDTO dto);
+
+    EntExamDTO findByEid(Long eid);
 }
