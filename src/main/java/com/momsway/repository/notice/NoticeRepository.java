@@ -19,4 +19,7 @@ public interface NoticeRepository extends JpaRepository<Notice,Long>, NoticeQuer
 
     @Query(" select n.nid, n.title, n.createAt, n.category from Notice n where n.notify = true")
     List<Object[]> findTopList();
+
+    @Override
+    void deleteById(Long aLong);
 }

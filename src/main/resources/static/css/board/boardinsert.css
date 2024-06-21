@@ -1,0 +1,47 @@
+body {
+    margin: 5vh 20vw;
+}
+
+.intop {
+    text-align: center;
+    background: #F5C943;
+    border-radius: 40px 0;
+    padding: 3%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #444040;
+}
+
+form {
+    margin: 0 7%;
+    padding: 7% 0 7% 0;
+}
+
+form ul li {
+    list-style: none;
+    padding: 2%;
+}
+
+.writelabel {
+    display: inline-block;
+    width: 100px;
+}
+
+.writeinput {
+    display: inline-block;
+    width: 75%;
+    border: 1px solid silver;
+}
+
+.titleinput {
+    height: 30px;
+}
+
+.contentinput {
+    overflow-y: scroll;
+    height: 300px;
+}
+
+ul li:nth-child(1), ul li:nth-child(2){
+    display: flex;
+}

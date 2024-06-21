@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/academy/acadetail.css}">
+    <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
+    <script th:src="@{/js/notice/notice.js}"></script>
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded",function () {
+            init([[${dto.nid}]]);
+        })
+    </script>
 </head>
 <body>
 <header></header>
@@ -11,11 +17,11 @@
     <div class="dttop">
         <span th:text="${dto.title}"></span>
         <button type="submit" id="mod">수정</button>
-        <button type="button" id="del">삭제</button>
+        <button type="button" id="del" th:onclick="delNotice()">삭제</button>
     </div>
     <div class="dtbody">
         <div class="dtinfo">
-            <span> 웹애플리케이션개발 </span>
+            <span>  관리자 </span>
             <span class="infospan" th:text="|조회 ${dto.readNo}|"> 조회 109 </span>
             <span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"> 2024.06.21 09:10</span>
         </div>

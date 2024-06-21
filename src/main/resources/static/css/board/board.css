@@ -36,31 +36,37 @@ li span {
     display: inline-block;
 }
 
+/* toplist 타이틀 */
 .noticetop li span:nth-child(2) {
-    width: 68.5%;
+    width: 65.5%;
 }
 
+/* toplist 아이콘, 글번호 */
 .boardlist li span:nth-child(1), .noticetop li span:nth-child(1){
-    width: 5%;
+    width: 10%;
     text-align: center;
 }
 
+/* 타이틀 */
 .boardlist li span:nth-child(2){
-    width: 47%;
+    width: 45%;
 }
 
+/* 작성자 */
 .boardlist li span:nth-child(3){
-    width: 21%;
+    width: 20%;
     text-align: center;
 }
 
+/* 작성일 */
 .boardlist li span:nth-child(4), .noticetop li span:nth-child(3){
     width: 15%;
     text-align: center;
 }
 
+/* 조회수 */
 .boardlist li span:nth-child(5){
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 

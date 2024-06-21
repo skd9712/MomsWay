@@ -4,12 +4,11 @@ import com.momsway.dto.NoticeDTO;
 import com.momsway.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,5 +48,22 @@ public class NoticeController {
         NoticeDTO dto = noticeService.findByNid(nid);
         model.addAttribute("dto",dto);
         return "notice/noticedetail";
+    }
+
+    @GetMapping("/delnotice/{nid}")
+    public ResponseEntity<String> delNotice(@PathVariable Long nid){
+        int result = noticeService.delNotice(nid);
+        String msg = "메롱";
+        if(result==0){
+            msg = "삭제가 실패하였습니다.";
+        }else{
+            msg = "삭제 되었습니다.";
+        }
+        return ResponseEntity.ok().body(msg);
+    }
+
+    @GetMapping("/insertNotice")
+    public String insertNotice(){
+        return "boardinsert";
     }
 }

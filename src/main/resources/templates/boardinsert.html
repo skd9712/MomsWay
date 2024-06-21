@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{css/board/boardinsert.css}">
+</head>
+<body>
+<header></header>
+<div id="insertboardwrap">
+    <div class="intop">
+        <span>게시글 등록하기</span>
+    </div>
+    <form th:method="post" th:action="@{insertent}" enctype="multipart/form-data">
+        <ul>
+            <li>
+                <label class="writelabel" th:name="title">제목</label>
+                <input class="writeinput titleinput" type="text" th:name="title" th:id="title">
+            </li>
+            <li>
+                <label class="writelabel" th:name="content">내용</label>
+                <textarea class="writeinput contentinput" th:name="content" th:id="content"></textarea>
+            </li>
+            <li>
+                <input type="file" th:name="files" multiple="multiple">
+            </li>
+            <li>
+                <button type="submit">등록</button>
+                <button type="reset">취소</button>
+            </li>
+        </ul>
+    </form>
+</div>
+<footer></footer>
+</body>
+</html>
