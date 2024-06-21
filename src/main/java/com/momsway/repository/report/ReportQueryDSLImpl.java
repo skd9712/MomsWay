@@ -28,24 +28,15 @@ public class ReportQueryDSLImpl implements ReportQueryDSL {
 
     @Override
     public List<Report> findAllReport() {
-//        List<Long> reportlist = queryFactory.select(Projections.fields(
-//                          report.rid
-//                        , report.status
-//                        , report.reportEntExam.eid
-//                        , report.reportUser.uid
-//                ))
-//                .from(report)
-//                .join(report.reportEntExam, entExam)
-//                .join(report.reportUser, user)
-//                .fetch();
-
         List<Report> fetch = queryFactory.select(report)
                 .from(report)
                 .join(report.reportUser, user )
                 .fetchJoin()
                 .join(report.reportEntExam, entExam)
                 .fetchJoin()
+                .groupBy(report.reportEntExam.eid)
                 .fetch();
+
 
         return fetch;
     }

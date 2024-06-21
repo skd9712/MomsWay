@@ -3,34 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/academy/academy.css}">
+    <link rel="stylesheet" th:href="@{/css/report/report.css}">
 </head>
 <body>
-
-
-<div class="boardtop">신고관리</div>
-<div class="list">
-    <ul class="reporttop">
-        <li>
-            <span>신고번호</span>
-            <span>신고당한유저</span>
-            <span>신고게시물</span>
-            <span>신고처리</span>
-        </li>
-    </ul>
-    <ul class="reportlist">
-        <li th:each="item:${reportlist}">
-            <span th:text="${item.rid}"></span>
-            <span th:text="${item.uid}"></span>
-            <span th:text="${item.eid}"></span>
-            <span th:text="${item.comment}"></span>
-        </li>
-
-    </ul>
-
-
-
+<header></header>
+<div id="reportwrap">
+    <div class="boardtop">신고관리</div>
+    <div class="list">
+        <ul class="reportlist">
+            <li class="reporttop">
+                <span>신고번호</span>
+                <span>신고당한유저</span>
+                <span>신고게시물</span>
+                <span>신고사유</span>
+                <span>신고횟수</span>
+                <span>신고처리</span>
+            </li>
+            <li class="reportlist" th:each="item:${reportlist}">
+                <span th:text="${item.rid}"></span>
+                <span th:text="${item.uid}"></span>
+                <span th:text="${item.eid}"></span>
+                <span th:text="${item.comment}"></span>
+                <span>신고횟수</span>
+                <span class="repdel">신고처리</span>
+            </li>
+        </ul>
+    </div>
+    <div class="boardbottom">
+        <div class="paging">
+            <a href="#"> < </a>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <a href="#"> > </a>
+        </div>
+    </div>
+    <footer></footer>
 </div>
+
 
 
 </body>
