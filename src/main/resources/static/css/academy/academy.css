@@ -12,10 +12,14 @@ body {
     color: #444040;
 }
 
-.noticetop, .acalist {
+.list {
     margin: 0 7%;
+}
+
+.noticetop, .acalist {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .noticetop {
@@ -23,7 +27,7 @@ body {
 }
 
 .acalist {
-    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    border-bottom: 2px solid #58B27B;
 }
 
 .noticetop li, .acalist li {
@@ -71,6 +75,8 @@ li span {
 .paging a, .paging span {
     display: inline-block;
     padding: 2px;
+    text-decoration: none;
+    color: #444040;
 }
 
 #writebtn {
