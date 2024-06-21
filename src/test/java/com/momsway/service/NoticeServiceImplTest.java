@@ -4,6 +4,7 @@ import com.momsway.dto.NoticeDTO;
 import static org.assertj.core.api.Assertions.*;
 
 import com.momsway.repository.notice.NoticeRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,12 @@ class NoticeServiceImplTest {
         for(NoticeDTO d:all){
             System.out.println(d.getTitle());
         }
+    }
+
+    @Test
+    public void findByNid(){
+        assertThat(noticeService.findByNid(1L).getImgPaths().get(0))
+                .isEqualTo("logo.png");
     }
 
 }

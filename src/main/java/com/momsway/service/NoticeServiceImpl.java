@@ -3,7 +3,9 @@ package com.momsway.service;
 import com.momsway.domain.Notice;
 import com.momsway.dto.NoticeDTO;
 import com.momsway.repository.notice.NoticeRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService{
     private final NoticeRepository noticeRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public List<NoticeDTO> findTopList() {
@@ -31,6 +34,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
+    @Transactional
     public Page<NoticeDTO> findList(Pageable pageable) {
         long count = listCount();
         List<NoticeDTO> list = noticeRepository.findList(pageable);
@@ -40,5 +44,22 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public long listCount() {
         return noticeRepository.count();
+    }
+
+    @Override
+    public NoticeDTO findByNid(Long nid) {
+        Notice detail = noticeRepository.findByNid(nid);
+        List<String> imgPaths = detail.getNoticeImgs().stream()
+                .map(img->img.getImgPath()).collect(Collectors.toList());
+        return NoticeDTO.builder()
+                .nid(detail.getNid())
+                .notify(detail.getNotify())
+                .title(detail.getTitle())
+                .content(detail.getContent())
+                .readNo(detail.getReadNo())
+                .category(detail.getCategory())
+                .createAt(detail.getCreateAt())
+                .imgPaths(imgPaths)
+                .build();
     }
 }

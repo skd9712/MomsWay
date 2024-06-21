@@ -18,7 +18,7 @@
                 <th:block th:if="${t.category.equals('NOTICE')}">
                     <span>📌</span>
                 </th:block>
-                <span th:text="${t.title}"/>
+                <span><a th:href="@{|/notice/${t.nid}|}" th:text="${t.title}"/></span>
                 <span th:text="${#temporals.format(t.createAt,'yyyy-MM-dd')}"/>
             </li>
         </ul>
@@ -30,7 +30,7 @@
                 <th:block th:if="${i.category.equals('NOTICE')}">
                     <span>공지</span>
                 </th:block>
-                <span th:text="${i.title}"/>
+                <span><a th:href="@{|/notice/${i.nid}|}" th:text="${i.title}"/></span>
                 <span>${item.nickname}</span>
                 <span th:text="${#temporals.format(i.createAt,'yyyy-MM-dd')}"/>
                 <span th:text="${i.readNo}"/>

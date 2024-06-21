@@ -11,4 +11,7 @@ public interface NoticeService {
     long listCount();
 
     List<NoticeDTO> findTopList();
+
+    NoticeDTO findByNid(Long nid);
+
 }
