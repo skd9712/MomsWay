@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/entexam/entexam.css}">
+</head>
+<body>
+<header></header>
+<div id="entexamwrap">
+    <div class="boardtop">입시</div>
+    <div class="list">
+        <ul class="noticetop">
+            <li>
+                <span>📌</span>
+                <span>공지</span>
+                <span>날짜</span>
+            </li>
+        </ul>
+        <ul class="entlist" th:each="item:${entList}">
+            <li th:text="${item.eid}"></li>
+            <li th:text="${item.title}"></li>
+            <li th:text="${#temporals.format(item.createAt,'yyyy-MM-dd HH:mm')}"></li>
+            <li th:text="${item.readNo}"></li>
+        </ul>
+        <div>
+            <th:block th:if="${startPage>1}">
+                <a th:href="@{/entexam(page=${startPage}-1)}" th:text="이전"></a>
+            </th:block>
+            <th:block th:each="index:${#numbers.sequence(startPage,endPage)}">
+                <span th:if="${index==entList.pageable.getPageNumber()+1}"
+                      th:text="${index}"></span>
+                <th:block th:if="${index!=entList.pageable.getPageNumber()+1}">
+                    <a th:href="@{/entexam(page=${index})}" th:text="${index}"></a>
+                </th:block>
+            </th:block>
+            <th:block th:if="${endPage<entList.getTotalPages()}">
+                <a th:href="@{/entexam(page=${endPage}+1)}" th:text="다음"></a>
+            </th:block>
+        </div>
+        <button id="writebtn" type="button">글쓰기</button>
+    </div>
+</div>
+</body>
+</html>
