@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Pretendard-ExtraLight';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+footer{
+    background-color: #1e1e1e;
+    color: #E1E1E1;
+}
+
+footer *{
+    font-family: 'Pretendard-ExtraLight';
+}
+
+#footer_box{
+    padding: 30px 50px;
+}
+
+#footer_box ul{
+    margin-left: 7px;
+}
+
+.footer_top{
+    display: flex;
+    flex-direction: row;
+}
+
+.footer_top li{
+    list-style: none;
+    margin-right: 75px;
+}
+
+.footer_top a{
+    text-decoration: none;
+    color: #E1E1E1;
+}
+
+.line{
+    border: 1px solid #939393;
+    margin: 15px 0 30px;
+}
+
+.footer_middle li{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+}
+
+.footer_middle li p{
+    margin-right: 50px;
+}
+
+.copyright{
+    margin-top: 20px;
+    text-align: center;
+}
+

@@ -1,6 +1,10 @@
 package com.momsway.repository.entexam;
 
 import com.momsway.domain.EntExam;
+
+import static com.momsway.domain.QEntExam.entExam;
+import static com.momsway.domain.QEntLike.entLike;
+
 import com.momsway.domain.QEntExam;
 import com.momsway.dto.EntExamDTO;
 import com.querydsl.core.BooleanBuilder;
@@ -11,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Repository;
 import static com.momsway.domain.QEntExam.*;
 import static com.momsway.domain.QUser.*;
@@ -18,11 +23,31 @@ import static com.momsway.domain.QUser.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class EntExamQueryDSLImpl implements EntExamQueryDSL {
+
     private final JPAQueryFactory queryFactory;
 
+    @Override
+    public List<Tuple> entExamLikeSortList() {
+
+        List<Tuple> entLikeSortList
+                = queryFactory.select(entExam, entLike.count())
+                .from(entExam)
+                .innerJoin(entExam.entExamEntLikes, entLike)
+                .fetchJoin()
+                .groupBy(entLike.likeEntExam.eid)
+                .orderBy(entLike.count().desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
+
+        return entLikeSortList;
+    }
+  
     @Override
     public Page<EntExamDTO> orderlist(Pageable pageable) {
         BooleanBuilder builder = new BooleanBuilder();
@@ -56,4 +81,5 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
 //            return entExam;
 //        }).collect(Collectors.toList());
 //    }
+
 }

@@ -1,0 +1,109 @@
+@font-face {
+    font-family: 'Pretendard-ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-SemiBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+#middle_body{
+    background-color: #F5F5F5;
+    padding: 70px 0;
+}
+
+#join_box{
+    background-color: white;
+    width: 45%;
+    margin: 0 auto;
+    border-radius: 35px 0;
+}
+
+#join_box h1{
+    background-color: #12a60d;
+    color: white;
+    text-align: center;
+    border-radius: 35px 0;
+    padding: 15px;
+}
+
+#join_form{
+    padding: 45px 150px;
+    display: flex;
+    justify-content: center;
+}
+
+#join_form ul li{
+    list-style: none;
+    margin: 40px 0;
+}
+
+#join_form label{
+    display: inline-block;
+    width: 120px;
+    font-size: 1.2rem;
+    color: #777777;
+}
+
+#join_form ul li:nth-child(6){
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    top: -30px;
+}
+
+#join_form ul li:nth-child(6)>label{
+    font-size: 1rem;
+    width: 10%;
+}
+
+.join_input{
+    width: 15vw;
+    padding: 1.5vh 0.9vw;
+    border-radius: 25px;
+    border: 1px solid #d5d5d5;
+    font-size: 1rem;
+}
+
+.join_input:focus{
+    outline: 1px solid #12a60d;
+}
+
+#role{
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+}
+
+#role:focus{
+    outline: 1px solid #12a60d;
+}
+
+.agree{
+    overflow-y: scroll;
+    height: 200px;
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+}
+
+#join_form ul li:last-child{
+    display: flex;
+    justify-content: center;
+}
+
+#submit{
+    padding: 1.5vh 6vw;
+    border-radius: 25px;
+    border: 1px solid #d5d5d5;
+    background-color: #12a60d;
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'Pretendard-SemiBold';
+    cursor: pointer;
+}

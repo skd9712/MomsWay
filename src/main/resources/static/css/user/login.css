@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'Pretendard-ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-SemiBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+#middle_body{
+    background-color: #F5F5F5;
+    padding: 70px 0;
+}
+
+#login_box{
+    background-color: white;
+    /*width: 32vw;*/
+    width: 40%;
+    margin: 0 auto;
+    padding: 30px 30px 70px;
+    border-radius: 35px 0;
+}
+
+#login_box>h1{
+    font-family: 'Pretendard-ExtraBold';
+    text-align: center;
+    color: #12a60d;
+    margin-bottom: 5px;
+}
+
+.login_line{
+    border: 1px solid #E7E7E7;
+}
+
+#login_form ul{
+    margin: 50px 0 40px;
+}
+
+#login_form ul li{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#login_form input{
+    width: 17vw;
+    padding: 1.5vh 0.9vw;
+    border-radius: 25px;
+    border: 1px solid #d5d5d5;
+    font-size: 1rem;
+}
+
+#login_form input:focus{
+    outline: 1px solid #12a60d;
+}
+
+#submit{
+    width: 18.8vw;
+    padding: 1.5vh 0.9vw;
+    border-radius: 25px;
+    border: 1px solid #d5d5d5;
+    background-color: #12a60d;
+    font-size: 1rem;
+    color: white;
+    font-family: 'Pretendard-SemiBold';
+    cursor: pointer;
+}
+
+#login_box a{
+    color: dimgray;
+    display: flex;
+    justify-content: center;
+}
