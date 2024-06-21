@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface EntExamService {
     Page<EntExamDTO> entlist(Pageable pageable);
+
+    long upload(String saveFolder, EntExamDTO dto);
 }

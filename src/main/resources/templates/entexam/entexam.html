@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{css/board/board.css}">
-    <!--    <link rel="stylesheet" th:href="@{/css/entexam/entexam.css}">-->
+    <script th:src="@{js/entexam/entexam.js}"></script>
 </head>
 <body>
 <header></header>
@@ -12,13 +12,18 @@
     <div class="boardtop">입시</div>
     <div class="list">
         <ul class="noticetop">
-            <li>
-                <span>📌</span>
-                <span>공지</span>
-                <span>날짜</span>
+            <li th:each="t:${toplist}">
+                <th:block th:if="${t.category.equals('EVENT')}">
+                    <span>🎁</span>
+                </th:block>
+                <th:block th:if="${t.category.equals('NOTICE')}">
+                    <span>📌</span>
+                </th:block>
+                <span th:text="${t.title}"/>
+                <span th:text="${#temporals.format(t.createAt,'yyyy-MM-dd')}"/>
             </li>
         </ul>
-        <ul class="boardlist" th:each="item:${entList}">
+        <ul class="boardlist" th:each="item:${entlist}">
             <li>
                 <span th:text="${item.eid}"></span>
                 <span th:text="${item.title}"></span>
@@ -35,13 +40,13 @@
                 <a th:href="@{/entexam(page=${startPage}-1)}" th:text="이전"></a>
             </th:block>
             <th:block th:each="index:${#numbers.sequence(startPage,endPage)}">
-                <span th:if="${index==entList.pageable.getPageNumber()+1}"
+                <span th:if="${index==entlist.pageable.getPageNumber()+1}"
                       th:text="${index}"></span>
-                <th:block th:if="${index!=entList.pageable.getPageNumber()+1}">
+                <th:block th:if="${index!=entlist.pageable.getPageNumber()+1}">
                     <a th:href="@{/entexam(page=${index})}" th:text="${index}"></a>
                 </th:block>
             </th:block>
-            <th:block th:if="${endPage<entList.getTotalPages()}">
+            <th:block th:if="${endPage<entlist.getTotalPages()}">
                 <a th:href="@{/entexam(page=${endPage}+1)}" th:text="다음"></a>
             </th:block>
         </div>
