@@ -11,7 +11,32 @@ body {
     font-size: 1.3rem;
     color: #444040;
 }
+.dttop button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+#mod {
+    background-color: #4CAF50; /* 수정 버튼의 배경색 */
+}
+
+#mod:hover {
+    background-color: #45a049; /* 수정 버튼 호버 색상 */
+}
+
+#del {
+    background-color: #f44336; /* 삭제 버튼의 배경색 */
+}
+
+#del:hover {
+    background-color: #e53935; /* 삭제 버튼 호버 색상 */
+}
 .dtbody {
     margin: 0 7%;
 }
@@ -68,8 +93,18 @@ body {
     display: inline-block;
     width: 15%;
     height: 87px;
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
-
+#writeReply:hover{
+    background-color: #45a049;
+}
 .replylist li {
     padding: 1.5%;
 }
@@ -82,7 +117,10 @@ body {
     border-bottom: 1px solid rgba(153, 153, 153, 0.5);
     padding-bottom: 3%;
 }
-
+.replylist button{
+    background: white;
+    border: none;
+}
 .tolist {
     text-align: center;
     padding: 5%;
