@@ -27,10 +27,9 @@ public class EntExamController {
         Page<EntExamDTO> entList = entExamService.entlist(pageable);
         int pagesize = 5;
         int startPage =((int)(Math.ceil(pageable.getPageNumber()/pagesize)))*pagesize+1;
-        int entPage =Math.min(startPage+pagesize-1,entList.getTotalPages());
+        int endPage =Math.min(startPage+pagesize-1,entList.getTotalPages());
         model.addAttribute("startPage",startPage);
-        model.addAttribute("endPage",entPage);
-//        List<EntExamDTO> entList = entExamService.entlist();
+        model.addAttribute("endPage",endPage);
         model.addAttribute("entList",entList);
         return "entexam/entexam";
     }
