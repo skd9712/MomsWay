@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{css/entexam/insertent.css}">
 </head>
 <body>
-<form th:method="post" th:action="@{insertent}">
+<form th:method="post" th:action="@{insertent}" enctype="multipart/form-data">
     <ul>
         <li>
             <label th:name="title">제목</label>
@@ -15,6 +15,9 @@
         <li>
             <label th:name="content">내용</label>
             <textarea cols="40" rows="3" th:name="content" th:id="content"></textarea>
+        </li>
+        <li>
+            <input type="file" th:name="files" multiple="multiple">
         </li>
         <li>
             <button type="submit">내용추가</button>

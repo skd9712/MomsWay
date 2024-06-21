@@ -1,13 +1,16 @@
 package com.momsway.domain;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -15,12 +18,13 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
     @Column(nullable = false)
     private String title;
     @Column(length = 1000, nullable = false)
     private String content;
-    @Column(name = "read_no" ,nullable = false)
+    @Column(name = "read_no")
     private Long readNo;
     @Column(name="create_at" ,nullable = false)
     @CreatedDate
