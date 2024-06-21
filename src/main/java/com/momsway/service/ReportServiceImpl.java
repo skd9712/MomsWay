@@ -8,10 +8,12 @@ import com.momsway.repository.report.ReportRepository;
 import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,8 @@ public class ReportServiceImpl implements ReportService {
     private final EntExamRepository entExamRepository;
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
+
+    private final ModelMapper modelMapper;
     @Override
     @Transactional
     public int delReport(ReportDTO dto) {
@@ -42,4 +46,33 @@ public class ReportServiceImpl implements ReportService {
         }
         return result;
     }
+
+
+    @Override
+    public List<ReportDTO> findAllReport() {
+        List<Report> reportlist = reportRepository.findAllReport();
+        List<ReportDTO> collect = reportlist.stream().map(item -> {
+
+            ReportDTO build = ReportDTO.builder()
+                    .rid(item.getRid())
+                    .uid(item.getReportUser().getUid())
+                    .eid(item.getReportEntExam().getEid())
+                    .status(item.getStatus())
+                    .build();
+            return build;
+        }).collect(Collectors.toList());
+
+
+        return collect;
+    }
+
+//    @Override
+//    public List<ReportDTO> reportlist() {
+//       List<Report> reporboardlist=reportRepository.findAllReport();
+//       List<ReportDTO> reportDTOList=reporboardlist.stream()
+//               .map(item -> modelMapper.map(item,ReportDTO.class))
+//               .collect(Collectors.toList());
+//        return reportDTOList;
+//    }
+
 }

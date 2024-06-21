@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/academy/academy.css}">
+</head>
+<body>
+
+
+<div class="boardtop">신고관리</div>
+<div class="list">
+    <ul class="reporttop">
+        <li>
+            <span>신고번호</span>
+            <span>신고당한유저</span>
+            <span>신고게시물</span>
+            <span>신고처리</span>
+        </li>
+    </ul>
+    <ul class="reportlist">
+        <li th:each="item:${reportlist}">
+            <span th:text="${item.rid}"></span>
+            <span th:text="${item.uid}"></span>
+            <span th:text="${item.eid}"></span>
+            <span th:text="${item.comment}"></span>
+        </li>
+
+    </ul>
+
+
+
+</div>
+
+
+</body>
+</html>
