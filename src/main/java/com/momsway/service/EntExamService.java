@@ -12,4 +12,8 @@ public interface EntExamService {
     long upload(String saveFolder, EntExamDTO dto);
 
     EntExamDTO findByEid(Long eid);
+
+    int delEnt(Long eid);
+
+    long entUpdate(Long eid, String saveFolder, EntExamDTO dto);
 }

@@ -1,7 +1,10 @@
 package com.momsway.repository.entexam;
 
 import com.momsway.domain.EntExam;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +23,9 @@ public interface EntExamRepository extends JpaRepository<EntExam,Long>, EntExamQ
 
     @Override
     Optional<EntExam> findById(Long aLong);
+
+    @Transactional
+    @Modifying
+    @Query(" update EntExam e set e.readNo = e.readNo+1 where e.eid = :eid")
+    void incrementReadNo(Long eid);
 }

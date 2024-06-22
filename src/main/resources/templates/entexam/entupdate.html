@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:id="entupdatewrap">
+    <th:block th:object="${dto}">
+        <form method="post" th:action="@{'/entupdate/'+*{eid}}">
+            <ul>
+                <input type="hidden" th:field="*{eid}">
+                <img th:src="@{'/getimages/'+${dto.imgPath}}" alt="img">
+                <li>
+                    <span>제목</span>
+                    <input type="text" th:field="*{title}">
+                    <span th:if="${#fields.hasErrors('title')}"
+                          th:errors="*{title}"></span>
+                </li>
+                <li>
+                    <span>내용</span>
+                    <textarea cols="30" rows="3" th:field="*{content}"></textarea>
+                    <span th:if="${#fields.hasErrors('content')}"
+                          th:errors="*{content}"></span>
+                </li>
+                <li>
+                    <input type="file" th:field="*{imgPath}">
+                    <span th:if="${#fields.hasErrors('imgPath')}"
+                          th:errors="*{imgPath}"></span>
+                </li>
+                <li>
+                    <button type="submit">수정</button>
+                    <button type="reset">취소</button>
+                </li>
+            </ul>
+        </form>
+    </th:block>
+</div>
+</body>
+</html>

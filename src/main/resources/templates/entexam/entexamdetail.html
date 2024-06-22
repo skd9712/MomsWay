@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
+    <script th:src="@{/js/entexam/entupdate.js}"></script>
+    <script th:src="@{/js/entexam/entexamdetail.js}"></script>
+    <script th th:inline="javascript">
+        document.addEventListener("DOMContentLoaded",function (){
+            init([[${dto.eid}]]);
+        })
+    </script>
 </head>
 <body>
 <div th:id="entexamdetailwrap">
     <div class="dttop">
         <span th:text="${dto.title}"></span>
         <button type="submit" id="mod">수정</button>
-        <button type="button" id="del">삭제</button>
+        <button type="button" id="del" th:onclick="delEnt()">삭제</button>
     </div>
     <div class="dtbody">
         <div class="dtinfo">
