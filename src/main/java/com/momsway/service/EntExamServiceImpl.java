@@ -3,9 +3,13 @@ package com.momsway.service;
 import com.momsway.domain.EntExam;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.repository.entexam.EntExamRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,15 +24,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
-public class EntExamServiceImpl implements EntExamService{
+public class EntExamServiceImpl implements EntExamService {
+
+    @Value("C:\\Users\\skd97\\backend/upload_img")
+    private String saveFolder;
+
+    @Value("C:\\Users\\skd97\\backend/upload_img")
+    private String filePath;
     private final EntExamRepository entExamRepository;
     private final ModelMapper modelMapper;
+    private static final Logger log = LoggerFactory.getLogger(EntExamService.class);
 
     @Override
     public Page<EntExamDTO> entlist(Pageable pageable) {
@@ -46,13 +57,13 @@ public class EntExamServiceImpl implements EntExamService{
                 .build();
         EntExam savedEntity = entExamRepository.save(entity);
         List<String> fnames = new ArrayList<>();
-        if(dto.getFiles()!=null && dto.getFiles().size()!=0){
-            fnames = fileUpload(saveFolder,dto.getFiles());
-            if(!fnames.isEmpty()){
+        if (dto.getFiles() != null && dto.getFiles().size() != 0) {
+            fnames = fileUpload(saveFolder, dto.getFiles());
+            if (!fnames.isEmpty()) {
                 savedEntity.setImgPath(fnames.get(0));
             }
-            for(String item:fnames)
-                log.info("....items..{}",item);
+            for (String item : fnames)
+                log.info("....items..{}", item);
         }
         entExamRepository.save(savedEntity);
 
@@ -62,41 +73,102 @@ public class EntExamServiceImpl implements EntExamService{
     @Override
     public EntExamDTO findByEid(Long eid) {
         EntExamDTO detail = entExamRepository.findByEid(eid);
-
+//조회수 증가
+        entExamRepository.incrementReadNo(eid);
         return EntExamDTO.builder()
                 .eid(detail.getEid())
                 .title(detail.getTitle())
                 .content(detail.getContent())
-                .readNo(detail.getReadNo())
+                .readNo(detail.getReadNo()+1)
                 .createAt(detail.getCreateAt())
                 .imgPath(detail.getImgPath())
                 .nickname(detail.getNickname())
                 .build();
     }
 
+    @Override
+    public int delEnt(Long eid) {
+        int result = 0;
+        try {
+            EntExamDTO entExamDTO = entExamRepository.findByEid(eid);
+            if (entExamDTO != null) {
+                String imgPath = entExamDTO.getImgPath();
+                log.info("해당파일을 삭제합니다: {}", imgPath);
+                if (imgPath != null && !imgPath.isEmpty()) {
+                    File file = new File(saveFolder,imgPath);
+                    log.info("절대 경로: {}",file.getAbsolutePath());
+                    if (file.exists()) {
+                        if (file.delete()) {
+                            log.info("파일이 성공적으로 삭제되었습니다: {}", file.getAbsolutePath());
+                        } else {
+                            log.warn("파일삭제 실패: {}", file.getAbsolutePath());
+                        }
+                    } else {
+                        log.info("파일이 존재하지 않습니다: {}", file.getAbsolutePath());
+                    }
+
+                }
+                entExamRepository.deleteById(eid);
+                result = 1;
+            } else {
+                log.info("엔티티가 존재하지 않습니다: {}", eid);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public long entUpdate(Long eid, String saveFolder, EntExamDTO dto) {
+        log.info("Starting update for eid: {}", eid);
+        EntExam entExam = entExamRepository.findById(eid)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid eid: " + eid));
+        log.info("Fetched EntExam: {}", entExam);
+        entExam.setTitle(dto.getTitle());
+        entExam.setContent(dto.getContent());
+        EntExam saveEntity = entExamRepository.save(entExam);
+        log.info("Updated title and content for EntExam: {}", saveEntity);
+        List<String> fnames = new ArrayList<>();
+        if (dto.getFiles() != null && dto.getFiles().size() != 0) {
+            fnames = fileUpload(saveFolder, dto.getFiles());
+            if (!fnames.isEmpty()) {
+                saveEntity.setImgPath(fnames.get(0));
+                log.info("Set imgPath for EntExam: {}", saveEntity.getImgPath());
+            }
+            for (String item : fnames)
+                log.info("....items..{}", item);
+        }
+
+        entExamRepository.save(saveEntity);
+        log.info("Final saved EntExam: {}", saveEntity);
+        return saveEntity.getEid();
+    }
+
+
     private List<String> fileUpload(String saveFolder, List<MultipartFile> files) {
         List<File> saveFile = new ArrayList<>();
         List<String> saveFileNames = new ArrayList<>();
-        for(int i =0;i< files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             UUID uuid = UUID.randomUUID();
             String fname = files.get(i).getOriginalFilename();
             URLEncoder.encode(fname, StandardCharsets.UTF_8)
-                    .replace("+","%20");
-            String filename = uuid+"_"+fname;
-            saveFile.add(new File(saveFolder,filename));
+                    .replace("+", "%20");
+            String filename = uuid + "_" + fname;
+            saveFile.add(new File(saveFolder, filename));
             saveFileNames.add(filename);
         }
         try {
-            for(int i =0;i< files.size();i++){
+            for (int i = 0; i < files.size(); i++) {
                 files.get(i).transferTo(saveFile.get(i));
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e);
-            for (int i =0;i<files.size();i++)
+            for (int i = 0; i < files.size(); i++)
                 saveFile.get(i).delete();
         }
         return saveFileNames;
-
     }
 
 
