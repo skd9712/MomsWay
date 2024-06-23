@@ -25,14 +25,14 @@ public class MainController {
         /* 입시 인기글(좋아요순) 5개 */
 //        List<Tuple> entLikeList=mainService.entExamLikeSortList();
 //
-//        /* 공지사항 최신순 5개 */
-//        List<NoticeDTO> noticeList=mainService.noticeLatestList();
-//
-//        /* 학원홍보 최신순 5개 */
-//        List<AcademyDTO> academyList=mainService.academyLastestList();
-//
-//        /* 입시 최신순 5개 */
-//        List<EntExamDTO> entLatestList=mainService.entExamLatestList();
+        /* 공지사항 최신순 5개 */
+        List<NoticeDTO> noticeList=mainService.noticeLatestList();
+
+        /* 학원홍보 최신순 5개 */
+        List<AcademyDTO> academyList=mainService.academyLatestList();
+
+        /* 입시 최신순 5개 */
+        List<EntExamDTO> entLatestList=mainService.entExamLatestList();
         
         return "main";
     }

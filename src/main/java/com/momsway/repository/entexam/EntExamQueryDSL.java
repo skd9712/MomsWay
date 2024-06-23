@@ -18,6 +18,5 @@ public interface EntExamQueryDSL {
 
     EntExamDTO findByEid(Long eid);
 
-
-
+    List<EntExam> entExamLatestList();
 }

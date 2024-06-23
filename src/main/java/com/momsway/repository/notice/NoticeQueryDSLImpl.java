@@ -8,6 +8,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class NoticeQueryDSLImpl implements NoticeQueryDSL {
@@ -21,5 +23,17 @@ public class NoticeQueryDSLImpl implements NoticeQueryDSL {
                 .where(notice.nid.eq(nid))
                 .fetchOne();
         return notice1;
+    }
+
+    @Override
+    public List<Notice> noticeLatest() {
+        List<Notice> noticeList
+                = queryFactory.select(notice)
+                .from(notice)
+                .orderBy(notice.createAt.desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
+        return noticeList;
     }
 }
