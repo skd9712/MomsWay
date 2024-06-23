@@ -85,5 +85,17 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
 
     }
 
+    @Override
+    public List<EntExam> entExamLatestList() {
+        List<EntExam> entExamList
+                = queryFactory.select(entExam)
+                .from(entExam)
+                .orderBy(entExam.createAt.desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
+        return entExamList;
+    }
+
 
 }
