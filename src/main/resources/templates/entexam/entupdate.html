@@ -7,7 +7,7 @@
 <body>
 <div th:id="entupdatewrap">
     <th:block th:object="${dto}">
-        <form method="post" th:action="@{'/entupdate/'+*{eid}}">
+        <form method="post" th:action="@{'/entupdate/'+*{eid}}" enctype="multipart/form-data">
             <ul>
                 <input type="hidden" th:field="*{eid}">
                 <img th:src="@{'/getimages/'+${dto.imgPath}}" alt="img">
@@ -24,9 +24,9 @@
                           th:errors="*{content}"></span>
                 </li>
                 <li>
-                    <input type="file" th:field="*{imgPath}">
-                    <span th:if="${#fields.hasErrors('imgPath')}"
-                          th:errors="*{imgPath}"></span>
+                    <input type="file" th:field="*{files}">
+                    <span th:if="${#fields.hasErrors('files')}"
+                          th:errors="*{files}"></span>
                 </li>
                 <li>
                     <button type="submit">수정</button>
