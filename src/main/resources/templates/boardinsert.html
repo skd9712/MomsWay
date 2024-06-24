@@ -13,19 +13,35 @@
     </div>
     <form th:method="post" action="" th:action="@{${insertAction}}" enctype="multipart/form-data">
         <ul class="inbody">
-            <li>
-                <label class="writelabel" th:name="title">제목</label>
+            <th:block th:if="${noticeOnly!=null}">
+                <li class="insertforms">
+                    <label class="writelabel">노출범위</label>
+                    <label th:for="notifalse">일반 (공지사항)</label>
+                    <input class="writeinput writecheck" type="radio" th:name="notify" th:id="notifalse" th:value="false" checked>
+                    <label th:for="notitrue">중요 (전체)</label>
+                    <input class="writeinput writecheck" type="radio" th:name="notify" th:id="notitrue" th:value="true">
+                </li>
+                <li class="insertforms">
+                    <label class="writelabel" th:for="category">카테고리</label>
+                    <select class="writeinput" th:name="category" th:id="category">
+                        <option value="NOTICE">공지</option>
+                        <option value="EVENT">이벤트</option>
+                    </select>
+                </li>
+            </th:block>
+            <li class="insertforms">
+                <label class="writelabel" th:for="title">제목</label>
                 <input class="writeinput titleinput" type="text" th:name="title" th:id="title">
             </li>
-            <li>
-                <label class="writelabel" th:name="content">내용</label>
+            <li class="insertforms">
+                <label class="writelabel" th:for="content">내용</label>
                 <textarea class="writeinput contentinput" th:name="content" th:id="content"></textarea>
             </li>
-            <li>
-                <label class="writelabel" th:name="files">파일등록</label>
+            <li class="insertforms">
+                <label class="writelabel" th:for="files">파일등록</label>
                 <input type="file" th:name="files" th:id="files" multiple="multiple">
             </li>
-            <li>
+            <li class="insertBtns">
                 <button type="submit" id="submitBtn">등록</button>
                 <button type="reset" id="resetBtn">취소</button>
             </li>

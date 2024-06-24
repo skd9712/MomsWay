@@ -22,4 +22,7 @@ public interface NoticeRepository extends JpaRepository<Notice,Long>, NoticeQuer
 
     @Override
     void deleteById(Long aLong);
+
+    @Override
+    <S extends Notice> S save(S entity);
 }
