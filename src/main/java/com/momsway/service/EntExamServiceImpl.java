@@ -32,10 +32,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EntExamServiceImpl implements EntExamService {
 
-    @Value("C:\\Users\\skd97\\backend/upload_img")
+    @Value("D:\\backend\\upload_img")
     private String saveFolder;
 
-    @Value("C:\\Users\\skd97\\backend/upload_img")
+    @Value("D:\\backend\\upload_img")
     private String filePath;
     private final EntExamRepository entExamRepository;
     private final ModelMapper modelMapper;

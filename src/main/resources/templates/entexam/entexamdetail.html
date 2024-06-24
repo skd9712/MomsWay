@@ -6,34 +6,54 @@
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
     <script th:src="@{/js/entexam/entupdate.js}"></script>
     <script th:src="@{/js/entexam/entexamdetail.js}"></script>
+    <script th:src="@{/js/entexam/entreply.js}"></script>
+    <script th:src="@{/js/entexam/entlike.js}"></script>
     <script th th:inline="javascript">
-        document.addEventListener("DOMContentLoaded",function (){
+        document.addEventListener("DOMContentLoaded", function () {
             init([[${dto.eid}]]);
+            window.entreply.init(eid)
+            window.entlike.init(eid)
         })
     </script>
 </head>
 <body>
 <div th:id="entexamdetailwrap">
     <div class="dttop">
+        <input type="hidden" th:name="eid" th:id="eid" th:value="${dto.eid}">
         <span th:text="${dto.title}"></span>
         <button type="submit" id="mod">수정</button>
         <button type="button" id="del" th:onclick="delEnt()">삭제</button>
     </div>
     <div class="dtbody">
         <div class="dtinfo">
-            <span class="infospan" th:text="${dto.nickname}"></span>
-            <span class="infospan" th:text="|조회 ${dto.readNo}|"></span>
-            <span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
+            <span class="infowriter" th:text="${dto.nickname}"></span>
+            <div class="readdate">
+                <span th:text="|조회 ${dto.readNo}|"></span>
+                <span th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
+            </div>
         </div>
         <div class="dtcontent">
             <th:block th:each="img:${dto.imgPath}">
-                <img th:src="@{'/getimages/'+${img}}" alt="img">
+                <img th:src="@{'/getentimages/'+${img}}" alt="img">
             </th:block>
             <p th:text="${dto.content}"></p>
+        </div>
+        <div class="func">
+            <img th:src="@{'/images/like.png'}" th:onclick="likeEnt()">
         </div>
         <div class="tolist">
             <a href="/entexam">목록으로</a>
         </div>
+    </div>
+    <ul>
+        <li>
+            <input type="text" name="content" id="content">
+            <button id="submit" type="button">등록</button>
+        </li>
+    </ul>
+    <div th:id="comments">
+        <p>댓글</p>
+        <ul th:id="comments-list"></ul>
     </div>
 </div>
 </body>

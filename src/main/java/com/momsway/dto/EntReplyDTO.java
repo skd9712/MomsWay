@@ -14,4 +14,5 @@ public class EntReplyDTO {
     private LocalDateTime createAt;
     private Long uid;
     private Long eid;
+    private String nickname;
 }
