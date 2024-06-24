@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name="user")
 @Getter
 @NoArgsConstructor
+//@Setter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +62,12 @@ public class User {
     @OneToMany(mappedBy = "reportUser")
     private List<Report> reports = new ArrayList<>();
 
+
     public void setReportNo(Integer reportNo) {
         this.reportNo = reportNo;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
