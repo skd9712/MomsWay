@@ -1,7 +1,7 @@
-let nid = '';
+let aid = '';
 function init(data) {
-    nid = data;
-    console.log(nid);
+    aid = data;
+    console.log(aid);
 }
 
 function modAcademy(){
