@@ -70,3 +70,6 @@ li span {
     text-decoration: none;
     color: #444040;
 }
+.repdel>button{
+    border: none;
+}

@@ -2,13 +2,19 @@ package com.momsway.service;
 
 import com.momsway.domain.Report;
 import com.momsway.domain.User;
+import com.momsway.domain.UserRole;
 import com.momsway.dto.ReportDTO;
 import com.momsway.repository.entexam.EntExamRepository;
 import com.momsway.repository.report.ReportRepository;
 import com.momsway.repository.user.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +23,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+
 public class ReportServiceImpl implements ReportService {
+    private static final Logger log = LoggerFactory.getLogger(ReportService.class);
     private final EntExamRepository entExamRepository;
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
 
     private final ModelMapper modelMapper;
+
     @Override
     @Transactional
     public int delReport(ReportDTO dto) {
@@ -32,39 +41,70 @@ public class ReportServiceImpl implements ReportService {
          */
         int result = 0;
         try{
-            entExamRepository.deleteById(dto.getEid());
-            List<Report> eid = reportRepository.findByEid(dto.getEid());
+             List<Report> eid = reportRepository.findByEid(dto.getEid());
             for(Report r:eid){
                 r.setStatus(true);
             }
             Optional<User> uid = userRepository.findById(dto.getUid());
             User user = uid.orElseThrow(()->{throw new RuntimeException();});
             user.setReportNo(user.getReportNo()+1);
+            entExamRepository.deleteById(dto.getEid());
             result = 1;
         }catch (Exception e){
-
+            System.out.println(e);
         }
         return result;
     }
+    @Override
+    @Transactional
+    public int delReports(Long rid) {
+        try {
+            // Report를 찾습니다.
+            Optional<Report> reportOpt = reportRepository.findById(rid);
+            if (reportOpt.isPresent()) {
+                Report report = reportOpt.get();
+
+                // 해당 사용자의 삭제 횟수 증가
+                User user = report.getReportUser();
+                user.setReportNo(user.getReportNo() + 1);
+
+                // report_no가 3번 이상일 때 userrole 변경
+                if (user.getReportNo() >= 3) {
+                    user.setRole(UserRole.SUSPENDED); // 변경할 역할로 설정
+                }
+
+                userRepository.save(user);
+
+                // 해당 eid를 가진 모든 Report의 status를 true로 설정
+                List<Report> eidReports = reportRepository.findByEid(report.getReportEntExam().getEid());
+                for (Report r : eidReports) {
+                    r.setStatus(true);
+                    reportRepository.save(r); // 각 Report를 저장
+                }
+
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 
 
     @Override
-    public List<ReportDTO> findAllReport() {
-        List<Report> reportlist = reportRepository.findAllReport();
-        List<ReportDTO> collect = reportlist.stream().map(item -> {
+    public Page<ReportDTO> findAllReport(Pageable pageable) {
+        Page<Report> reportPage = reportRepository.findAllReport(pageable);
+        List<ReportDTO> reportDTOList = reportPage.stream().map(item -> ReportDTO.builder()
+                .rid(item.getRid())
+                .uid(item.getReportUser().getUid())
+                .eid(item.getReportEntExam().getEid())
+                .status(item.getStatus())
+                .comment(item.getComment())
+                .build()).collect(Collectors.toList());
 
-            ReportDTO build = ReportDTO.builder()
-                    .rid(item.getRid())
-                    .uid(item.getReportUser().getUid())
-                    .eid(item.getReportEntExam().getEid())
-                    .status(item.getStatus())
-                    .comment(item.getComment())
-                    .build();
-            return build;
-        }).collect(Collectors.toList());
-
-
-        return collect;
+        return new PageImpl<>(reportDTOList, pageable, reportPage.getTotalElements());
     }
 
 
