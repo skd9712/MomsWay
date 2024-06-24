@@ -10,7 +10,7 @@
         <form method="post" th:action="@{'/entupdate/'+*{eid}}" enctype="multipart/form-data">
             <ul>
                 <input type="hidden" th:field="*{eid}">
-                <img th:src="@{'/getimages/'+${dto.imgPath}}" alt="img">
+                <img th:src="@{'/getentimages/'+${dto.imgPath}}" alt="img">
                 <li>
                     <span>제목</span>
                     <input type="text" th:field="*{title}">

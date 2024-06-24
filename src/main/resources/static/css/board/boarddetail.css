@@ -44,6 +44,8 @@ body {
 .dtinfo {
     padding: 1.5%;
     border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+    display: flex;
+    justify-content: space-between;
 }
 
 .dtinfo span {
@@ -56,11 +58,9 @@ body {
     font-weight: 600;
 }
 
-.infospan {
-    float: right;
+.readdate{
+    width: 35%;
 }
-
-
 .dtcontent{
     padding: 7% 0 7% 0;
 }

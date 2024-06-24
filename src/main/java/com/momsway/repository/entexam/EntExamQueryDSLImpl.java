@@ -4,9 +4,11 @@ import com.momsway.domain.EntExam;
 
 import static com.momsway.domain.QEntExam.entExam;
 import static com.momsway.domain.QEntLike.entLike;
+import static com.momsway.domain.QEntReply.entReply;
 
 import com.momsway.domain.QEntExam;
 import com.momsway.dto.EntExamDTO;
+import com.momsway.dto.EntReplyDTO;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
@@ -95,6 +97,17 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
                 .limit(5)
                 .fetch();
         return entExamList;
+    }
+
+    @Override
+    public List<EntReplyDTO> repList(Long eid) {
+        List<EntReplyDTO> repList = queryFactory.select(Projections.fields(EntReplyDTO.class, entReply.repId,entReply.createAt,entReply.content,entExam.eid,user.uid, user.nickname))
+                .from(entReply)
+                .innerJoin(entReply.replyEntExam, entExam)
+                .innerJoin(entReply.entReplyUser, user)
+                .where(entExam.eid.eq(eid))
+                .fetch();
+        return repList;
     }
 
 

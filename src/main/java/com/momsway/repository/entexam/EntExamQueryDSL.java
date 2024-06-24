@@ -2,6 +2,7 @@ package com.momsway.repository.entexam;
 
 import com.momsway.domain.EntExam;
 
+import com.momsway.dto.EntReplyDTO;
 import com.querydsl.core.Tuple;
 import com.momsway.dto.EntExamDTO;
 import org.springframework.data.domain.Page;
@@ -19,4 +20,6 @@ public interface EntExamQueryDSL {
     EntExamDTO findByEid(Long eid);
 
     List<EntExam> entExamLatestList();
+
+    List<EntReplyDTO> repList(Long eid);
 }

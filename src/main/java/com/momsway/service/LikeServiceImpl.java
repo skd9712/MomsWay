@@ -32,15 +32,19 @@ public class LikeServiceImpl implements LikeService{
 
     @Override
     public void insertLike(LikeDTO dto) {
+        log.info("eid...{}",dto.getEid());
         Optional<EntExam> entExam = entExamRepository.findById(dto.getEid());
-        EntExam parent = entExam.orElseThrow(()->new RuntimeException());
-        Optional<User> user = userRepository.findById(dto.getUid());
-        User parent2 = user.orElseThrow(()->new RuntimeException());
+        EntExam parent = entExam.orElseThrow(()->new RuntimeException("error EntExam"));
+//        Optional<User> user = userRepository.findById(dto.getUid());
+        User defaultUser = userRepository.findById(1L).orElseThrow(() -> new RuntimeException("Default User not found"));
+
+//        User parent2 = user.orElseThrow(()->new RuntimeException("error User"));
         EntLike like = EntLike.builder()
                         .likeEntExam(parent)
-                        .likeUser(parent2)
+                        .likeUser(defaultUser)
                         .build();
         likeRepository.save(like);
+
     }
 
     @Override

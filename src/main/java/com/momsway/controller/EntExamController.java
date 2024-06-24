@@ -32,10 +32,10 @@ import java.util.List;
 public class EntExamController {
 
 
-    @Value("C:\\Users\\skd97\\backend/upload_img")
+    @Value("D:\\backend\\upload_img")
     private String saveFolder;
 
-    @Value("C:\\Users\\skd97\\backend/upload_img")
+    @Value("D:\\backend\\upload_img")
     private String filePath;
     private final LikeService likeService;
     private final EntExamService entExamService;
@@ -56,8 +56,9 @@ public class EntExamController {
     }
 
     @GetMapping("/insertent")
-    public String insertEnt() {
-        return "entexam/insertent";
+    public String insertEnt(Model model) {
+        model.addAttribute("insertAction","/insertent");
+        return "boardinsert";
     }
 
     @PostMapping("/insertent")
@@ -75,8 +76,8 @@ public class EntExamController {
         return "entexam/entexamdetail";
     }
 
-    @GetMapping(value = "/getimages/{filename}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String filename) {
+    @GetMapping(value = "/getentimages/{filename}")
+    public ResponseEntity<byte[]> getEntImage(@PathVariable String filename) {
         InputStream in = null;
         ResponseEntity<byte[]> entity = null;
         try {
@@ -131,15 +132,16 @@ public class EntExamController {
     public @ResponseBody ResponseEntity<Integer> insertLike(@RequestBody LikeDTO dto) {
         int result = 0;
         try {
+            log.info("Received LikeDTO: {}", dto); // 요청 본문 확인
             likeService.insertLike(dto);
             result = 1;
         } catch (Exception e) {
             log.error("ExamController insertLike...{}", e);
         }
-        return ResponseEntity.ok().body(1);
+        return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("/dellike/{lid}")
+    @PostMapping("/dellike/{lid}")
     public @ResponseBody ResponseEntity<Integer> delLike(@PathVariable Long lid) {
         int result = likeService.delLike(lid);
         return ResponseEntity.ok().body(result);
