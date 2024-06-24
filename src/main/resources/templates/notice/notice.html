@@ -52,7 +52,7 @@
             <th:block th:if="${endPage<list.totalPages}">
                 <a th:href="@{/notice(page=${endPage+1})}" th:text="다음"/>
             </th:block>
-            <button id="writebtn" type="button">글쓰기</button>
+            <a th:href="@{/insertNotice}" id="writebtn" type="button">글쓰기</a>
         </div>
     </div>
     <footer></footer>

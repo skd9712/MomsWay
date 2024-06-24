@@ -63,7 +63,8 @@ public class NoticeController {
     }
 
     @GetMapping("/insertNotice")
-    public String insertNotice(){
+    public String insertNotice(Model model){
+        model.addAttribute("insertAction","/insertNotice_result");
         return "boardinsert";
     }
 }
