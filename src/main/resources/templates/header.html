@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
@@ -21,8 +22,20 @@
 				</button>
 			</form>
 			<ul>
-				<li><a th:href="@{/login}" th:text="로그인"></a></li>
-				<li><a th:href="@{/join}" th:text="회원가입"></a></li>
+				<th:block sec:authorize="hasRole('ADMIN')">
+					<li><a th:href="@{/logout}" th:text="로그아웃"></a></li>
+					<li><a th:href="@{/'#'}" th:text="관리자페이지"></a></li>
+				</th:block>
+
+				<th:block sec:authorize="hasAnyRole('PARENT','ACADEMY')">
+					<li><a th:href="@{/logout}" th:text="로그아웃"></a></li>
+					<li><a th:href="@{/'#'}" th:text="마이페이지"></a></li>
+				</th:block>
+
+				<th:block sec:authorize="!isAuthenticated()">
+					<li><a th:href="@{/login}" th:text="로그인"></a></li>
+					<li><a th:href="@{/join}" th:text="회원가입"></a></li>
+				</th:block>
 			</ul>
 		</div>
 		<div th:id="header_nav">

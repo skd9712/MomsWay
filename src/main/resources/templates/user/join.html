@@ -8,6 +8,7 @@
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<link rel="stylesheet" th:href="@{/css/user/join.css}">
+	<script th:src="@{/js/user/joincheck.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
@@ -19,15 +20,21 @@
 				<ul>
 					<li>
 						<label>이메일</label>
-						<input type="email" th:name="email" th:id="email" th:class="join_input">
+						<input type="email" th:name="email" th:id="email" th:class="join_input" required>
+						<span th:id="email_msg">
+<!--							<button type="button" th:id="emailCheck">중복확인</button>-->
+						</span>
 					</li>
 					<li>
 						<label>비밀번호</label>
-						<input type="password" th:name="pwd" th:id="pwd" th:class="join_input">
+						<input type="password" th:name="pwd" th:id="pwd" th:class="join_input" required>
 					</li>
 					<li>
 						<label>닉네임</label>
-						<input type="text" th:name="nickname" th:id="nickname" th:class="join_input">
+						<input type="text" th:name="nickname" th:id="nickname" th:class="join_input" required>
+						<span th:id="nick_msg">
+<!--							<button type="button" th:id="nicknameCheck">중복확인</button>-->
+						</span>
 					</li>
 					<li>
 						<label>회원유형</label>
@@ -98,7 +105,7 @@
 					</li>
 					<li>
 						<label for="check">동의함</label>
-						<input type="checkbox" id="check">
+						<input type="checkbox" id="check" required>
 					</li>
 					<li>
 						<button type="submit" id="submit">회원가입</button>

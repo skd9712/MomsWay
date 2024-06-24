@@ -43,6 +43,10 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
     // template layout lib
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    // spring security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
