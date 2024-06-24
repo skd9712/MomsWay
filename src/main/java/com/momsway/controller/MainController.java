@@ -7,6 +7,7 @@ import com.momsway.service.MainService;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +34,7 @@ public class MainController {
 
         /* 입시 최신순 5개 */
         List<EntExamDTO> entLatestList=mainService.entExamLatestList();
-        
+
         return "main";
     }
 
