@@ -19,6 +19,7 @@ public class Notice extends BaseEntity {
     private Long nid;
     @Column(nullable = false)
     private Boolean notify;
+    //@Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private String category;
 

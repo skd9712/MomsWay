@@ -4,16 +4,27 @@ import com.momsway.dto.NoticeDTO;
 import com.momsway.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -22,6 +33,27 @@ import java.util.List;
 @Slf4j
 public class NoticeController {
     private final NoticeService noticeService;
+    @Value("D:\\uploadImg")
+    private String saveFolder;
+
+    @GetMapping( value="/getNotiImages/{filename}")
+    public ResponseEntity<byte[]> getNoticeImage(@PathVariable String filename) {
+        String fname = URLEncoder.encode(filename, StandardCharsets.UTF_8)
+                .replace("+", "%20");
+        InputStream in = null;
+        ResponseEntity<byte[]> responseEntity;
+        try {
+            in = new FileInputStream(saveFolder + "/" + fname);
+            HttpHeaders headers = new HttpHeaders();
+            responseEntity = new ResponseEntity<>(FileCopyUtils.copyToByteArray(in)
+                    ,headers , HttpStatus.OK);
+        } catch(IOException e) {
+            log.error("getImages error...{}",e);
+            responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return responseEntity;
+    }
+
     @GetMapping("/notice")
     public String notice(Model model
             , @PageableDefault(size=2, sort = "nid", direction = Sort.Direction.ASC) Pageable pageable){
@@ -64,7 +96,26 @@ public class NoticeController {
 
     @GetMapping("/insertNotice")
     public String insertNotice(Model model){
-        model.addAttribute("insertAction","/insertNotice_result");
+        model.addAttribute("insertAction","/insertNotice");
+        model.addAttribute("noticeOnly","notice");
         return "boardinsert";
+    }
+
+    @PostMapping("/insertNotice")
+    public String insertNoticeResult(@ModelAttribute NoticeDTO dto){
+        System.out.println(dto.getCategory());
+        System.out.println(dto.getNotify());
+        for(int i=0; i<dto.getFiles().size(); i++){
+            System.out.println(dto.getFiles().get(i).getOriginalFilename());
+        }
+        Long newNid = noticeService.insertNotice(dto,saveFolder);
+        return "redirect:/notice/"+newNid;
+    }
+
+    @GetMapping("/modnotice/{nid}")
+    public String modNotice(@PathVariable Long nid, Model model){
+        NoticeDTO dto = noticeService.findByNid(nid);
+        model.addAttribute("dto",dto);
+        return "notice/noticeupdate";
     }
 }

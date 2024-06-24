@@ -4,12 +4,12 @@ function init(data) {
     console.log(nid);
 }
 
-function modNotice(){
-    location.href=`/modnotice/${nid}`;
+function modAcademy(){
+    location.href=`/modacademy/${aid}`;
 }
 
-async function delNotice(){
-    await fetch(`/delnotice/${nid}`,{
+async function delAcademy(){
+    await fetch(`/delacademy/${aid}`,{
         method: "get"
         ,headers: { "Accept": "application/json", "Content-Type" : "application/json" }
     }).then(res=>{
@@ -19,7 +19,7 @@ async function delNotice(){
             return res.text();
     }).then(data=>{
         alert(data);
-        location.href="/notice";
+        location.href="/academy";
     }).catch(error=>{
         console.error(error);
     });
