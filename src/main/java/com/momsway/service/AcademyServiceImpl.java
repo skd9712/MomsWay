@@ -34,9 +34,9 @@ public class AcademyServiceImpl implements AcademyService{
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     @Override
-    public Page<AcademyDTO> findAcademyList(Pageable pageable) {
+    public Page<AcademyDTO> findAcademyList(Pageable pageable, String search_txt) {
         long count = listCount();
-        List<AcademyDTO> list = academyRepository.findList(pageable);
+        List<AcademyDTO> list = academyRepository.findList(pageable, search_txt);
         return new PageImpl<>(list,pageable,count);
     }
 

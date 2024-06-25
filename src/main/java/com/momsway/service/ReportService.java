@@ -6,16 +6,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ReportService {
 
-//    int delReports(Long rid);
-
     Page<ReportDTO> findAllReport(Pageable pageable);
 
-    int delReports(Long eid);
+    int delReports(Long rid);
 
 
     int EntReport(ReportDTO reportDTO);
 
+    List<Long> countReportsByEid();
+
+
+    ReportDTO detail(Long rid);
 }

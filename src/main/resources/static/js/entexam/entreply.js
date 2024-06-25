@@ -6,9 +6,8 @@ window.entreply.init = function (eid) {
     num = eid;
     // 추가적인 초기화 로직
 };
-// const init = async function (data){
-//     num=data;
-// }
+
+
 const init_json = async function () {
     await fetch("/replist/" + num, {
         method: 'GET'
@@ -50,15 +49,22 @@ const init_json = async function () {
 window.onload = function () {
     init_json();
     document.getElementById('submit').onclick = async function () {
+        const token = document.querySelector("meta[name='_csrf']").content;
+        const header = document.querySelector("meta[name='_csrf_header']").content;
         let content = document.querySelector('#content');
         let eid = document.querySelector('#eid');
-        let d = {'content': content.value, 'eid':eid.value};
+
+        let d = {'content': content.value, 'eid': eid.value};
 
         await fetch("/insertrep", {
             method: 'POST'
             , headers: {
                 'Content-Type': 'application/json;utf-8'
+                // , 'header': header
+                , 'X-Requested-With': "XMLHttpRequest"
                 , 'Accept': 'application/json'
+                , 'X-XSRF-Token': token
+
             }
             , body: JSON.stringify(d)
         })
@@ -75,9 +81,9 @@ window.onload = function () {
             .catch(error => {
                 console.log(error)
             }).finally(() => {
-            console.log('finally');
-            content.value = '';
-        });
+                console.log('finally');
+                content.value = '';
+            });
 
     }
 }

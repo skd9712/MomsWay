@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface AcademyService {
-    Page<AcademyDTO> findAcademyList(Pageable pageable);
+    Page<AcademyDTO> findAcademyList(Pageable pageable, String search_txt);
 
     long listCount();
 

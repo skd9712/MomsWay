@@ -25,7 +25,8 @@ public class UserDetailService implements UserDetailsService {
         User findUser
                 = userRepository.findByEmail(email);
 
-        log.info("user........{}", findUser.getNickname()+", "+findUser.getEmail());
+//        log.info("user........{}", findUser.getNickname()+", "+findUser.getEmail());
+
         if(findUser!=null)
             return new CustomUserDetails(findUser);
 

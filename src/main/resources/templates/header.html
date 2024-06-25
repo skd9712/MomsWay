@@ -5,13 +5,15 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/header.js}"></script>
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 </head>
 <body>
 	<header th:fragment="header_template">
 		<div id="header_top">
-			<a th:href="@{/main}"><img th:src="@{images/logo.png}" alt="로고이미지"></a>
-			<form th:method="get" th:action="@{/search}">
+			<a th:href="@{/main}"><img th:src="@{/images/logo.png}" alt="로고이미지"></a>
+			<!-- 검색창 -->
+			<form th:method="get" th:action="@{/entexam}" th:id="search_form">
 				<select th:name="search" th:id="search">
 					<option th:value="EntExam">입시</option>
 					<option th:value="Academy">학원홍보</option>
@@ -28,7 +30,7 @@
 							<button type="submit" th:class="logout">로그아웃</button>
 						</form>
 					</li>
-					<li><a th:href="@{/'#'}" th:text="관리자페이지"></a></li>
+					<li><a th:href="@{/report}" th:text="관리자페이지"></a></li>
 				</th:block>
 
 				<th:block sec:authorize="hasAnyRole('PARENT','ACADEMY')">
@@ -48,9 +50,9 @@
 		</div>
 		<div th:id="header_nav">
 			<ul>
-				<li><a th:href="@{'#'}">입시</a></li>
-				<li><a th:href="@{'#'}">학원홍보</a></li>
-				<li><a th:href="@{'#'}">공지사항</a></li>
+				<li><a th:href="@{/entexam}">입시</a></li>
+				<li><a th:href="@{/academy}">학원홍보</a></li>
+				<li><a th:href="@{/notice}">공지사항</a></li>
 			</ul>
 		</div>
 	</header>

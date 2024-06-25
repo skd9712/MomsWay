@@ -15,7 +15,7 @@ public interface EntExamQueryDSL {
 
     List<Tuple> entExamLikeSortList();
 
-    Page<EntExamDTO> orderlist(Pageable pageable);
+    Page<EntExamDTO> orderlist(Pageable pageable, String search);
 
     EntExamDTO findByEid(Long eid);
 

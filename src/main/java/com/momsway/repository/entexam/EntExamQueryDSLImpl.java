@@ -52,11 +52,12 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
     }
   
     @Override
-    public Page<EntExamDTO> orderlist(Pageable pageable) {
+    public Page<EntExamDTO> orderlist(Pageable pageable, String search_txt) {
         BooleanBuilder builder = new BooleanBuilder();
         List<EntExamDTO> list = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.eid, entExam.title,user.nickname, entExam.createAt, entExam.readNo))
                 .from(entExam)
                 .innerJoin(entExam.entExamUser, user)
+                .where(entExam.title.like("%"+search_txt+"%").or(entExam.content.like("%"+search_txt+"%")))
                 .orderBy(entExam.eid.desc())
                 .where(builder)
                 .offset(pageable.getOffset())

@@ -26,16 +26,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)
             throws Exception{
+
         http.csrf(csrf->
                 csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
+//     http.csrf(csrf-> csrf.disable());
+
         http.authorizeHttpRequests(authorize ->
-                authorize
-                        .requestMatchers("/**").permitAll()
+                        authorize
+                                .requestMatchers("/**").permitAll()
+                                .requestMatchers("/insertrep/**").permitAll()
 //                        .requestMatchers("/join","/login","/logout","/main").permitAll()
-                        .anyRequest().authenticated()
+                                .anyRequest().authenticated()
         );
-        
+
         // 로그인
         http.formLogin(formLogin -> formLogin
                 .loginPage("/login")
@@ -45,14 +49,14 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/main")
                 .permitAll()
         );
-        
+
         // 로그아웃
         http.logout(logout -> logout.logoutUrl("/logout")
                 .logoutSuccessUrl("/main")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
         );
-        
+
         return http.build();
     }
 

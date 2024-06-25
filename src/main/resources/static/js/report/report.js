@@ -5,8 +5,8 @@ function init(data) {
     console.log(reportList);
 }
 
-async function delReport(eid) {
-    await fetch('/delreport/' + eid, {
+async function delReport(rid) {
+    await fetch('/delreport/' + rid, {
         method: 'GET',
         headers: {
             "Accept": "application/json",
@@ -24,16 +24,3 @@ async function delReport(eid) {
         console.log(error);
     });
 }
-// function delReport(rid) {
-//     $.ajax({
-//         type: 'GET',
-//         url: '/delreport/' + rid,
-//         success: function(response) {
-//             alert(response);
-//             location.reload(); // 페이지 새로고침하여 삭제된 항목 반영
-//         },
-//         error: function() {
-//             alert('ERROR');
-//         }
-//     });
-// }

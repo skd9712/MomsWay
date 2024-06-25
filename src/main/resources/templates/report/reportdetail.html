@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
+    <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<header layout:fragment="header" th:replace="~{header :: header_template}"></header>
+<div id="acadetailwrap">
+    <div class="dttop">
+        <span th:text="${dto.rid}"></span>
+    </div>
+    <div class="dtbody">
+        <div class="dtcontent">
+           <span class="rid" th:text="${dto.rid}">글번호</span>
+           <span class="uid" th:text="${dto.uid}">신호당한유저</span>
+           <span class="eid" th:text="${dto.eid}">신고당한입시글</span>
+           <span class="comment" th:text="${dto.comment}">신고이유</span>
+        </div>
+        <div class="tolist">
+            <a href="/report">목록으로</a>
+        </div>
+    </div>
+</div>
+<footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
+</body>
+</html>

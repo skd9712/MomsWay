@@ -33,9 +33,14 @@
 }
 
 #join_form{
-    padding: 45px 150px;
+    /*padding: 45px 150px;*/
+    padding: 2vw 7vw;
     display: flex;
     justify-content: center;
+}
+
+#join_form ul{
+    width: 90%;
 }
 
 #join_form ul li{
@@ -74,6 +79,26 @@
     outline: 1px solid #12a60d;
 }
 
+.label_input{
+    display: flex;
+    justify-content: space-between;
+}
+
+#emsg, #nmsg
+, #nick_valid{
+    margin: 7px 0;
+    float: right;
+}
+
+.msg_error
+, #nick_valid{
+    color: #f62c2c;
+}
+
+.msg_ok{
+    color: #1d3ed7;
+}
+
 #role{
     padding: 5px 10px;
     font-size: 1rem;
@@ -86,10 +111,13 @@
 }
 
 .agree{
-    overflow-y: scroll;
+    width: 100%;
     height: 200px;
+    text-align: start;
+    overflow-y: scroll;
     border: 1px solid #d5d5d5;
     padding: 10px;
+    resize: none;
 }
 
 #join_form ul li:last-child{
