@@ -16,7 +16,7 @@ public interface NoticeService {
 
     NoticeDTO findByNid(Long nid);
 
-    int delNotice(Long nid);
+    int delNotice(Long nid,String saveFolder);
 
     Long insertNotice(NoticeDTO dto, String saveFolder);
 

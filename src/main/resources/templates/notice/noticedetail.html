@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/notice/notice.js}"></script>
     <script th:inline="javascript">
         document.addEventListener("DOMContentLoaded",function () {
@@ -16,7 +17,7 @@
     </script>
 </head>
 <body>
-<header layout:fragment="header" th:replace="header :: header_template"></header>
+<header layout:fragment="header" th:replace="~{header :: header_template}"></header>
 <div class="boarddetailwrap">
     <div class="dttop">
         <span th:text="${dto.title}"></span>
@@ -46,6 +47,6 @@
         </div>
     </div>
 </div>
-<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
+<footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>
 </html>

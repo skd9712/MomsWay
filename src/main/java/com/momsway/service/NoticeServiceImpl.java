@@ -1,7 +1,6 @@
 package com.momsway.service;
 
 import com.momsway.domain.Notice;
-import com.momsway.domain.NoticeCategory;
 import com.momsway.domain.NoticeImg;
 import com.momsway.dto.NoticeDTO;
 import com.momsway.repository.notice.NoticeRepository;
@@ -77,15 +76,26 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public int delNotice(Long nid) {
+    @Transactional
+    public int delNotice(Long nid, String saveFolder) {
         int result = 0;
         try{
+            NoticeDTO find = findByNid(nid);
+            noticeImgFileRemove(find.getImgPaths(),saveFolder);
             noticeRepository.deleteById(nid);
             result = 1;
         }catch (Exception e){
 
         }
         return result;
+    }
+
+    private void noticeImgFileRemove(List<String> imgPaths, String saveFolder) {
+        File file = null;
+        for(String fname:imgPaths){
+            file = new File(saveFolder + "/" + fname);
+            file.delete();
+        }
     }
 
     @Override

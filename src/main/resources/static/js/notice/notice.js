@@ -5,7 +5,7 @@ function init(data) {
 }
 
 function modNotice(){
-    location.href=`/modnotice/${nid}`;
+    location.href=`/updateNotice/${nid}`;
 }
 
 async function delNotice(){

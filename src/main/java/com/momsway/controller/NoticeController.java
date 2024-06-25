@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -85,12 +86,14 @@ public class NoticeController {
     public String noticeDetail(@PathVariable Long nid, Model model){
         NoticeDTO dto = noticeService.findByNid(nid);
         model.addAttribute("dto",dto);
+        if(dto.getImgPaths()!=null)
+            model.addAttribute("imgPaths",dto.getImgPaths());
         return "notice/noticedetail";
     }
 
     @GetMapping("/delnotice/{nid}")
     public ResponseEntity<String> delNotice(@PathVariable Long nid){
-        int result = noticeService.delNotice(nid);
+        int result = noticeService.delNotice(nid,saveFolder);
         String msg = "메롱";
         if(result==0){
             msg = "삭제가 실패하였습니다.";
@@ -118,10 +121,23 @@ public class NoticeController {
         return "redirect:/notice/"+newNid;
     }
 
-    @GetMapping("/modnotice/{nid}")
+    @GetMapping("/updateNotice/{nid}")
     public String modNotice(@PathVariable Long nid, Model model){
         NoticeDTO dto = noticeService.findByNid(nid);
         model.addAttribute("dto",dto);
-        return "notice/noticeupdate";
+        List<String> imgs = new ArrayList<>();
+        for(int i=0; i<dto.getImgPaths().size(); i++){
+            imgs.add("/getNotiImages/"+dto.getImgPaths().get(i));
+        }
+        dto.setImgPaths(imgs);
+        model.addAttribute("imgPaths",dto.getImgPaths());
+        model.addAttribute("noticeOnly","notice");
+        model.addAttribute("insertAction", "/updateNotice");
+        return "boardupdate";
+    }
+
+    @PostMapping("/updateNotice")
+    public String updateNoticeResult(){
+        return null;
     }
 }

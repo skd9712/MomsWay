@@ -1,0 +1,16 @@
+
+.thumb {
+    display: inline-block;
+    width: 7vw;
+    height: 11vh;
+    border: 1px solid silver;
+}
+
+.thumb:hover {
+
+}
+
+.inbody {
+    margin: 0;
+    padding: 0;
+}
