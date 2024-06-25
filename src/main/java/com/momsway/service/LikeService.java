@@ -12,4 +12,6 @@ public interface LikeService {
     int delLike(Long lid);
 
     List<String> findByUid(Long uid);
+
+    boolean findLike(Long uid, Long eid);
 }

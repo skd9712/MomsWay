@@ -37,7 +37,7 @@ public class EntReplyServiceImpl implements EntReplyService{
                 = entExamRepository.findById(dto.getEid());
         EntExam entExam1 = byEid.orElseThrow(() -> new IllegalArgumentException("invalid eid"));
 //      로그인 구현후 변경하기.임시로 uid=1 등록
-        User defaultUser = userRepository.findById(1L).orElseThrow(() -> new RuntimeException("Default User not found"));
+        User defaultUser = userRepository.findById(2L).orElseThrow(() -> new RuntimeException("Default User not found"));
         log.info("....eid...{}",dto.getEid());
         EntReply entity = EntReply.builder()
                 .content(dto.getContent())
