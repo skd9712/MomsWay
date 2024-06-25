@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/board/board.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <script th:src="@{js/academy/academy.js}"></script>
 </head>
 <body>
-<header></header>
-<div id="academywrap">
+<header layout:fragment="header" th:replace="header :: header_template"></header>
+<div class="boardwrap">
     <div class="boardtop">학원홍보</div>
     <div class="list">
         <ul class="noticetop">
@@ -48,12 +52,10 @@
             <th:block th:if="${endPage<list.totalPages}">
                 <a th:href="@{/academy(page=${endPage+1}, search_txt=${search_txt})}" th:text="다음"/>
             </th:block>
-            <th:block th:if="${user!=null and !user.role.equals('PARENT')}">
-                <a th:href="@{/insertAcademy}" id="writebtn" type="button">글쓰기</a>
-            </th:block>
+            <a sec:authorize="hasAnyRole('ADMIN','ACADEMY')" th:href="@{/insertAcademy}" id="writebtn" type="button">글쓰기</a>
         </div>
     </div>
-    <footer></footer>
 </div>
+<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>
 </html>

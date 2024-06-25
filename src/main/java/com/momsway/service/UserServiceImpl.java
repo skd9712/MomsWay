@@ -57,12 +57,13 @@ public class UserServiceImpl implements UserService {
         return findUser!=null;
     }
 
-    /** authentication email 로 유저정보 받기 (sessionId로 유저정보 찾는 개념)  */
+    /** authentication email 로 유저id 받기 */
     @Override
-    public UserDTO findUserByEmail(String sessionId) {
+    public long findUidByEmail(String sessionId) {
         User user = userRepository.findByEmail(sessionId);
+        long result = 0;
         if(user!=null)
-            return modelMapper.map(user,UserDTO.class);
-        return null;
+            result = user.getUid();
+        return result;
     }
 }

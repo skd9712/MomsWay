@@ -1,7 +1,9 @@
 package com.momsway.controller;
 
 import com.momsway.dto.NoticeDTO;
+import com.momsway.dto.UserDTO;
 import com.momsway.service.NoticeService;
+import com.momsway.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -33,8 +36,11 @@ import java.util.List;
 @Slf4j
 public class NoticeController {
     private final NoticeService noticeService;
+    private final UserService userService;
+
     @Value("D:\\uploadImg")
     private String saveFolder;
+
 
     @GetMapping( value="/getNotiImages/{filename}")
     public ResponseEntity<byte[]> getNoticeImage(@PathVariable String filename) {

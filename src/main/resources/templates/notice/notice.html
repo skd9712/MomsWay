@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>title</title>
     <link rel="stylesheet" th:href="@{/css/board/board.css}">
     <link rel="stylesheet" th:href="@{/css/notice/notice.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
-<header></header>
-<div id="academywrap">
+<header layout:fragment="header" th:replace="header :: header_template"></header>
+<div class="boardwrap">
     <div class="boardtop">공지사항</div>
     <div class="list">
         <ul class="noticetop">
@@ -52,11 +56,11 @@
             <th:block th:if="${endPage<list.totalPages}">
                 <a th:href="@{/notice(page=${endPage+1})}" th:text="다음"/>
             </th:block>
-            <a th:href="@{/insertNotice}" id="writebtn" type="button">글쓰기</a>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/insertNotice}" id="writebtn" type="button">글쓰기</a>
         </div>
     </div>
-    <footer></footer>
 </div>
+<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>
 
 </html>

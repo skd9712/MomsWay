@@ -17,6 +17,6 @@ class UserServiceImplTest {
     @Test
     public void findByEmail(){
         //assertThat(userService.findUidByEmail("admin@test.com").getNickname()).isEqualTo("손흥민");
-        assertThat(userService.findUserByEmail("a")).isNull();
+        assertThat(userService.findUidByEmail("a")).isNull();
     }
 }

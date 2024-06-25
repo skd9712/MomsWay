@@ -8,5 +8,5 @@ public interface UserService {
     boolean findNicknameCheck(String nickname);
 
 
-    UserDTO findUserByEmail(String sessionId);
+    long findUidByEmail(String sessionId);
 }

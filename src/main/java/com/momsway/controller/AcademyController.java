@@ -30,6 +30,14 @@ public class AcademyController {
     private final NoticeService noticeService;
     private final UserService userService;
 
+//    private long uid = 0;
+//
+//    private void uidInit(String sessionId){
+//        log.info("uidInit sessionId... {}",sessionId);
+//        if(!sessionId.equals("anonymousUser"))
+//            uid = userService.findUidByEmail(sessionId);
+//    }
+
     @Value("D:\\uploadImg")
     private String saveFolder;
 
@@ -41,6 +49,7 @@ public class AcademyController {
         UserDTO user = userService.findUserByEmail(sessionId);
         if(user!=null)
             model.addAttribute("user",user);
+
         List<NoticeDTO> toplist = noticeService.findTopList();
         Page<AcademyDTO> list = academyService.findAcademyList(pageable, search_txt);
         log.info("currPage... {}",pageable.getPageNumber());
