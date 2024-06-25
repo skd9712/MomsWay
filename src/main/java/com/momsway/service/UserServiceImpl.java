@@ -24,6 +24,12 @@ public class UserServiceImpl implements UserService {
        // Role
        UserRole userRole = UserRole.valueOf(dto.getRole());
 
+       boolean findEmail = findEmailCheck(dto.getEmail());
+       boolean findNickname = findNicknameCheck(dto.getNickname());
+
+       if(findEmail || findNickname)
+           throw new RuntimeException("이미 사용 중입니다.");
+
        User user = User.builder()
                .email(dto.getEmail())
                .pwd(pwd)

@@ -39,23 +39,16 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
     @Override
     public List<Tuple> entExamLikeSortList() {
 
-//
-//        List<Tuple> list = queryFactory.select(
-//                        entExam.eid
-//                        , entExam.title
-//                        , entLike.lid.count()
-//                )
-//                .from(entExam)
-//                .innerJoin(entExam.entExamEntLikes, entLike)
-//                .fetchJoin()
-//                .groupBy(entLike.likeEntExam.eid)
-//                .orderBy(entLike.count().desc())
-//                .offset(0)
-//                .limit(5)
-//                .fetch();
+        List<Tuple> list = queryFactory.select(entExam.eid, entExam.title, entLike.likeEntExam.eid.count())
+                .from(entExam)
+                .leftJoin(entExam.entExamEntLikes, entLike)
+                .groupBy(entExam.eid)
+                .orderBy(entLike.likeEntExam.eid.count().desc())
+                .offset(0)
+                .limit(5)
+                .fetch();
 
-
-        return null;
+        return list;
     }
   
     @Override
