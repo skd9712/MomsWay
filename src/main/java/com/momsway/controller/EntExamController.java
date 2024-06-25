@@ -42,8 +42,13 @@ public class EntExamController {
     private final NoticeService noticeService;
 
     @GetMapping("entexam")
-    public String entexam(@PageableDefault(size = 10, page = 0) Pageable pageable, Model model) {
-        Page<EntExamDTO> entlist = entExamService.entlist(pageable);
+    public String entexam(@PageableDefault(size = 10, page = 0) Pageable pageable, Model model
+            , @RequestParam(required = false, defaultValue = "") String search_txt) {
+
+        if(search_txt==null)
+            search_txt = "";
+
+        Page<EntExamDTO> entlist = entExamService.entlist(pageable, search_txt);
         List<NoticeDTO> toplist = noticeService.findTopList();
         int pagesize = 5;
         int startPage = ((int) (Math.ceil(pageable.getPageNumber() / pagesize))) * pagesize + 1;
@@ -52,6 +57,7 @@ public class EntExamController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("entlist", entlist);
         model.addAttribute("toplist", toplist);
+        model.addAttribute("search_txt", search_txt);
         return "entexam/entexam";
     }
 

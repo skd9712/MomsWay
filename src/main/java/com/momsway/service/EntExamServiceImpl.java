@@ -42,8 +42,8 @@ public class EntExamServiceImpl implements EntExamService {
     private static final Logger log = LoggerFactory.getLogger(EntExamService.class);
 
     @Override
-    public Page<EntExamDTO> entlist(Pageable pageable) {
-        Page<EntExamDTO> orderlist = entExamRepository.orderlist(pageable);
+    public Page<EntExamDTO> entlist(Pageable pageable, String search_txt) {
+        Page<EntExamDTO> orderlist = entExamRepository.orderlist(pageable, search_txt);
         return orderlist;
     }
 

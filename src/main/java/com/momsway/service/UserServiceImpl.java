@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
         User findUser = userRepository.findByNickname(nickname);
         return findUser!=null;
     }
+
     /** authentication email 로 유저정보 받기 (sessionId로 유저정보 찾는 개념)  */
     @Override
     public UserDTO findUserByEmail(String sessionId) {
