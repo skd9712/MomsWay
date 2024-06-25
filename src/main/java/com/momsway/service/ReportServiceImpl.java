@@ -1,5 +1,6 @@
 package com.momsway.service;
 
+import com.momsway.domain.EntExam;
 import com.momsway.domain.Report;
 import com.momsway.domain.User;
 import com.momsway.domain.UserRole;
@@ -32,65 +33,42 @@ public class ReportServiceImpl implements ReportService {
 
     private final ModelMapper modelMapper;
 
-    @Override
-    @Transactional
-    public int delReport(ReportDTO dto) {
-        /* 1) 글 테이블에서 해당글 삭제 (JPA 내장 메서드)
-           2) 신고 테이블에서 처리여부 변경 (JPA 내장메서드로 find 후 setter 사용)
-           3) 유저 테이블에서 글쓴이의 삭제횟수 +1
-         */
-        int result = 0;
-        try{
-             List<Report> eid = reportRepository.findByEid(dto.getEid());
-            for(Report r:eid){
-                r.setStatus(true);
-            }
-            Optional<User> uid = userRepository.findById(dto.getUid());
-            User user = uid.orElseThrow(()->{throw new RuntimeException();});
-            user.setReportNo(user.getReportNo()+1);
-            entExamRepository.deleteById(dto.getEid());
-            result = 1;
-        }catch (Exception e){
-            System.out.println(e);
-        }
-        return result;
-    }
-    @Override
-    @Transactional
-    public int delReports(Long rid) {
-        try {
-            // Report를 찾습니다.
-            Optional<Report> reportOpt = reportRepository.findById(rid);
-            if (reportOpt.isPresent()) {
-                Report report = reportOpt.get();
-
-                // 해당 사용자의 삭제 횟수 증가
-                User user = report.getReportUser();
-                user.setReportNo(user.getReportNo() + 1);
-
-                // report_no가 3번 이상일 때 userrole 변경
-                if (user.getReportNo() >= 3) {
-                    user.setRole(UserRole.SUSPENDED); // 변경할 역할로 설정
-                }
-
-                userRepository.save(user);
-
-                // 해당 eid를 가진 모든 Report의 status를 true로 설정
-                List<Report> eidReports = reportRepository.findByEid(report.getReportEntExam().getEid());
-                for (Report r : eidReports) {
-                    r.setStatus(true);
-                    reportRepository.save(r); // 각 Report를 저장
-                }
-
-                return 1;
-            } else {
-                return 0;
-            }
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
+//    @Override
+//    @Transactional
+//    public int delReports(Long rid) {
+//        try {
+//            // Report를 찾습니다.
+//            Optional<Report> reportOpt = reportRepository.findById(rid);
+//            if (reportOpt.isPresent()) {
+//                Report report = reportOpt.get();
+//
+//                // 해당 사용자의 삭제 횟수 증가
+//                User user = report.getReportUser();
+//                user.setReportNo(user.getReportNo() + 1);
+//
+//                // report_no가 3번 이상일 때 userrole 변경
+//                if (user.getReportNo() >= 3) {
+//                    user.setRole(UserRole.SUSPENDED); // 변경할 역할로 설정
+//                }
+//
+//                userRepository.save(user);
+//
+//                // 해당 eid를 가진 모든 Report의 status를 true로 설정
+//                List<Report> eidReports = reportRepository.findByEid(report.getReportEntExam().getEid());
+//                for (Report r : eidReports) {
+//                    r.setStatus(true);
+//                    reportRepository.save(r); // 각 Report를 저장
+//                }
+//                EntExam entExam=report.getReportEntExam();
+//                entExamRepository.deleteById(entExam.getEid());
+//                return 1;
+//            } else {
+//                return 0;
+//            }
+//        } catch (Exception e) {
+//            return 0;
+//        }
+//    }
 
 
     @Override
@@ -105,6 +83,57 @@ public class ReportServiceImpl implements ReportService {
                 .build()).collect(Collectors.toList());
 
         return new PageImpl<>(reportDTOList, pageable, reportPage.getTotalElements());
+    }
+
+    @Override
+    public int delReports(Long eid) {
+        try {
+            // EntExam을 가져옵니다.
+            Optional<EntExam> entExamOpt = entExamRepository.findById(eid);
+            if (entExamOpt.isPresent()) {
+                EntExam entExam = entExamOpt.get();
+
+                // 관련된 모든 Report 엔티티의 status를 true로 업데이트합니다.
+                List<Report> reports = reportRepository.findByEid(eid);
+                for (Report report : reports) {
+                    report.setStatus(true);
+                    reportRepository.save(report); // 각 Report를 저장
+                }
+
+                // EntExam을 삭제합니다.
+                entExamRepository.deleteById(eid);
+
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return 0;
+        }
+
+    }
+
+    @Override
+    public int EntReport(ReportDTO reportDTO) {
+        try {
+            User user=userRepository.findById(reportDTO.getUid()).orElseThrow(()-> new RuntimeException("User not found"));
+            EntExam entExam=entExamRepository.findById(reportDTO.getEid()).orElseThrow(()-> new RuntimeException("EntExam not found"));
+
+            Report report=Report.builder()
+                    .comment(reportDTO.getComment())
+                    .status(false) //초기 신고 상태는 false로 설정
+                    .reportUser(user)
+                    .reportEntExam(entExam)
+                    .build();
+
+            reportRepository.save(report);
+            return 1;
+        }catch (Exception e){
+            System.out.println(e);
+            return 0;
+        }
+
     }
 
 

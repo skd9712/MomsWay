@@ -31,24 +31,35 @@ public class ReportController {
         return "report/reportlist";
     }
 
-    @PostMapping("/delreport")
-    public @ResponseBody ResponseEntity<Integer> delReport( @RequestBody ReportDTO dto){
-        // 해당 신고글 삭제 및 부대작업 와르르
-        int result = reportService.delReport(dto);
-        return ResponseEntity.ok().body(result);
-    }
     /** 신고삭제처리 */
-    @GetMapping("/delreport/{rid}")
-    public ResponseEntity<String> delReport(@PathVariable Long rid){
-        int result=reportService.delReports(rid);
-        String msg="메롱";
-        if (result==0){
-            msg="처리오류";
-        }else {
-            msg="처리완료";
-        }
+//    @GetMapping("/delreport/{rid}")
+//    public ResponseEntity<String> delReport(@PathVariable Long rid){
+//        int result=reportService.delReports(rid);
+//        String msg="메롱";
+//        if (result==0){
+//            msg="처리오류";
+//        }else {
+//            msg="처리완료";
+//        }
+//        return ResponseEntity.ok().body(msg);
+//    }
+    @GetMapping("/delreport/{eid}")
+    public ResponseEntity<String> delReport(@PathVariable Long eid) {
+        int result = reportService.delReports(eid);
+        String msg = result == 1 ? "처리완료" : "처리오류";
         return ResponseEntity.ok().body(msg);
     }
+    @PostMapping("/entreport")
+    public ResponseEntity<String> createReport(@RequestParam Long eid, @RequestParam Long uid, @RequestParam String comment) {
+        ReportDTO reportDTO = new ReportDTO();
+        reportDTO.setEid(eid);
+        reportDTO.setUid(uid);
+        reportDTO.setComment(comment);
+        int result = reportService.EntReport(reportDTO);
+        String msg = result == 1 ? "신고 성공" : "신고 실패";
+        return ResponseEntity.ok().body(msg);
+    }
+
 
 
 
