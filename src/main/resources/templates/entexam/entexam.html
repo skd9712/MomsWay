@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/board/board.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <script th:src="@{js/entexam/entexam.js}"></script>
 </head>
 <body>
-<header></header>
-<div id="entexamwrap">
+<header layout:fragment="header" th:replace="~{header :: header_template}"></header>
+<div class="boardwrap">
     <div class="boardtop">입시</div>
     <div class="list">
         <ul class="noticetop">
@@ -19,7 +23,7 @@
                 <th:block th:if="${t.category.equals('NOTICE')}">
                     <span>📌</span>
                 </th:block>
-                <span th:text="${t.title}"/>
+                <span><a th:href="@{|/notice/${t.nid}|}" th:text="${t.title}"/></span>
                 <span th:text="${#temporals.format(t.createAt,'yyyy-MM-dd')}"/>
             </li>
         </ul>
@@ -50,9 +54,10 @@
                 <a th:href="@{/entexam(page=${endPage}+1), search_txt=${search_txt}}" th:text="다음"></a>
             </th:block>
         </div>
-        <button id="writebtn" type="button">글쓰기</button>
+        <a sec:authorize="hasAnyRole('ADMIN','PARENT')" th:href="@{/insertent}" id="writebtn" type="button">글쓰기</a>
+<!--        <button id="writebtn" type="button">글쓰기</button>-->
     </div>
-    <footer></footer>
 </div>
+<footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>
 </html>
