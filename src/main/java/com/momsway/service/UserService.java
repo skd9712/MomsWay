@@ -6,4 +6,7 @@ public interface UserService {
     Long joinUser(UserDTO dto);
     boolean findEmailCheck(String email);
     boolean findNicknameCheck(String nickname);
+
+
+    UserDTO findUserByEmail(String sessionId);
 }

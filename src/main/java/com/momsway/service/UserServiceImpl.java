@@ -5,6 +5,7 @@ import com.momsway.domain.UserRole;
 import com.momsway.dto.UserDTO;
 import com.momsway.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
+    private final ModelMapper modelMapper;
 
     /** 회원가입 */
    @Override
@@ -47,5 +49,13 @@ public class UserServiceImpl implements UserService {
     public boolean findNicknameCheck(String nickname) {
         User findUser = userRepository.findByNickname(nickname);
         return findUser!=null;
+    }
+    /** authentication email 로 유저정보 받기 (sessionId로 유저정보 찾는 개념)  */
+    @Override
+    public UserDTO findUserByEmail(String sessionId) {
+        User user = userRepository.findByEmail(sessionId);
+        if(user!=null)
+            return modelMapper.map(user,UserDTO.class);
+        return null;
     }
 }
