@@ -27,6 +27,7 @@ public class AcademyQueryDSLImpl implements AcademyQueryDSL{
                         , academy.readNo
                         , academy.createAt
                         , academy.imgPath
+                        , user.email
                         , user.nickname))
                 .from(academy)
                 .leftJoin(academy.academyUser, user)

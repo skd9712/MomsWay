@@ -14,5 +14,6 @@ class AcademyServiceImplTest {
     @Test
     public void findByAid(){
         Assertions.assertThat(academyService.findByAid(1L).getImgPath()).isNull();
+        Assertions.assertThat(academyService.findByAid(3L).getEmail()).isEqualTo("apass@test.com");
     }
 }

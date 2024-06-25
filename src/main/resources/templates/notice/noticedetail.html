@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <script th:src="@{/js/notice/notice.js}"></script>
     <script th:inline="javascript">
         document.addEventListener("DOMContentLoaded",function () {
@@ -12,18 +16,22 @@
     </script>
 </head>
 <body>
-<header></header>
-<div id="noticedetailwrap">
+<header layout:fragment="header" th:replace="header :: header_template"></header>
+<div class="boarddetailwrap">
     <div class="dttop">
         <span th:text="${dto.title}"></span>
-        <button type="submit" id="mod" th:onclick="modNotice()">수정</button>
-        <button type="button" id="del" th:onclick="delNotice()">삭제</button>
+        <th:block sec:authorize="hasRole('ADMIN')">
+            <button type="submit" id="mod" th:onclick="modNotice()">수정</button>
+            <button type="button" id="del" th:onclick="delNotice()">삭제</button>
+        </th:block>
     </div>
     <div class="dtbody">
         <div class="dtinfo">
             <span> 관리자 </span>
-            <span class="infospan" th:text="|조회 ${dto.readNo}|"> 조회 109 </span>
-            <span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"> 2024.06.21 09:10</span>
+            <div class="readdate">
+                <span class="infospan" th:text="|조회 ${dto.readNo}|"> 조회 109 </span>
+                <span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"> 2024.06.21 09:10</span>
+            </div>
         </div>
         <div class="dtcontent">
             <th:block th:if="${imgPaths != null}">
@@ -37,7 +45,7 @@
             <a href="/notice">목록으로</a>
         </div>
     </div>
-    <footer></footer>
 </div>
+<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>
 </html>
