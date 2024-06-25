@@ -45,10 +45,6 @@ public class AcademyController {
     public String academy(Model model
             , @PageableDefault(size=2, sort = "aid", direction = Sort.Direction.ASC) Pageable pageable
             , @RequestParam(required = false, defaultValue = "") String search_txt){
-        String sessionId = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserDTO user = userService.findUserByEmail(sessionId);
-        if(user!=null)
-            model.addAttribute("user",user);
 
         List<NoticeDTO> toplist = noticeService.findTopList();
         Page<AcademyDTO> list = academyService.findAcademyList(pageable, search_txt);
