@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -109,9 +111,9 @@ public class EntExamController {
     @GetMapping("/delentexam/{eid}")
     public ResponseEntity<String> delEnt(@PathVariable Long eid){
         int result = entExamService.delEnt(eid);
-        String msg = "메롱";
+        String msg = "";
         if(result==0){
-            msg = "삭제실패0";
+            msg = "삭제실패";
         }else {
             msg="삭제완료";
         }
@@ -128,6 +130,16 @@ public class EntExamController {
         deletelike
 
      */
+
+    @GetMapping("/checklike")
+    public ResponseEntity<String> checkLikeStatus(@RequestParam Long uid, @RequestParam Long eid) {
+
+        boolean liked = likeService.findLike(uid,eid);
+        log.info("uid...{}",uid);
+        log.info("eid, .{}",eid);
+
+        return ResponseEntity.ok(liked+"");
+    }
     @PostMapping("/insertlike")
     public @ResponseBody ResponseEntity<Integer> insertLike(@RequestBody LikeDTO dto) {
         int result = 0;
