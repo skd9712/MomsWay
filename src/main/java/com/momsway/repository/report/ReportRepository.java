@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ReportRepository extends JpaRepository<Report,Long>, ReportQueryDSL {
 
-
+    List<Report> findByEid(Long eid);
 
 }

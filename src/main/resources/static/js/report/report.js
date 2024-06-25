@@ -5,8 +5,8 @@ function init(data) {
     console.log(reportList);
 }
 
-async function delReport(rid) {
-    await fetch('/delreport/' + rid, {
+async function delReport(eid) {
+    await fetch('/delreport/' + eid, {
         method: 'GET',
         headers: {
             "Accept": "application/json",

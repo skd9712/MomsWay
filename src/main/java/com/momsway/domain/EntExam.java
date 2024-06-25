@@ -38,7 +38,7 @@ public class EntExam extends BaseEntity {
     @OneToMany(mappedBy = "likeEntExam")
     private List<EntLike> entExamEntLikes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "reportEntExam")
+    @OneToMany(mappedBy = "reportEntExam", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Report> entExamReports = new ArrayList<>();
 
     @OneToMany(mappedBy = "replyEntExam")

@@ -23,7 +23,7 @@ public class Report {
     private User reportUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="eid")
+    @JoinColumn(name="eid", nullable = false)
     private EntExam reportEntExam;
 
     public void setStatus(Boolean status) {

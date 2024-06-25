@@ -8,6 +8,7 @@
     <script th:src="@{/js/entexam/entexamdetail.js}"></script>
     <script th:src="@{/js/entexam/entreply.js}"></script>
     <script th:src="@{/js/entexam/entlike.js}"></script>
+    <script th:src="@{/js/entexam/entreport.js}"></script>
     <script th th:inline="javascript">
         document.addEventListener("DOMContentLoaded", function () {
             init([[${dto.eid}]]);
@@ -40,6 +41,7 @@
         </div>
         <div class="func">
             <img th:src="@{'/images/like.png'}" th:onclick="likeEnt()">
+            <button type="submit" id="report" th:onclick="repEnt()">신고하기</button>
         </div>
         <div class="tolist">
             <a href="/entexam">목록으로</a>
