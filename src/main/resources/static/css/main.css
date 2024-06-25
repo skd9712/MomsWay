@@ -1,3 +1,41 @@
 #main_img{
     width: 100%;
+    margin: 0;
+}
+
+#middle{
+    background-color: #eaeaea;
+    padding: 6vw 10vw;
+    position: relative;
+    top: -5px;
+}
+
+#middle h1, #middle h3{
+    text-align: center;
+}
+
+#middle h1{
+    font-size: 2.5rem;
+}
+
+#middle h3{
+    margin-top: 8px;
+    font-size: 1.5rem;
+    color: #4A4A4A;
+}
+
+#middle ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 3vw 0;
+}
+
+#middle ul li{
+    list-style: none;
+    margin: 0 20px;
+}
+
+.milktea_img{
+    width: 80%;
 }

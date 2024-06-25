@@ -21,6 +21,7 @@ window.onload = function () {
                 let ele_txt=document.createTextNode("이메일을 작성해 주세요.");
                 ele_p.appendChild(ele_txt);
                 ele_p.id="emsg";
+                ele_p.className="msg_error";
                 document.getElementById("email_msg").appendChild(ele_p);
             }
             else if(data===true){
@@ -28,6 +29,7 @@ window.onload = function () {
                 let ele_txt=document.createTextNode("사용 불가능한 이메일입니다.");
                 ele_p.appendChild(ele_txt);
                 ele_p.id="emsg";
+                ele_p.className="msg_error";
                 document.getElementById("email_msg").appendChild(ele_p);
             }
             else if(data===false){
@@ -35,6 +37,7 @@ window.onload = function () {
                 let ele_txt=document.createTextNode("사용 가능한 이메일입니다.")
                 ele_p.appendChild(ele_txt);
                 ele_p.id="emsg";
+                ele_p.className="msg_ok";
                 document.getElementById("email_msg").appendChild(ele_p);
             }
         })
@@ -63,6 +66,7 @@ window.onload = function () {
                 let ele_txt=document.createTextNode("닉네임을 작성해 주세요.");
                 ele_p.appendChild(ele_txt);
                 ele_p.id="nmsg";
+                ele_p.className="msg_error";
                 document.getElementById("nick_msg").appendChild(ele_p);
             }
             else if(data===true){
@@ -70,6 +74,7 @@ window.onload = function () {
                 let ele_txt=document.createTextNode("사용 불가능한 닉네임입니다.");
                 ele_p.appendChild(ele_txt);
                 ele_p.id="nmsg";
+                ele_p.className="msg_error";
                 document.getElementById("nick_msg").appendChild(ele_p);
             }
             else if(data===false){
@@ -77,6 +82,7 @@ window.onload = function () {
                 let ele_txt=document.createTextNode("사용 가능한 닉네임입니다.")
                 ele_p.appendChild(ele_txt);
                 ele_p.id="nmsg";
+                ele_p.className="msg_ok";
                 document.getElementById("nick_msg").appendChild(ele_p);
             }
 

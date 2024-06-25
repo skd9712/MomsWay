@@ -41,16 +41,16 @@
     <div class="boardbottom">
         <div class="paging">
             <th:block th:if="${startPage>1}">
-                <a th:href="@{/academy(page=${startPage}-1)}" th:text="이전"/>
+                <a th:href="@{/academy(page=${startPage}-1, search_txt=${search_txt})}" th:text="이전"/>
             </th:block>
             <th:block th:each="idx:${#numbers.sequence(startPage,endPage)}">
                 <span class="curr" th:if="${idx==list.pageable.getPageNumber()+1}" th:text="${idx}"/>
                 <span th:if="${idx!=list.pageable.getPageNumber()+1}">
-            <a th:href="@{/academy(page=${idx})}" th:text="${idx}"/>
+            <a th:href="@{/academy(page=${idx}, search_txt=${search_txt})}" th:text="${idx}"/>
         </span>
             </th:block>
             <th:block th:if="${endPage<list.totalPages}">
-                <a th:href="@{/academy(page=${endPage+1})}" th:text="다음"/>
+                <a th:href="@{/academy(page=${endPage+1}, search_txt=${search_txt})}" th:text="다음"/>
             </th:block>
             <a sec:authorize="hasAnyRole('ADMIN','ACADEMY')" th:href="@{/insertAcademy}" id="writebtn" type="button">글쓰기</a>
         </div>

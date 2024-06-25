@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/header.js}"></script>
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<link rel="stylesheet" th:href="@{/css/main.css}">
@@ -12,9 +13,39 @@
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
 <div id="wrap">
-<!--	<div>-->
-<!--		<img src="/images/Momsway.png" alt="메인이미지" id="main_img">-->
-<!--	</div>-->
+	<!-- 이미지 -->
+	<div>
+		<img src="/images/Momsway.png" alt="메인이미지" id="main_img">
+	</div>
+	<!-- 밀크티 링크 -->
+	<div id="middle">
+		<h1>우리 아이 교육은?</h1>
+		<h3>천재교육 밀크티에서!</h3>
+		<ul>
+			<li class="milktea">
+				<a href="https://i.milkt.co.kr/Main/frm_Main.aspx">
+					<img src="/images/밀크티아이.png" alt="밀크티아이" class="milktea_img">
+				</a>
+			</li>
+			<li class="milktea">
+				<a href="https://www.milkt.co.kr/Main/Main_new">
+					<img src="/images/밀크티초등.png" alt="밀크티초등" class="milktea_img">
+				</a>
+			</li>
+			<li class="milktea">
+				<a href="https://mid.milkt.co.kr/Main/frm_Main.aspx">
+					<img src="/images/밀크티중등.png" alt="밀크티중등" class="milktea_img">
+				</a>
+			</li>
+			<li class="milktea">
+				<a href="https://high.milkt.co.kr/Main/frm_Main.aspx">
+					<img src="/images/밀크티고등.png" alt="밀크티고등" class="milktea_img">
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 입시게시판 인기글 -->
 	<ul>
 		<li th:each="item:${entLikeList}">
 			<span th:text="${item[0]}"></span>

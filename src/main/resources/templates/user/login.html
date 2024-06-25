@@ -27,6 +27,9 @@
 					<li>
 						<button type="submit" id="submit">로그인</button>
 					</li>
+					<li th:if="${loginError}">
+						<span id="fail_msg">이메일 또는 비밀번호를 다시 확인해 주세요.</span>
+					</li>
 				</ul>
 			</form>
 			<a th:href="@{/join}">회원가입</a>

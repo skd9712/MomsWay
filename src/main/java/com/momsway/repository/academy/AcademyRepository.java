@@ -10,8 +10,11 @@ import java.util.List;
 
 public interface AcademyRepository extends JpaRepository<Academy,Long>, AcademyQueryDSL{
     @Query(" select new com.momsway.dto.AcademyDTO(a.aid, a.title, a.readNo, a.createAt, u.nickname) " +
-            "from Academy a inner join a.academyUser u order by a.aid desc")
-    List<AcademyDTO> findList(Pageable pageable);
+            " from Academy a inner join a.academyUser u " +
+            " where a.title like %:search_txt% " +
+            " or a.content like %:search_txt% " +
+            " order by a.aid desc ")
+    List<AcademyDTO> findList(Pageable pageable, String search_txt);
 
     @Override
     long count();
