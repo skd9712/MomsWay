@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/report/report.css}">
+    <link rel="stylesheet" th:href="@{css/board/board.css}">
+    <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <script th:src="@{/js/report/report.js}"></script>
         <script th:inline="javascript">
             document.addEventListener("DOMContentLoaded",function (){
@@ -12,8 +16,8 @@
         </script>
 </head>
 <body>
-<header></header>
-<div id="reportwrap">
+<header layout:fragment="header" th:replace="header :: header_template"></header>
+<div class="boardwrap">
     <div class="boardtop">신고관리</div>
     <div class="list">
         <ul class="reportlist">
@@ -25,14 +29,14 @@
                 <span>신고횟수</span>
                 <span>신고처리</span>
             </li>
-            <li class="reportlist" th:each="item:${reportlist}">
-                <span th:text="${item.rid}"></span>
+            <li class="reportlist" th:each="item, iterStat :${reportlist}">
+                <span><a th:href="@{'/repdeatail/'+${item.rid}}" th:text="${item.rid}"></a></span>
                 <span th:text="${item.uid}"></span>
-                <span th:text="${item.eid}"></span>
+                <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
                 <span th:text="${item.comment}"></span>
-                <span>신고횟수</span>
+                <span th:text="${countReportsByEid[iterStat.index]}"></span>
                 <span class="repdel" id="reportdel">
-                     <button type="button" class="repdel" th:onclick="|delReport(${item.eid})|">신고처리</button>
+                     <button type="button" class="repdel" th:onclick="|delReport(${item.rid})|">신고처리</button>
                 </span>
             </li>
         </ul>
@@ -55,10 +59,9 @@
         </div>
         </div>
     </div>
-    <footer></footer>
+
 </div>
 
-
-
+<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>
 </html>
