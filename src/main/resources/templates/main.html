@@ -7,11 +7,39 @@
 	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
+	<link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
 <div id="wrap">
-
+<!--	<div>-->
+<!--		<img src="/images/Momsway.png" alt="메인이미지" id="main_img">-->
+<!--	</div>-->
+	<ul>
+		<li th:each="item:${entLikeList}">
+			<span th:text="${item[0]}"></span>
+			<span th:text="${item[1]}"></span>
+			<span th:text="${item[2]}"></span>
+		</li>
+	</ul>
+	<ul>
+		<li th:each="item:${noticeList}">
+			<span th:text="${item.category}"></span>
+			<span th:text="${item.title}"></span>
+		</li>
+	</ul>
+	<ul>
+		<li th:each="item:${academyList}">
+			<span th:text="${item.title}"></span>
+			<span th:text="|조회수 ${item.readNo}|"></span>
+		</li>
+	</ul>
+	<ul>
+		<li th:each="item:${entLatestList}">
+			<span th:text="${item.title}"></span>
+			<span th:text="|조회수 ${item.readNo}|"></span>
+		</li>
+	</ul>
 </div>
 <footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>
