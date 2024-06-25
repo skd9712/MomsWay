@@ -48,7 +48,9 @@
             <th:block th:if="${endPage<list.totalPages}">
                 <a th:href="@{/academy(page=${endPage+1})}" th:text="다음"/>
             </th:block>
-            <a th:href="@{/insertAcademy}" id="writebtn" type="button">글쓰기</a>
+            <th:block th:if="${user!=null and !user.role.equals('PARENT')}">
+                <a th:href="@{/insertAcademy}" id="writebtn" type="button">글쓰기</a>
+            </th:block>
         </div>
     </div>
     <footer></footer>

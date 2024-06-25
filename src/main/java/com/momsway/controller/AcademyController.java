@@ -3,8 +3,10 @@ package com.momsway.controller;
 import com.momsway.domain.Academy;
 import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.NoticeDTO;
+import com.momsway.dto.UserDTO;
 import com.momsway.service.AcademyService;
 import com.momsway.service.NoticeService;
+import com.momsway.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +31,7 @@ import java.util.List;
 public class AcademyController {
     private final AcademyService academyService;
     private final NoticeService noticeService;
+    private final UserService userService;
 
     @Value("D:\\uploadImg")
     private String saveFolder;
@@ -36,6 +39,10 @@ public class AcademyController {
     @GetMapping("/academy")
     public String academy(Model model
             , @PageableDefault(size=2, sort = "aid", direction = Sort.Direction.ASC) Pageable pageable){
+        String sessionId = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserDTO user = userService.findUserByEmail(sessionId);
+        if(user!=null)
+            model.addAttribute("user",user);
         List<NoticeDTO> toplist = noticeService.findTopList();
         Page<AcademyDTO> list = academyService.findAcademyList(pageable);
         log.info("currPage... {}",pageable.getPageNumber());
