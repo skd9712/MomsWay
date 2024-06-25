@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{css/board/boardinsert.css}">
+    <link rel="stylesheet" th:href="@{/css/board/boardinsert.css}">
+    <link rel="stylesheet" th:href="@{/css/board/updateBoard.css}">
+    <script th:src="@{/js/academy/updateacademy.js}"></script>
 </head>
 <body>
 <header></header>
@@ -39,8 +41,9 @@
             </li>
             <li class="insertforms">
                 <label class="writelabel" th:for="files">파일등록</label>
-                <input type="file" th:name="files" th:id="files" multiple="multiple">
+                <input type="file" th:name="files" id="files" multiple="multiple">
             </li>
+            <li id="imgs"></li>
             <li class="insertBtns">
                 <button type="submit" id="submitBtn">등록</button>
                 <button type="reset" id="resetBtn">취소</button>

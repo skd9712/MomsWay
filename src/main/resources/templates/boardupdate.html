@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/board/boardinsert.css}">
+    <link rel="stylesheet" th:href="@{/css/board/updateBoard.css}">
+    <script th:src="@{/js/academy/updateacademy.js}"></script>
+</head>
+<body>
+<header></header>
+<div id="updateboardwrap">
+    <div class="intop">
+        <span>게시글 등록하기</span>
+    </div>
+    <form th:method="post" action="" th:action="@{${insertAction}}" enctype="multipart/form-data">
+<!--        <input type="text" th:name="email" th:value="${#authentication.name}" hidden>-->
+        <ul class="inbody">
+            <th:block th:if="${noticeOnly!=null}">
+                <li class="insertforms">
+                    <label class="writelabel">노출범위</label>
+                    <th:block th:if="${dto.notify}">
+                        <label th:for="notifalse">일반 (공지사항)</label>
+                        <input class="writeinput writecheck" type="radio" th:name="notify" th:id="notifalse" th:value="false">
+                        <label th:for="notitrue">중요 (전체)</label>
+                        <input class="writeinput writecheck" type="radio" th:name="notify" th:id="notitrue" th:value="true" checked>
+                    </th:block>
+                    <th:block th:if="${!dto.notify}">
+                        <label th:for="notifalse">일반 (공지사항)</label>
+                        <input class="writeinput writecheck" type="radio" th:name="notify" th:id="notifalse" th:value="false" checked>
+                        <label th:for="notitrue">중요 (전체)</label>
+                        <input class="writeinput writecheck" type="radio" th:name="notify" th:id="notitrue" th:value="true">
+                    </th:block>
+                </li>
+                <li class="insertforms">
+                    <label class="writelabel" th:for="category">카테고리</label>
+                    <select class="writeinput" th:name="category" th:id="category" th:value="${dto.category}">
+                        <option value="NOTICE">공지</option>
+                        <option value="EVENT">이벤트</option>
+                    </select>
+                </li>
+            </th:block>
+            <li class="insertforms">
+                <label class="writelabel" th:for="title">제목</label>
+                <input class="writeinput titleinput" type="text" th:name="title" th:id="title" th:value="${dto.title}">
+            </li>
+            <li class="insertforms">
+                <label class="writelabel" th:for="content">내용</label>
+                <textarea class="writeinput contentinput" th:name="content" th:id="content" th:text="${dto.content}"></textarea>
+            </li>
+            <li class="insertforms">
+                <label class="writelabel" th:for="files">파일등록</label>
+                <input type="file" th:name="files" id="files" multiple="multiple">
+            </li>
+            <th:block th:if="${imgPaths!=null}">
+                <li id="imgs">
+                    <th:block th:each="img:${imgPaths}">
+                        <img class="thumb currfile" th:src="@{${img}}" onclick="updateImg(this)">
+                    </th:block>
+                </li>
+            </th:block>
+            <li id="uploadImgs"></li>
+            <li class="insertBtns">
+                <button type="submit" id="submitBtn">등록</button>
+                <button type="reset" id="resetBtn">취소</button>
+            </li>
+        </ul>
+    </form>
+</div>
+<footer></footer>
+</body>
+</html>

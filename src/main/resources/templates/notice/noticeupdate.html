@@ -1,42 +1,42 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div th:id="noticeupdatewrap">
-    <th:block th:object="${dto}">
-        <form method="post" th:action="@{'/noticeupdate/'+*{nid}}" enctype="multipart/form-data">
-            <ul>
-                <input type="hidden" th:field="*{nid}">
-                <th:block th:each="img:${dto.imgPaths}">
-                    <img th:src="@{'/getNotiImages/'+${img}}" alt="notice_img">
-                </th:block>
-                <li>
-                    <span>제목</span>
-                    <input type="text" th:field="*{title}">
-                    <span th:if="${#fields.hasErrors('title')}"
-                          th:errors="*{title}"></span>
-                </li>
-                <li>
-                    <span>내용</span>
-                    <textarea cols="30" rows="3" th:field="*{content}"></textarea>
-                    <span th:if="${#fields.hasErrors('content')}"
-                          th:errors="*{content}"></span>
-                </li>
-                <li>
-                    <input type="file" th:field="*{files}">
-                    <span th:if="${#fields.hasErrors('files')}"
-                          th:errors="*{files}"></span>
-                </li>
-                <li>
-                    <button type="submit">수정</button>
-                    <button type="reset">취소</button>
-                </li>
-            </ul>
-        </form>
-    </th:block>
-</div>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:id="noticeupdatewrap">-->
+<!--    <th:block th:object="${dto}">-->
+<!--        <form method="post" th:action="@{'/noticeupdate/'+*{nid}}" enctype="multipart/form-data">-->
+<!--            <ul>-->
+<!--                <input type="hidden" th:field="*{nid}">-->
+<!--                <th:block th:each="img:${dto.imgPaths}">-->
+<!--                    <img th:src="@{'/getNotiImages/'+${img}}" alt="notice_img">-->
+<!--                </th:block>-->
+<!--                <li>-->
+<!--                    <span>제목</span>-->
+<!--                    <input type="text" th:field="*{title}">-->
+<!--                    <span th:if="${#fields.hasErrors('title')}"-->
+<!--                          th:errors="*{title}"></span>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <span>내용</span>-->
+<!--                    <textarea cols="30" rows="3" th:field="*{content}"></textarea>-->
+<!--                    <span th:if="${#fields.hasErrors('content')}"-->
+<!--                          th:errors="*{content}"></span>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <input type="file" th:field="*{files}">-->
+<!--                    <span th:if="${#fields.hasErrors('files')}"-->
+<!--                          th:errors="*{files}"></span>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <button type="submit">수정</button>-->
+<!--                    <button type="reset">취소</button>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </form>-->
+<!--    </th:block>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
