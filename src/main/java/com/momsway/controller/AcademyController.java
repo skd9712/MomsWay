@@ -145,7 +145,18 @@ public class AcademyController {
             model.addAttribute("imgPaths",imgPaths);
         }
         model.addAttribute("dto",dto);
-        model.addAttribute("insertAction", "/updateAcademy");
+        model.addAttribute("insertAction", "/updateAcademy/"+aid);
         return "boardupdate";
+    }
+
+    @PostMapping("/updateAcademy/{aid}")
+    public String updateNoticeResult(@PathVariable Long aid, @ModelAttribute AcademyDTO dto){
+//        for(String s: dto.getImgPaths()){
+//            System.out.println(s);
+//        }
+        log.info("AcademyController getDelImgPaths( delete target )...{}",dto.getImgPaths());
+        dto.setAid(aid);
+        Long modAid = academyService.updateAcademy(dto,saveFolder);
+        return "redirect:/academy/"+modAid;
     }
 }

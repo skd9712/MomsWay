@@ -1,10 +1,7 @@
 package com.momsway.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -35,4 +32,15 @@ public class Academy {
     @JoinColumn(name="uid")
     private User academyUser;
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
 }

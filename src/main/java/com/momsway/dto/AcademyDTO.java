@@ -17,6 +17,7 @@ public class AcademyDTO {
     private Long readNo;
     private LocalDateTime createAt;
     private List<MultipartFile> files;
+    private List<String> imgPaths;
     private String imgPath;
     private String email;
     private String nickname;
