@@ -89,6 +89,7 @@ public class EntExamServiceImpl implements EntExamService {
                 .readNo(detail.getReadNo()+1)
                 .createAt(detail.getCreateAt())
                 .imgPath(detail.getImgPath())
+                .uid(detail.getUid())
                 .nickname(detail.getNickname())
                 .build();
     }
