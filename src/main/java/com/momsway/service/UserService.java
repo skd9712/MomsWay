@@ -16,4 +16,8 @@ public interface UserService {
     List<EntExamDTO> myentlist(String username);
 
     List<EntExamDTO> findByUid(String username);
+
+    UserDTO findUserInfo(String username);
+
+    long userUpdate(Long uid,UserDTO dto);
 }

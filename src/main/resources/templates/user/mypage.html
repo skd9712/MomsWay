@@ -6,28 +6,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/user/mypage.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
-<div>
-    <h2>Logged in User Information</h2>
-    <p>Username: <span sec:authentication="name"></span></p>
-    <p>Authorities: <span sec:authentication="authorities"></span></p>
+<div class="mypagewrap">
+    <a th:href="@{'/myinfo'}">내정보 수정</a>
+    <div class="myinfo">
+        <p>이메일: <span sec:authentication="name"></span></p>
+        <p>회원 구분: <span sec:authentication="authorities"></span></p>
+    </div>
+    <div class="mywriteinfo">
+        <div class="mywrite">
+            <p>글쓴거</p>
+            <ul th:each="item:${myentlist}">
+                <li>
+                    <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
+                </li>
+            </ul>
+        </div>
+        <div class="mylike">
+            <p>좋아요</p>
+            <ul th:each="like:${likeTitles}">
+
+                <li>
+                    <span><a th:href="@{'/entdetail/'+${like.eid}}" th:text="${like.title}"></a></span>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
-<div>글쓴거</div>
-<ul th:each="item:${myentlist}">
-    <li>
-        <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
-    </li>
-</ul>
-<div>좋아요</div>
-<ul th:each="like:${likeTitles}">
-    <li>
-        <span><a th:href="@{'/entdetail/'+${like.eid}}" th:text="${like.title}"></a></span>
-    </li>
-</ul>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 
 </body>

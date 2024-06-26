@@ -1,0 +1,92 @@
+/*
+.mypagewrap{
+    margin: 5vh 20vw;
+}
+.mypagewrap ul li{
+    list-style: none;
+}
+.mywriteinfo{
+    display: flex;
+    justify-content: space-evenly;
+}
+.mywriteinfo ul p{
+    color: #292929;
+}
+.mywriteinfo ul li a{
+    text-decoration: none;
+}*/
+
+/* .mypagewrap */
+.mypagewrap {
+    margin: 5vh 20vw;
+    background-color: #f5f5f5;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* .myinfo */
+.myinfo {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.myinfo p {
+    font-size: 16px;
+    color: #292929;
+    margin-bottom: 10px;
+}
+
+.myinfo span {
+    font-weight: bold;
+}
+
+/* .mywriteinfo */
+.mywriteinfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.mywrite, .mylike {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    height: 200px;
+    overflow-y: auto;
+}
+.mywrite {
+    margin-right: 15px;
+}
+
+.mylike {
+    margin-left: 15px;
+}
+.mywrite p, .mylike p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #292929;
+    margin-bottom: 20px;
+}
+
+.mywrite ul, .mylike ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.mywrite li, .mylike li {
+    margin-bottom: 10px;
+}
+
+.mywrite li a, .mylike li a {
+    color: #0077b6;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.mywrite li a:hover, .mylike li a:hover {
+    color: #005b8f;
+}
