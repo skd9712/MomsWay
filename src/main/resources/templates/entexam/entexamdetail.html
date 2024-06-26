@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
+    <link rel="stylesheet" th:href="@{/css/entexam/entdetail.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" th:href="@{/css/entexam/entmodal.css}">
@@ -24,8 +25,8 @@
             init([[${dto.eid}]]);
             window.entreply.init(eid)
             window.entlike.init(eid)
-            // let username = [[${#authentication.principal.username}]]
-            // console.log(username);
+            let username = [[${#authentication.principal.username}]]
+            console.log(username);
         })
     </script>
 </head>
@@ -34,8 +35,11 @@
 <div class="boarddetailwrap">
     <div class="dttop">
         <span th:text="${dto.title}"></span>
+        <input type="hidden" th:id="eid" th:value="${dto.eid}">
+        <th:block th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasAnyRole(''ADMIN'',''PARENT'')')}">
             <button type="submit" id="mod">수정</button>
             <button type="button" id="del" th:onclick="delEnt()">삭제</button>
+        </th:block>
     </div>
     <div class="dtbody">
         <div class="dtinfo">
@@ -70,6 +74,7 @@
             <a href="/entexam">목록으로</a>
         </div>
     </div>
+    <div class="comarea">
     <ul>
         <li>
             <input type="text" name="content" id="content">
@@ -79,6 +84,7 @@
     <div th:id="comments">
         <p>댓글</p>
         <ul th:id="comments-list"></ul>
+    </div>
     </div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
