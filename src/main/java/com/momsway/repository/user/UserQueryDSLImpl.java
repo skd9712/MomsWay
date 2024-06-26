@@ -37,28 +37,28 @@ public class UserQueryDSLImpl implements UserQueryDSL {
     @Override
     public int getCount(String search, String search_txt) {
 
-        int totalCount=0;
+        int totalCount = 0;
 
-        if(search=="email"||"email".equals(search)){
+        if (search == "email" || "email".equals(search)) {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
                     .where(user.email.like("%" + search_txt + "%"))
                     .fetchOne();
-            totalCount=count.intValue();
-        }else if(search=="nickname"||"nickname".equals(search)){
+            totalCount = count.intValue();
+        } else if (search == "nickname" || "nickname".equals(search)) {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
                     .where(user.nickname.like("%" + search_txt + "%"))
                     .fetchOne();
-            totalCount=count.intValue();
-        }else{
+            totalCount = count.intValue();
+        } else {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
                     .fetchOne();
-            totalCount=count.intValue();
+            totalCount = count.intValue();
         }
-
         return totalCount;
+    }
 
     @Override
     public UserDTO findByUserInfo(long uidByEmail) {

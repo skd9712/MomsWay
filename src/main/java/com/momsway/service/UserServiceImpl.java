@@ -140,6 +140,7 @@ public class UserServiceImpl implements UserService {
     public Long deleteUser(Long uid) {
         userRepository.deleteById(uid);
         return uid;
+    }
 
     @Override
     public UserDTO findUserInfo(String username) {
