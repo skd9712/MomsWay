@@ -1,12 +1,15 @@
 package com.momsway.repository.user;
 
+import com.momsway.domain.User;
 import com.momsway.dto.EntExamDTO;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import static com.momsway.domain.QEntExam.*;
+import static com.momsway.domain.QUser.user;
 import java.util.List;
 
 @Repository
@@ -23,5 +26,32 @@ public class UserQueryDSLImpl implements UserQueryDSL {
                 .where(entExam.entExamUser.uid.eq(uidByEmail))
                 .fetch();
         return list;
+    }
+
+    @Override
+    public int getCount(String search, String search_txt) {
+
+        int totalCount=0;
+
+        if(search=="email"||"email".equals(search)){
+            Long count = queryFactory.select(user.uid.count())
+                    .from(user)
+                    .where(user.email.like("%" + search_txt + "%"))
+                    .fetchOne();
+            totalCount=count.intValue();
+        }else if(search=="nickname"||"nickname".equals(search)){
+            Long count = queryFactory.select(user.uid.count())
+                    .from(user)
+                    .where(user.nickname.like("%" + search_txt + "%"))
+                    .fetchOne();
+            totalCount=count.intValue();
+        }else{
+            Long count = queryFactory.select(user.uid.count())
+                    .from(user)
+                    .fetchOne();
+            totalCount=count.intValue();
+        }
+
+        return totalCount;
     }
 }

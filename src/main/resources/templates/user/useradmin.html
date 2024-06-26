@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<header layout:fragment="header" th:replace="header :: header_template"></header>
+<div id="wrap">
+	<!-- 회원 검색창 -->
+	<form th:method="get" th:action="@{/useradmin}">
+		<select th:name="search" th:id="search_user">
+			<option th:value="email">이메일</option>
+			<option th:value="nickname">닉네임</option>
+		</select>
+		<input type="text" th:name="search_txt" th:id="search_txt_user">
+		<button type="submit" id="search_user_btn">검색</button>
+	</form>
+
+	<!-- 회원리스트 -->
+	<div id="list">
+		<ul>
+			<li>
+				<span>회원번호</span>
+				<span>이메일</span>
+				<span>닉네임</span>
+				<span>회원유형</span>
+			</li>
+			<li th:each="item:${userList}">
+				<a th:href="@{'/userdetail/'+${item.uid}}">
+					<span th:text="${item.uid}"></span>
+					<span th:text="${item.email}"></span>
+					<span th:text="${item.nickname}"></span>
+					<span th:text="${item.role}"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 페이지 -->
+	<div id="page">
+		<th:block th:if="${startPage>1}">
+			<a th:href="@{/useradmin(page=${startPage}-1, search=${search}, search_txt=${search_txt})}">
+				<span>이전</span>
+			</a>
+		</th:block>
+
+		<th:block th:each="index:${#numbers.sequence(startPage, endPage)}" th:class="page">
+			<span th:if="${index==userList.pageable.getPageNumber()+1}" th:text="${index}"></span>
+			<span th:if="${index!=userList.pageable.getPageNumber()+1}">
+				<a th:href="@{/useradmin(page=${index}, search=${search}, search_txt=${search_txt})}"
+				   th:text="${index}"></a>
+			</span>
+		</th:block>
+
+		<th:block th:if="${endPage<userList.getTotalPages()}">
+			<a th:href="@{/useradmin(page=${endPage+1}, search=${search}, search_txt=${search_txt})}">
+				<span>다음</span>
+			</a>
+		</th:block>
+	</div>
+</div>
+<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
+</body>
+</html>
