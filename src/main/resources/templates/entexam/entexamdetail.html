@@ -21,6 +21,8 @@
             init([[${dto.eid}]]);
             window.entreply.init(eid)
             window.entlike.init(eid)
+            let username=[[${#authentication.principal.username}]]
+            console.log(username);
         })
     </script>
 </head>
@@ -48,7 +50,7 @@
             <p th:text="${dto.content}"></p>
         </div>
         <div class="func">
-            <img th:src="@{'/images/like.png'}" th:id="likeBtn" th:onclick="likeEnt()">
+            <img th:src="@{'/images/like.png'}" th:id="likeBtn" th:onclick="toggleLike()">
         </div>
         <div class="tolist">
             <a href="/entexam">목록으로</a>

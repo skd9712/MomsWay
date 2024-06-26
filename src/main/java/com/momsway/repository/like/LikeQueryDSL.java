@@ -1,10 +1,12 @@
 package com.momsway.repository.like;
 
+import com.momsway.dto.EntExamDTO;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface LikeQueryDSL {
-    List<String> findByUid(Long uid);
+    List<EntExamDTO> findByUid(long uidByEmail);
 
-    boolean findByUidAndEid(Long uid, Long eid);
+    boolean findByUidAndEid(Long uid, Long eid,String username);
 }

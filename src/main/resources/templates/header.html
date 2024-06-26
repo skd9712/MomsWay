@@ -39,7 +39,7 @@
 							<button type="submit" th:class="logout">로그아웃</button>
 						</form>
 					</li>
-					<li><a th:href="@{/'#'}" th:text="마이페이지"></a></li>
+					<li><a th:href="@{/mypage}" th:text="마이페이지"></a></li>
 				</th:block>
 
 				<th:block sec:authorize="!isAuthenticated()">

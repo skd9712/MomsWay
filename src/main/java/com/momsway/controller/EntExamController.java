@@ -1,11 +1,13 @@
 package com.momsway.controller;
 
+import com.momsway.domain.User;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.LikeDTO;
 import com.momsway.dto.NoticeDTO;
 import com.momsway.service.EntExamService;
 import com.momsway.service.LikeService;
 import com.momsway.service.NoticeService;
+import com.momsway.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +47,7 @@ public class EntExamController {
     private final LikeService likeService;
     private final EntExamService entExamService;
     private final NoticeService noticeService;
+    private final UserService userService;
 
     @GetMapping("entexam")
     public String entexam(@PageableDefault(size = 10, page = 0) Pageable pageable, Model model
@@ -70,9 +76,13 @@ public class EntExamController {
     }
 
     @PostMapping("/insertent")
-    public String entresult(EntExamDTO dto, Model model) {
+    public String entresult(EntExamDTO dto, Model model, Principal principal) {
         log.info("....upload file path: {}", saveFolder);
-        long result = entExamService.upload(saveFolder, dto);
+        String username = principal.getName();
+        log.info("...username...{}",username);
+        long uidByEmail = userService.findUidByEmail(username);
+        log.info("uid,,,,{}",uidByEmail);
+        long result = entExamService.upload(saveFolder, dto,username);
         log.info("...upload file length:{}", result);
         return "redirect:/entexam";
     }
@@ -138,20 +148,22 @@ public class EntExamController {
      */
 
     @GetMapping("/checklike")
-    public ResponseEntity<String> checkLikeStatus(@RequestParam Long uid, @RequestParam Long eid) {
-
-        boolean liked = likeService.findLike(uid,eid);
-        log.info("uid...{}",uid);
+    public ResponseEntity<String> checkLikeStatus(@RequestParam Long uid, @RequestParam Long eid,Principal principal) {
+        String username = principal.getName();
+        Long uidByEmail = userService.findUidByEmail(username);
+        boolean liked = likeService.findLike(uidByEmail,eid,username);
+        log.info("uid...{}",uidByEmail);
         log.info("eid, .{}",eid);
 
         return ResponseEntity.ok(liked+"");
     }
     @PostMapping("/insertlike")
-    public @ResponseBody ResponseEntity<Integer> insertLike(@RequestBody LikeDTO dto) {
+    public @ResponseBody ResponseEntity<Integer> insertLike(@RequestBody LikeDTO dto,Principal principal) {
+        String username = principal.getName();
         int result = 0;
         try {
             log.info("Received LikeDTO: {}", dto); // 요청 본문 확인
-            likeService.insertLike(dto);
+            likeService.insertLike(dto,username);
             result = 1;
         } catch (Exception e) {
             log.error("ExamController insertLike...{}", e);
