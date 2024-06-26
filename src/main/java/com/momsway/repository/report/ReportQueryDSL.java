@@ -19,5 +19,5 @@ public interface ReportQueryDSL {
     List<ReportDTO> findByRid(Long rid);
 
 
-//    List<Long> countByEid();
+//    List<Long> countByEid1();
 }

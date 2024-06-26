@@ -47,26 +47,40 @@ public class ReportServiceImpl implements ReportService {
                 .comment(item.getComment())
                 .build()).collect(Collectors.toList());
 
-        List<Long> countByEid = reportRepository.countByEid();
+        List<Object[]> countByEid = reportRepository.countByEid();
         PageImpl<ReportDTO> reportDTOS = new PageImpl<>(reportDTOList, pageable, reportPage.getTotalElements());
         return new PageImpl<>(reportDTOList, pageable, reportPage.getTotalElements());
     }
 
+//    @Override
+//    public List<Long> countReportsByEid() {
+//        return reportRepository.countByEid();
+//    }
     @Override
-    public List<Long> countReportsByEid() {
-        return reportRepository.countByEid();
+    public Map<Long, Long> countReportsByEid() {
+    List<Object[]> results = reportRepository.countByEid();
+    Map<Long, Long> eidCountMap = new HashMap<>();
+    for (Object[] result : results) {
+        Long eid = (Long) result[0];
+        Long count = (Long) result[1];
+        eidCountMap.put(eid, count);
     }
+    return eidCountMap;
+}
 
     @Override
     public ReportDTO detail(Long rid) {
-        List<ReportDTO> byRid = reportRepository.findByRid(rid);
-        if (byRid.isEmpty()) {
-            return null; // 또는 예외를 던질 수도 있습니다.
-        }
+        // ReportDTO를 얻는 로직
+        Report report = reportRepository.findById(rid)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid report id: " + rid));
 
-        return byRid.get(0);
+        return ReportDTO.builder()
+                .rid(report.getRid())
+                .uid(report.getReportUser().getUid())
+                .eid(report.getReportEntExam().getEid())
+                .comment(report.getComment())
+                .build();
     }
-
 
 
     @Override
@@ -112,23 +126,30 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public int EntReport(ReportDTO reportDTO) {
         try {
-            User user=userRepository.findById(reportDTO.getUid()).orElseThrow(()-> new RuntimeException("User not found"));
-            EntExam entExam=entExamRepository.findById(reportDTO.getEid()).orElseThrow(()-> new RuntimeException("EntExam not found"));
+            User user = userRepository.findById(reportDTO.getUid())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            EntExam entExam = entExamRepository.findById(reportDTO.getEid())
+                    .orElseThrow(() -> new RuntimeException("EntExam not found"));
+            // 중복 신고 검사
+            boolean exists = reportRepository.existsByReportUserAndReportEntExam(user, entExam);
+            if (exists) {
+                // 이미 신고한 경우
+                return -1;  // 중복 신고 표시 값 (예: -1)
+            }
 
-            Report report=Report.builder()
+            Report report = Report.builder()
                     .comment(reportDTO.getComment())
-                    .status(false) //초기 신고 상태는 false로 설정
+                    .status(false) // 초기 신고 상태는 false로 설정
                     .reportUser(user)
                     .reportEntExam(entExam)
                     .build();
 
             reportRepository.save(report);
             return 1;
-        }catch (Exception e){
-            System.out.println(e);
+        } catch (Exception e) {
+            e.printStackTrace(); // 예외가 발생했을 때 스택 트레이스를 출력
             return 0;
         }
-
     }
 
 

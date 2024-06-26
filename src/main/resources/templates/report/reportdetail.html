@@ -2,28 +2,63 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
+    <link rel="stylesheet" th:href="@{/css/report/reportdetail.css}">
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/entexam/entmodal.css}">
+    <script th:src="@{/js/entexam/entreport.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
-<div id="acadetailwrap">
+<div id="reportdetail">
     <div class="dttop">
         <span th:text="${dto.rid}"></span>
     </div>
     <div class="dtbody">
         <div class="dtcontent">
-           <span class="rid" th:text="${dto.rid}">글번호</span>
-           <span class="uid" th:text="${dto.uid}">신호당한유저</span>
-           <span class="eid" th:text="${dto.eid}">신고당한입시글</span>
-           <span class="comment" th:text="${dto.comment}">신고이유</span>
+           <ul>
+            <li class="list">
+                <span class="rid">글번호</span>
+                <span class="rid" th:text="${dto.rid}">글번호</span>
+            </li>
+               <li class="list">
+                   <span class="uid">신고당한유저</span>
+                   <span class="uid" th:text="${dto.uid}">신호당한유저</span>
+               </li>
+               <li class="list">
+                   <span class="eid">신고당한글번호</span>
+                   <span class="eid" th:text="${dto.eid}">신고당한입시글</span>
+               </li>
+               <li class="list">
+                   <span class="comment">신고이유</span>
+                   <textarea cols="30" rows="3" th:text="${dto.comment}" readonly></textarea>
+               </li>
+               <li class="list">
+                   <span class="count">신고횟수</span>
+                   <span class="count" th:text="${count}">신고횟수</span>
+               </li>
+           </ul>
+
         </div>
         <div class="tolist">
             <a href="/report">목록으로</a>
+            <button type="button" onclick="document.getElementById('reportModal').style.display='block'">신고하기</button>
         </div>
+        <div id="reportModal" style="display:none;">
+            <h2>신고페이지</h2>
+            <p>신고 하는 이유를 입력하고 제출하기를 눌러주세요</p>
+            <input type="hidden" id="reportEid" th:value="${dto.eid}">
+            <input type="hidden" id="reportUid" th:value="${dto.uid}">
+            <textarea id="comment" name="comment" placeholder="신고 하는 이유를 적어주세요"></textarea>
+            <button type="button" onclick="entReport()">신고 제출</button>
+            <button type="button" onclick="document.getElementById('reportModal').style.display='none'">닫기</button>
+        </div>
+
     </div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>

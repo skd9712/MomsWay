@@ -1,4 +1,3 @@
-
 .boardtop {
     text-align: center;
     background: #F5C943;
@@ -17,7 +16,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 54vw;
 }
 .reporttop{
     background: #58B27B;
@@ -31,29 +29,26 @@ li span {
 }
 
 .reporttop li span:nth-child(1), .reportlist li span:nth-child(1){
-    width: 10%;
+    width: 20%;
     text-align: center;
 }
 .reporttop li span:nth-child(2), .reportlist li span:nth-child(2){
-    width: 16%;
+    width: 20%;
     text-align: center;
 }
 .reporttop li span:nth-child(3), .reportlist li span:nth-child(3){
-    width: 13%;
+    width: 20%;
     text-align: center;
 }
 .reporttop li span:nth-child(4), .reportlist li span:nth-child(4){
-    width: 30%;
+    width: 20%;
     text-align: center;
 }
 .reporttop li span:nth-child(5), .reportlist li span:nth-child(5){
-    width: 16%;
+    width: 15%;
     text-align: center;
 }
-.reporttop li span:nth-child(6), .reportlist li span:nth-child(6){
-    width: 10%;
-    text-align: center;
-}
+
 .repdel{
     background-color: #f88686;
 }
