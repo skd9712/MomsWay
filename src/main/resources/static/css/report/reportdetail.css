@@ -1,0 +1,13 @@
+ul{
+    list-style: none;
+}
+#reportdetail{
+    margin: 5vh 20vw;
+}
+.rid, .uid, .eid, .comment, .comment,.count{
+    padding: 5px;
+}
+
+.list{
+    padding: 5px;
+}

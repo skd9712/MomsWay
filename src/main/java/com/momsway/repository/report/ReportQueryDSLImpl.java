@@ -99,7 +99,7 @@ public class ReportQueryDSLImpl implements ReportQueryDSL {
 
 
 //    @Override
-//    public List<Long> countByEid() {
+//    public List<Long> countByEid1() {
 //        queryFactory.select()
 //                .from()
 //                .groupBy();
