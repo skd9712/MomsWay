@@ -24,4 +24,9 @@ public interface UserService {
     UserDTO getUserDetail(Long uid);
 
     Long deleteUser(Long uid);
+
+    UserDTO findUserInfo(String username);
+
+    long userUpdate(Long uid,UserDTO dto);
+
 }

@@ -1,0 +1,78 @@
+.comarea {
+    padding: 20px;
+}
+
+.comarea p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #292929;
+    margin-bottom: 20px;
+}
+
+.comarea ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comarea li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.comarea input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.comarea button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comarea button:hover {
+    background-color: #005b8f;
+}
+
+.comarea #comments-list {
+    margin-top: 20px;
+}
+
+.comarea #comments-list li {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.comarea #comments-list li .comment-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comarea #comments-list li .comment-info .comment-author {
+    font-weight: bold;
+    color: #292929;
+}
+
+.comarea #comments-list li .comment-info .comment-date {
+    color: #777;
+    font-size: 14px;
+}
+
+.comarea #comments-list li .comment-content {
+    color: #555;
+}

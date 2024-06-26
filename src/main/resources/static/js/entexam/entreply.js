@@ -27,7 +27,7 @@ const init_json = async function () {
                 let ele_li = document.createElement("li");
                 ele_li.classList.add('comment');
 
-                let writer = document.createElement("span")
+                let writer = document.createElement("p")
                 writer.classList.add('writer');
                 writer.textContent = item.nickname;
 

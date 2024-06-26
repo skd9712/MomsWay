@@ -6,11 +6,18 @@ import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.UserDTO;
 import com.momsway.repository.like.LikeRepository;
 import com.momsway.repository.user.UserRepository;
+import groovy.util.logging.Slf4j;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +33,7 @@ public class UserServiceImpl implements UserService {
     private final LikeRepository likeRepository;
     private final PasswordEncoder encoder;
     private final ModelMapper modelMapper;
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     /** 회원가입 */
    @Override
@@ -132,5 +140,23 @@ public class UserServiceImpl implements UserService {
     public Long deleteUser(Long uid) {
         userRepository.deleteById(uid);
         return uid;
+
+    @Override
+    public UserDTO findUserInfo(String username) {
+        long uidByEmail = findUidByEmail(username);
+        UserDTO user = userRepository.findByUserInfo(uidByEmail);
+        return user;
+    }
+
+    @Override
+    @Transactional
+    public long userUpdate(Long uid,UserDTO dto) {
+        log.info("Starting update for eid: {}", uid);
+        User user = userRepository.findById(uid)
+                .orElseThrow(() -> new IllegalArgumentException("invalid uid: " + uid));
+        user.setEmail(dto.getEmail());
+        user.setNickname(dto.getNickname());
+        User save = userRepository.save(user);
+        return save.getUid();
     }
 }

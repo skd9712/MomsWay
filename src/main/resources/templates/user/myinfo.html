@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/user/myinfo.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<header layout:fragment="header" th:replace="~{header :: header_template}"></header>
+
+<div class="myinfowrap">
+    <h1>내정보 수정</h1>
+    <th:block th:object="${dto}">
+        <form method="post" th:action="@{'/myinfo'}">
+            <input type="hidden" th:field="*{uid}">
+            <ul>
+                <li>
+                    <label>이메일</label>
+                    <input type="text" th:field="*{email}">
+                </li>
+                <li>
+                    <label>닉네임</label>
+                    <input type="text" th:field="*{nickname}">
+                </li>
+                <li>
+                    <button type="submit">수정</button>
+                </li>
+            </ul>
+        </form>
+    </th:block>
+</div>
+<footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
+</body>
+</html>

@@ -10,13 +10,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
+    <link rel="stylesheet" th:href="@{/css/entexam/entdetail.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-
     <link rel="stylesheet" th:href="@{/css/entexam/entmodal.css}">
-
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
-
     <script th:src="@{/js/entexam/entupdate.js}"></script>
     <script th:src="@{/js/entexam/entexamdetail.js}"></script>
     <script th:src="@{/js/entexam/entreply.js}"></script>
@@ -27,8 +25,8 @@
             init([[${dto.eid}]]);
             window.entreply.init(eid)
             window.entlike.init(eid)
-            // let username = [[${#authentication.principal.username}]]
-            // console.log(username);
+            let username = [[${#authentication.principal.username}]]
+            console.log(username);
         })
     </script>
 </head>
@@ -37,8 +35,11 @@
 <div class="boarddetailwrap">
     <div class="dttop">
         <span th:text="${dto.title}"></span>
+        <input type="hidden" th:id="eid" th:value="${dto.eid}">
+        <th:block th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasAnyRole(''ADMIN'',''PARENT'')')}">
             <button type="submit" id="mod">수정</button>
             <button type="button" id="del" th:onclick="delEnt()">삭제</button>
+        </th:block>
     </div>
     <div class="dtbody">
         <div class="dtinfo">
@@ -59,18 +60,21 @@
             <img th:src="@{'/images/like.png'}" th:id="likeBtn" th:onclick="toggleLike()">
         </div>
         <div id="reportModal" style="display:none;">
+            <div class="modal">
             <h2>신고페이지</h2>
-            <p>신고 하는 이유를 입력하고 제출하기를 눌러주세요</p>
+            <p>신고 하는 이유를 입력하고 신고 제출을 눌러주세요</p>
             <input type="hidden" id="reportEid" th:value="${dto.eid}">
             <input type="hidden" id="reportUid" th:value="${dto.uid}">
             <textarea id="comment" name="comment" placeholder="신고 하는 이유를 적어주세요"></textarea>
             <button type="button" onclick="entReport()">신고 제출</button>
             <button type="button" onclick="document.getElementById('reportModal').style.display='none'">닫기</button>
+            </div>
         </div>
         <div class="tolist">
             <a href="/entexam">목록으로</a>
         </div>
     </div>
+    <div class="comarea">
     <ul>
         <li>
             <input type="text" name="content" id="content">
@@ -80,6 +84,7 @@
     <div th:id="comments">
         <p>댓글</p>
         <ul th:id="comments-list"></ul>
+    </div>
     </div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
