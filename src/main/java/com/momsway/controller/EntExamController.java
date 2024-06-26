@@ -151,20 +151,19 @@ public class EntExamController {
     public ResponseEntity<String> checkLikeStatus(@RequestParam Long uid, @RequestParam Long eid,Principal principal) {
         String username = principal.getName();
         Long uidByEmail = userService.findUidByEmail(username);
-        boolean liked = likeService.findLike(uidByEmail,eid,username);
+        Long liked = likeService.findLike(uidByEmail,eid,username);
         log.info("uid...{}",uidByEmail);
         log.info("eid, .{}",eid);
 
         return ResponseEntity.ok(liked+"");
     }
     @PostMapping("/insertlike")
-    public @ResponseBody ResponseEntity<Integer> insertLike(@RequestBody LikeDTO dto,Principal principal) {
+    public @ResponseBody ResponseEntity<Long> insertLike(@RequestBody LikeDTO dto,Principal principal) {
         String username = principal.getName();
-        int result = 0;
+        Long result = 0L;
         try {
             log.info("Received LikeDTO: {}", dto); // 요청 본문 확인
-            likeService.insertLike(dto,username);
-            result = 1;
+            result = likeService.insertLike(dto, username);
         } catch (Exception e) {
             log.error("ExamController insertLike...{}", e);
         }
@@ -173,6 +172,7 @@ public class EntExamController {
 
     @PostMapping("/dellike/{lid}")
     public @ResponseBody ResponseEntity<Integer> delLike(@PathVariable Long lid) {
+
         int result = likeService.delLike(lid);
         return ResponseEntity.ok().body(result);
     }

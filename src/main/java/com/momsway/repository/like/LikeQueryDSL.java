@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface LikeQueryDSL {
     List<EntExamDTO> findByUid(long uidByEmail);
 
-    boolean findByUidAndEid(Long uid, Long eid,String username);
+    Long findByUidAndEid(Long uid, Long eid,String username);
 }
