@@ -3,6 +3,7 @@ package com.momsway.service;
 import com.momsway.domain.Academy;
 import com.momsway.domain.User;
 import com.momsway.dto.AcademyDTO;
+import com.momsway.dto.NoticeDTO;
 import com.momsway.repository.academy.AcademyRepository;
 import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
@@ -20,10 +21,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -94,6 +92,60 @@ public class AcademyServiceImpl implements AcademyService{
                 .build();
         Academy academy = academyRepository.save(newAcademy);
         return academy.getAid();
+    }
+
+    @Override
+    @Transactional
+    public Long updateAcademy(AcademyDTO dto, String saveFolder) {
+        // find academy entity
+        Optional<Academy> find = academyRepository.findById(dto.getAid());
+        Academy academy = find.orElseThrow(() -> {
+            throw new RuntimeException("from AcademyServiceImpl updateAcademy");
+        });
+        StringBuilder updateImgPaths = new StringBuilder();
+        // 기존 이미지가 있는 경우
+        if(academy.getImgPath()!=null){
+            // original imgList
+            List<String> originPaths = Arrays.stream(academy.getImgPath().split(";-;")).toList();
+            for(String s:originPaths){
+                System.out.println(s);
+            }
+            // dto.imgPaths file delete, imgList modify
+            if(dto.getImgPaths()!=null && dto.getImgPaths().size()>0){
+                //academyImgFileRemove(dto.getImgPaths(),saveFolder);
+                //dto.getImgPaths() 에 있으면 original imgList 에서 빼기, 없으면 updateList 에 추가
+                updateImgPaths = updateImgList(updateImgPaths, originPaths, dto.getImgPaths());
+                log.info("updateImgPaths after del...{}",updateImgPaths);
+            }
+        }
+        // dto.files 는 insertImg, insert 한 imgPath 를 updateList 와 합치기
+        String addPaths = "";
+        if(dto.getFiles()!=null && !dto.getFiles().get(0).getOriginalFilename().equals("")){
+            addPaths = academyImgFileUpload(dto.getFiles(), saveFolder);
+        }
+        updateImgPaths.append(addPaths);
+        log.info("updateImgPaths after add...{}",updateImgPaths);
+        // set entity
+        academy.setTitle(dto.getTitle());
+        academy.setContent(dto.getContent());
+        academy.setImgPath(updateImgPaths.toString());
+        return academy.getAid();
+    }
+
+    private StringBuilder updateImgList(StringBuilder updateImgPaths
+            , List<String> originPaths, List<String> delPaths){
+        System.out.println(originPaths.size()+","+delPaths.size());
+        System.out.println(originPaths.get(0));
+        List<String> result = new ArrayList<>();
+
+        // 오리지널 리스트에서 삭제 리스트 빼는 거 다시 구현
+
+        for(String s:result){
+            updateImgPaths.append(s);
+            updateImgPaths.append(";-;");
+        }
+        System.out.println(updateImgPaths);
+        return updateImgPaths;
     }
 
     private String academyImgFileUpload(List<MultipartFile> files, String saveFolder) {
