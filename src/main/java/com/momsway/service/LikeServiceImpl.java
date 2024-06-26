@@ -27,7 +27,7 @@ public class LikeServiceImpl implements LikeService {
 
 
     @Override
-    public boolean findLike(Long uid, Long eid,String username) {
+    public Long findLike(Long uid, Long eid,String username) {
         User user = userRepository.findByEmail(username);
         log.info("Sereid...{}",eid);
         log.info("Seruid...{}",user.getUid());
@@ -36,38 +36,38 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public void insertLike(LikeDTO dto,String username) {
+    public Long insertLike(LikeDTO dto,String username) {
         log.info("eid...{}", dto.getEid());
         Optional<EntExam> entExam = entExamRepository.findById(dto.getEid());
+        EntLike save = null;
         User user = userRepository.findByEmail(username);
-//        Optional<User> user = userRepository.findById(dto.getUid());
-//        User parent2 = user.orElseThrow(() -> new RuntimeException("error User"));
         if (entExam.isPresent()) {
             EntExam parent = entExam.orElseThrow(() -> new RuntimeException("error EntExam"));
             log.info("Found EntExam with id: {}", parent.getEid());
-//            User defaultUser = userRepository.findById(1L).orElseThrow(() -> new RuntimeException("Default User not found"));
-//            log.info("Found default user with id: {}", defaultUser.getUid());
-            boolean alreadyLiked = likeRepository.findByUidAndEid(user.getUid(),parent.getEid(),username);
+
+            Long alreadyLiked = likeRepository.findByUidAndEid(user.getUid(),parent.getEid(),username);
             log.info("..t/f..{}",alreadyLiked);
-            if (alreadyLiked) {
+            if (alreadyLiked!=null) {
                 log.info("User with id: {} has already liked the EntExam with id: {}", user.getUid(),parent.getEid());
-                return;
+                return 0L;
             }
             EntLike like = EntLike.builder()
                     .likeEntExam(parent)
                     .likeUser(user)
                     .build();
-            likeRepository.save(like);
+            save = likeRepository.save(like);
             log.info("Saved new like for user with id: {} and EntExam with id: {}", user.getUid(), parent.getEid());
         }else{
             log.error("EntExam with id: {} not found", dto.getEid());
             throw new RuntimeException("Error occurred while inserting like");
         }
+        return save.getLid();
     }
 
     @Override
     public int delLike(Long lid) {
         int result = 0;
+
         try {
             likeRepository.deleteById(lid);
             result = 1;
