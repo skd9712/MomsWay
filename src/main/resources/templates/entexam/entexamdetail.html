@@ -12,7 +12,11 @@
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+
     <link rel="stylesheet" th:href="@{/css/entexam/entmodal.css}">
+
+    <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+
     <script th:src="@{/js/entexam/entupdate.js}"></script>
     <script th:src="@{/js/entexam/entexamdetail.js}"></script>
     <script th:src="@{/js/entexam/entreply.js}"></script>
@@ -23,9 +27,8 @@
             init([[${dto.eid}]]);
             window.entreply.init(eid)
             window.entlike.init(eid)
-            let username=[[${#authentication.principal.username}]]
-            console.log(username);
-
+            // let username = [[${#authentication.principal.username}]]
+            // console.log(username);
         })
     </script>
 </head>
@@ -33,10 +36,9 @@
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
 <div class="boarddetailwrap">
     <div class="dttop">
-        <input type="hidden" th:name="eid" th:id="eid" th:value="${dto.eid}">
         <span th:text="${dto.title}"></span>
-        <button type="submit" id="mod">수정</button>
-        <button type="button" id="del" th:onclick="delEnt()">삭제</button>
+            <button type="submit" id="mod">수정</button>
+            <button type="button" id="del" th:onclick="delEnt()">삭제</button>
     </div>
     <div class="dtbody">
         <div class="dtinfo">

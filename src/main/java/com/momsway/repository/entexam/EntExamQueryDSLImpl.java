@@ -50,14 +50,14 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
 
         return list;
     }
-  
+
     @Override
     public Page<EntExamDTO> orderlist(Pageable pageable, String search_txt) {
         BooleanBuilder builder = new BooleanBuilder();
-        List<EntExamDTO> list = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.eid, entExam.title,user.nickname, entExam.createAt, entExam.readNo))
+        List<EntExamDTO> list = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.eid, entExam.title, user.nickname, entExam.createAt, entExam.readNo))
                 .from(entExam)
                 .innerJoin(entExam.entExamUser, user)
-                .where(entExam.title.like("%"+search_txt+"%").or(entExam.content.like("%"+search_txt+"%")))
+                .where(entExam.title.like("%" + search_txt + "%").or(entExam.content.like("%" + search_txt + "%")))
                 .orderBy(entExam.eid.desc())
                 .where(builder)
                 .offset(pageable.getOffset())
@@ -67,12 +67,21 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
                 .from(entExam)
                 .where(builder)
                 .fetchOne();
-        return new PageImpl<>(list,pageable,totalCount);
+        return new PageImpl<>(list, pageable, totalCount);
     }
 
     @Override
     public EntExamDTO findByEid(Long eid) {
-        EntExamDTO entExamDTO = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.eid, entExam.title, entExam.content, entExam.createAt, entExam.readNo, user.uid,user.nickname,entExam.imgPath))
+        EntExamDTO entExamDTO = queryFactory.select(Projections.fields(EntExamDTO.class
+                                                                       , entExam.eid
+                                                                       , entExam.title
+                                                                       , entExam.content
+                                                                       , entExam.createAt
+                                                                       , entExam.readNo
+                                                                       , user.uid
+                                                                       ,user.nickname
+                                                                       ,entExam.imgPath))
+       
                 .from(entExam)
                 .innerJoin(entExam.entExamUser, user)
                 .where(entExam.eid.eq(eid))
@@ -95,7 +104,7 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
 
     @Override
     public List<EntReplyDTO> repList(Long eid) {
-        List<EntReplyDTO> repList = queryFactory.select(Projections.fields(EntReplyDTO.class, entReply.repId,entReply.createAt,entReply.content,entExam.eid,user.uid, user.nickname))
+        List<EntReplyDTO> repList = queryFactory.select(Projections.fields(EntReplyDTO.class, entReply.repId, entReply.createAt, entReply.content, entExam.eid, user.uid, user.nickname))
                 .from(entReply)
                 .innerJoin(entReply.replyEntExam, entExam)
                 .innerJoin(entReply.entReplyUser, user)

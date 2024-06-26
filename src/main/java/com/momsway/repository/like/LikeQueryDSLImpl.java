@@ -31,17 +31,17 @@ public class LikeQueryDSLImpl implements LikeQueryDSL {
     }
 
     @Override
-    public boolean findByUidAndEid(Long uid, Long eid,String username) {
+    public Long findByUidAndEid(Long uid, Long eid,String username) {
 
         try {
-            Long count = queryFactory.select(entLike.count())
+            Long likeId = queryFactory.select(entLike.lid)
                     .from(entLike)
                     .where(entLike.likeEntExam.eid.eq(eid), entLike.likeUser.uid.eq(uid))
                     .fetchOne();
             log.info("find uid: {}",uid);
             log.info("find eid: {}",eid);
-            log.info("findByUidAndEid count: {}", count);
-            return count>0;
+            log.info("findByUidAndEid likeId: {}", likeId);
+            return likeId;
         }catch (DataAccessException e){
             log.error("Error in findByUidAndEid",e);
             throw new RuntimeException("Error Runtime Like");

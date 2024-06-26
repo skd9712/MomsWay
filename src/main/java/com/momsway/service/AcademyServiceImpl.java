@@ -64,7 +64,7 @@ public class AcademyServiceImpl implements AcademyService{
             academyRepository.deleteById(aid);
             result = 1;
         }catch (Exception e){
-
+            log.error("delAcademy...{}",e);
         }
         return result;
     }
@@ -80,7 +80,9 @@ public class AcademyServiceImpl implements AcademyService{
     @Override
     @Transactional
     public Long insertAcademy(AcademyDTO dto, String saveFolder) {
-        String imgPaths = academyImgFileUpload(dto.getFiles(),saveFolder);
+        String imgPaths = null;
+        if(!dto.getFiles().get(0).getOriginalFilename().equals(""))
+            imgPaths = academyImgFileUpload(dto.getFiles(),saveFolder);
         User user = userRepository.findByEmail(dto.getEmail());
         Academy newAcademy = Academy.builder()
                 .title(dto.getTitle())
@@ -102,9 +104,10 @@ public class AcademyServiceImpl implements AcademyService{
             String fname = files.get(i).getOriginalFilename();
             URLEncoder.encode(fname, StandardCharsets.UTF_8)
                     .replace("+","%20");
-            String filename = uuid+"_"+fname+";-;";
+            String filename = uuid+"_"+fname;
             saveFile.add(new File(saveFolder,filename));
             imgPaths.append(filename);
+            imgPaths.append(";-;");
         }
         try {
             for (int i = 0; i < files.size(); i++) {

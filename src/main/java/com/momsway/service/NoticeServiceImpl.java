@@ -85,7 +85,7 @@ public class NoticeServiceImpl implements NoticeService{
             noticeRepository.deleteById(nid);
             result = 1;
         }catch (Exception e){
-
+            log.error("delNotice...{}",e);
         }
         return result;
     }
@@ -99,6 +99,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
+    @Transactional
     public Long insertNotice(NoticeDTO dto, String saveFolder) {
         // notice 보드 엔티티의 내용을 먼저 만들고 DB에 insert
         Notice board = Notice.builder()
@@ -109,20 +110,54 @@ public class NoticeServiceImpl implements NoticeService{
                 .readNo(0L)
                 .build();
         Notice newNotice = noticeRepository.save(board);
-        List<String> fnames;
-        Iterable<NoticeImg> noticeImgEntities;
-        if(dto.getFiles()!=null && dto.getFiles().size()!=0){
+        log.info("insertNotice getFiles[0] name...{}",dto.getFiles().get(0).getOriginalFilename());
+        if(dto.getFiles()!=null && !dto.getFiles().get(0).getOriginalFilename().equals("")){
             // multipartfile 을 notice_img 테이블에 insert
-            fnames = noticeImgFileUpload(saveFolder,dto.getFiles());
-            for(String s:fnames){
-                log.info("fnames...{}",s);
-            }
-            noticeImgEntities = insertNoticeImgs(fnames, newNotice);
-            noticeImgRepository.saveAll(noticeImgEntities);
+            insertNoticeImgs(dto.getFiles(),saveFolder,newNotice);
         }
         return newNotice.getNid();
     }
-    private Iterable<NoticeImg> insertNoticeImgs(List<String> fnames, Notice newNotice) {
+
+    private void insertNoticeImgs(List<MultipartFile> files, String saveFolder, Notice entity){
+        List<String> fnames;
+        Iterable<NoticeImg> noticeImgEntities;
+            // multipartfile 을 notice_img 테이블에 insert
+            fnames = noticeImgFileUpload(saveFolder,files);
+            for(String s:fnames){
+                log.info("fnames...{}",s);
+            }
+            noticeImgEntities = connetNoticeToImg(fnames, entity);
+            noticeImgRepository.saveAll(noticeImgEntities);
+    }
+
+    @Override
+    @Transactional
+    public Long updateNotice(NoticeDTO dto, String saveFolder) {
+        // dto.imgPaths delete
+        if(dto.getImgPaths()!=null && dto.getImgPaths().size()>0){
+            deleteNoticeImg(dto.getImgPaths(),saveFolder);
+        }
+        // find notice entity and set
+        Notice parent = noticeRepository.findByNid(dto.getNid());
+        parent.setNotify(dto.getNotify());
+        parent.setCategory(dto.getCategory());
+        parent.setTitle(dto.getTitle());
+        parent.setContent(dto.getContent());
+        // dto.getFiles 는 insertNoticeImgs()
+        if(dto.getFiles()!=null && !dto.getFiles().get(0).getOriginalFilename().equals("")){
+            insertNoticeImgs(dto.getFiles(),saveFolder,parent);
+        }
+        return parent.getNid();
+    }
+
+    private void deleteNoticeImg(List<String> imgPaths, String saveFolder) {
+        noticeImgFileRemove(imgPaths,saveFolder);
+        for(String path:imgPaths){
+            noticeImgRepository.deleteAllByImgPath(path);
+        }
+    }
+
+    private Iterable<NoticeImg> connetNoticeToImg(List<String> fnames, Notice newNotice) {
         List<NoticeImg> noticeImgEntities = new ArrayList<>();
         for(int i=0; i< fnames.size(); i++){
             NoticeImg noticeImg = NoticeImg.builder()
@@ -154,7 +189,7 @@ public class NoticeServiceImpl implements NoticeService{
             for (int i = 0; i < files.size(); i++) {
                 files.get(i).transferTo(saveFile.get(i));
             }
-        }catch (IOException e){
+        } catch (IOException e){
             log.info("noticeImgFileUpload exception...{}",e);
             // transactional 처리가 되어야 하므로 file 을 모두 삭제한다.
             for(int i=0; i<files.size(); i++){

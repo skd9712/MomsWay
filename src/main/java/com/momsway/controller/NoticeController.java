@@ -45,12 +45,10 @@ public class NoticeController {
 
     @GetMapping( value="/getNotiImages/{filename}")
     public ResponseEntity<byte[]> getNoticeImage(@PathVariable String filename) {
-        String fname = URLEncoder.encode(filename, StandardCharsets.UTF_8)
-                .replace("+", "%20");
         InputStream in = null;
         ResponseEntity<byte[]> responseEntity;
         try {
-            in = new FileInputStream(saveFolder + "/" + fname);
+            in = new FileInputStream(saveFolder + "/" + filename);
             HttpHeaders headers = new HttpHeaders();
             responseEntity = new ResponseEntity<>(FileCopyUtils.copyToByteArray(in)
                     ,headers , HttpStatus.OK);
@@ -63,7 +61,7 @@ public class NoticeController {
 
     @GetMapping("/notice")
     public String notice(Model model
-            , @PageableDefault(size=2, sort = "nid", direction = Sort.Direction.ASC) Pageable pageable){
+            , @PageableDefault(size=10, sort = "nid", direction = Sort.Direction.ASC) Pageable pageable){
         List<NoticeDTO> toplist = noticeService.findTopList();
         Page<NoticeDTO> list = noticeService.findList(pageable);
         log.info("currPage... {}",pageable.getPageNumber());
@@ -132,12 +130,18 @@ public class NoticeController {
         dto.setImgPaths(imgs);
         model.addAttribute("imgPaths",dto.getImgPaths());
         model.addAttribute("noticeOnly","notice");
-        model.addAttribute("insertAction", "/updateNotice");
+        model.addAttribute("insertAction", "/updateNotice/"+nid);
         return "boardupdate";
     }
 
-    @PostMapping("/updateNotice")
-    public String updateNoticeResult(){
-        return null;
+    @PostMapping("/updateNotice/{nid}")
+    public String updateNoticeResult(@PathVariable Long nid, @ModelAttribute NoticeDTO dto){
+//        for(String s: dto.getImgPaths()){
+//            System.out.println(s);
+//        }
+        log.info("NoticeController getImgPaths(delete target)...{}",dto.getImgPaths());
+        dto.setNid(nid);
+        Long modNid = noticeService.updateNotice(dto,saveFolder);
+        return "redirect:/notice/"+modNid;
     }
 }

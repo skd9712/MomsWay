@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NoticeRepository extends JpaRepository<Notice,Long>, NoticeQueryDSL {
     @Query(" select new com.momsway.dto.NoticeDTO(n.nid, n.notify, n.category, n.title, n.readNo, n.createAt) " +
@@ -24,5 +25,9 @@ public interface NoticeRepository extends JpaRepository<Notice,Long>, NoticeQuer
     void deleteById(Long aLong);
 
     @Override
+    void delete(Notice entity);
+
+    @Override
     <S extends Notice> S save(S entity);
+
 }
