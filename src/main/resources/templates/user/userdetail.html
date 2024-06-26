@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<header layout:fragment="header" th:replace="header :: header_template"></header>
+<div id="wrap">
+	<ul>
+		<li th:text="${userDTO.uid}"></li>
+		<li th:text="${userDTO.email}"></li>
+		<li th:text="${userDTO.nickname}"></li>
+		<li th:text="${userDTO.role}"></li>
+		<li th:text="${userDTO.reportNo}"></li>
+	</ul>
+	<a th:href="@{|/delete/${userDTO.uid}|}">탈퇴</a>
+</div>
+<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
+</body>
+</html>

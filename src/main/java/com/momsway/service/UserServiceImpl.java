@@ -10,12 +10,20 @@ import groovy.util.logging.Slf4j;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -91,13 +99,54 @@ public class UserServiceImpl implements UserService {
         return likeTitles;
     }
 
+    /** 회원관리 페이지 */
+    @Override
+    public Page<UserDTO> findUsers(Pageable pageable, String search
+            , String search_txt) {
+
+        int totalPage = userRepository.getCount(search, search_txt);
+
+        List<User> userList = new ArrayList<>();
+        if(search=="email"||"email".equals(search)) {
+            userList=userRepository.findUsersEmail(pageable, search_txt);
+        }else if(search=="nickname"||"nickname".equals(search)) {
+            userList=userRepository.findUsersNick(pageable, search_txt);
+        }else{
+            userList=userRepository.findUsersNick(pageable, search_txt);
+        }
+
+        List<UserDTO> userDTOList = new ArrayList<>();
+        if(userList.isEmpty()){
+            return new PageImpl<>(userDTOList, pageable, totalPage);
+        }
+
+        userDTOList = userList.stream()
+                .map(item -> modelMapper.map(item, UserDTO.class))
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(userDTOList, pageable, totalPage);
+    }
+
+    /** 회원관리 상세 */
+    @Override
+    public UserDTO getUserDetail(Long uid) {
+        User user = userRepository.getUserDetail(uid);
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        return userDTO;
+    }
+
+    /** 회원관리 탈퇴 */
+    @Override
+    public Long deleteUser(Long uid) {
+        userRepository.deleteById(uid);
+        return uid;
+
     @Override
     public UserDTO findUserInfo(String username) {
         long uidByEmail = findUidByEmail(username);
         UserDTO user = userRepository.findByUserInfo(uidByEmail);
         return user;
     }
-
 
     @Override
     @Transactional
