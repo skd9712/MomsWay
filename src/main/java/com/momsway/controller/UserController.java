@@ -85,7 +85,6 @@ public class UserController {
             return "false";
     }
 
-    
     /** 회원관리 */
     @GetMapping("/useradmin")
     public String userAdmin(@PageableDefault(size = 2, page = 0) Pageable pageable

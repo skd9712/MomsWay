@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
         return likeTitles;
     }
 
+    /** 회원관리 페이지 */
     @Override
     public Page<UserDTO> findUsers(Pageable pageable, String search
             , String search_txt) {
@@ -118,6 +119,7 @@ public class UserServiceImpl implements UserService {
         return new PageImpl<>(userDTOList, pageable, totalPage);
     }
 
+    /** 회원관리 상세 */
     @Override
     public UserDTO getUserDetail(Long uid) {
         User user = userRepository.getUserDetail(uid);
@@ -125,6 +127,7 @@ public class UserServiceImpl implements UserService {
         return userDTO;
     }
 
+    /** 회원관리 탈퇴 */
     @Override
     public Long deleteUser(Long uid) {
         userRepository.deleteById(uid);
