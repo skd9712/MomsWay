@@ -50,7 +50,7 @@ public class ReportController {
         return ResponseEntity.ok().body(msg);
     }
     @PostMapping("/entreport")
-    public ResponseEntity<String> createReport(@RequestParam Long eid, @RequestParam Long uid, @RequestParam String comment) {
+    public ResponseEntity<String> EntReport(@RequestParam Long eid, @RequestParam Long uid, @RequestParam String comment) {
         try {
             ReportDTO reportDTO = new ReportDTO();
             reportDTO.setEid(eid);
@@ -71,6 +71,7 @@ public class ReportController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("신고 처리 중 오류가 발생했습니다.");
         }
     }
+
     @GetMapping("/repdeatail/{rid}")
     public String reportDetail(@PathVariable Long rid, Model model){
         ReportDTO dto=reportService.detail(rid);

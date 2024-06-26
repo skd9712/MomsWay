@@ -73,14 +73,15 @@ public class EntExamQueryDSLImpl implements EntExamQueryDSL {
     @Override
     public EntExamDTO findByEid(Long eid) {
         EntExamDTO entExamDTO = queryFactory.select(Projections.fields(EntExamDTO.class
-                        , entExam.eid
-                        , entExam.title
-                        , entExam.content
-                        , entExam.createAt
-                        , entExam.readNo
-                        , user.email
-                        , user.nickname
-                        , entExam.imgPath))
+                                                                       , entExam.eid
+                                                                       , entExam.title
+                                                                       , entExam.content
+                                                                       , entExam.createAt
+                                                                       , entExam.readNo
+                                                                       , user.uid
+                                                                       ,user.nickname
+                                                                       ,entExam.imgPath))
+       
                 .from(entExam)
                 .innerJoin(entExam.entExamUser, user)
                 .where(entExam.eid.eq(eid))
