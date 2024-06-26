@@ -67,6 +67,8 @@
 
 .dtcontent img {
     border: 1px solid;
+    display: inline-block;
+    width: 100%;
 }
 .functions {
     border-bottom: 2px solid #58B27B;
