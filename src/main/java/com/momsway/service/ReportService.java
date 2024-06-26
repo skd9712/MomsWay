@@ -17,8 +17,8 @@ public interface ReportService {
 
     int EntReport(ReportDTO reportDTO);
 
-    List<Long> countReportsByEid();
-
+//    List<Long> countReportsByEid();
+    Map<Long, Long> countReportsByEid();
 
     ReportDTO detail(Long rid);
 }

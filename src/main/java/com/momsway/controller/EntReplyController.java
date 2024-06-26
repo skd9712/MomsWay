@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -20,8 +21,9 @@ public class EntReplyController {
         return ResponseEntity.ok().body(repList);
     }
     @PostMapping("/insertrep")
-    public List<EntReplyDTO> insertRep(@RequestBody EntReplyDTO dto, Model model){
-        Long id = entReplyService.insertRep(dto);
+    public List<EntReplyDTO> insertRep(@RequestBody EntReplyDTO dto, Model model, Principal principal){
+        String username = principal.getName();
+        Long id = entReplyService.insertRep(dto,username);
         List<EntReplyDTO> subList = entReplyService.repList(dto.getEid());
         return subList;
     }

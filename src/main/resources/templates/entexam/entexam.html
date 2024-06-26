@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/board/board.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <script th:src="@{js/entexam/entexam.js}"></script>
 </head>
 <body>
@@ -30,7 +31,7 @@
         <ul class="boardlist" th:each="item:${entlist}">
             <li>
                 <span th:text="${item.eid}"></span>
-                <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
+                <span><a th:href="@{|/entdetail/${item.eid}|}" th:text="${item.title}"></a></span>
                 <span th:text="${item.nickname}"></span>
                 <span th:text="${#temporals.format(item.createAt,'yyyy-MM-dd')}"></span>
                 <span th:text="${item.readNo}"></span>
@@ -55,7 +56,6 @@
             </th:block>
         </div>
         <a sec:authorize="hasAnyRole('ADMIN','PARENT')" th:href="@{/insertent}" id="writebtn" type="button">글쓰기</a>
-<!--        <button id="writebtn" type="button">글쓰기</button>-->
     </div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>

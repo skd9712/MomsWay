@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/report/report.css}">
@@ -16,7 +18,7 @@
         </script>
 </head>
 <body>
-<header layout:fragment="header" th:replace="header :: header_template"></header>
+<header layout:fragment="header" th:replace="~{header :: header_template}"></header>
 <div class="boardwrap">
     <div class="boardtop">신고관리</div>
     <div class="list">
@@ -25,16 +27,14 @@
                 <span>신고번호</span>
                 <span>신고당한유저</span>
                 <span>신고게시물</span>
-                <span>신고사유</span>
                 <span>신고횟수</span>
                 <span>신고처리</span>
             </li>
-            <li class="reportlist" th:each="item, iterStat :${reportlist}">
+            <li class="reportlist" th:each="item: ${reportlist}">
                 <span><a th:href="@{'/repdeatail/'+${item.rid}}" th:text="${item.rid}"></a></span>
                 <span th:text="${item.uid}"></span>
                 <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
-                <span th:text="${item.comment}"></span>
-                <span th:text="${countReportsByEid[iterStat.index]}"></span>
+                <span th:text="${countReportsByEid[item.eid]}"></span>
                 <span class="repdel" id="reportdel">
                      <button type="button" class="repdel" th:onclick="|delReport(${item.rid})|">신고처리</button>
                 </span>
@@ -62,6 +62,6 @@
 
 </div>
 
-<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
+<footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>
 </html>

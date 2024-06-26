@@ -7,11 +7,10 @@ import java.util.List;
 
 public interface LikeService {
 
-    void insertLike(LikeDTO dto);
+    Long insertLike(LikeDTO dto,String username);
 
     int delLike(Long lid);
 
-    List<String> findByUid(Long uid);
 
-    boolean findLike(Long uid, Long eid);
+    Long findLike(Long uid, Long eid,String username);
 }

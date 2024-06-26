@@ -2,18 +2,23 @@ package com.momsway.service;
 
 import com.momsway.domain.User;
 import com.momsway.domain.UserRole;
+import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.UserDTO;
+import com.momsway.repository.like.LikeRepository;
 import com.momsway.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final LikeRepository likeRepository;
     private final PasswordEncoder encoder;
     private final ModelMapper modelMapper;
 
@@ -65,5 +70,19 @@ public class UserServiceImpl implements UserService {
         if(user!=null)
             result = user.getUid();
         return result;
+    }
+
+    @Override
+    public List<EntExamDTO> myentlist(String username) {
+        long uidByEmail = findUidByEmail(username);
+        List<EntExamDTO> myentlist = userRepository.myentlist(uidByEmail);
+        return myentlist;
+    }
+
+    @Override
+    public List<EntExamDTO> findByUid(String username) {
+        long uidByEmail = findUidByEmail(username);
+        List<EntExamDTO> likeTitles = likeRepository.findByUid(uidByEmail);
+        return likeTitles;
     }
 }

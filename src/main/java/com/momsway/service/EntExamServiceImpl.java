@@ -1,8 +1,10 @@
 package com.momsway.service;
 
 import com.momsway.domain.EntExam;
+import com.momsway.domain.User;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.repository.entexam.EntExamRepository;
+import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,6 +41,7 @@ public class EntExamServiceImpl implements EntExamService {
     @Value("D:\\backend\\upload_img")
     private String filePath;
     private final EntExamRepository entExamRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private static final Logger log = LoggerFactory.getLogger(EntExamService.class);
 
@@ -48,14 +52,17 @@ public class EntExamServiceImpl implements EntExamService {
     }
 
     @Override
-    public long upload(String saveFolder, EntExamDTO dto) {
+    public long upload(String saveFolder, EntExamDTO dto,String username) {
+        User user = userRepository.findByEmail(username);
         EntExam entity = EntExam.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .imgPath(dto.getImgPath())
+                .entExamUser(user)
                 .readNo(0L)
                 .build();
         EntExam savedEntity = entExamRepository.save(entity);
+        log.info("service..uid...{}",dto.getUid());
         List<String> fnames = new ArrayList<>();
         if (dto.getFiles() != null && dto.getFiles().size() != 0) {
             fnames = fileUpload(saveFolder, dto.getFiles());
@@ -82,6 +89,7 @@ public class EntExamServiceImpl implements EntExamService {
                 .readNo(detail.getReadNo()+1)
                 .createAt(detail.getCreateAt())
                 .imgPath(detail.getImgPath())
+                .uid(detail.getUid())
                 .nickname(detail.getNickname())
                 .build();
     }

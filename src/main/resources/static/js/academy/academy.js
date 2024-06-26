@@ -5,7 +5,7 @@ function init(data) {
 }
 
 function modAcademy(){
-    location.href=`/modacademy/${aid}`;
+    location.href=`/updateAcademy/${aid}`;
 }
 
 async function delAcademy(){

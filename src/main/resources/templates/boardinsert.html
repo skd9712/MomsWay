@@ -6,6 +6,12 @@
     <link rel="stylesheet" th:href="@{/css/board/boardinsert.css}">
     <link rel="stylesheet" th:href="@{/css/board/updateBoard.css}">
     <script th:src="@{/js/academy/updateacademy.js}"></script>
+    <script th th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            let username=[[${#authentication.principal.username}]]
+            console.log(username);
+        })
+    </script>
 </head>
 <body>
 <header></header>

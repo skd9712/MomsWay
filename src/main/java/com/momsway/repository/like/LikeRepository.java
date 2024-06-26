@@ -19,4 +19,6 @@ public interface LikeRepository extends JpaRepository<EntLike,Long>, LikeQueryDS
     @Override
     void deleteById(Long aLong);
 
+
+
 }

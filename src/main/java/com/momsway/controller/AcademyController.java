@@ -15,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -55,12 +56,10 @@ public class AcademyController {
 
     @GetMapping( value="/getAcaImages/{filename}")
     public ResponseEntity<byte[]> getNoticeImage(@PathVariable String filename) {
-        String fname = URLEncoder.encode(filename, StandardCharsets.UTF_8)
-                .replace("+", "%20");
         InputStream in = null;
         ResponseEntity<byte[]> responseEntity;
         try {
-            in = new FileInputStream(saveFolder + "/" + fname);
+            in = new FileInputStream(saveFolder + "/" + filename);
             HttpHeaders headers = new HttpHeaders();
             responseEntity = new ResponseEntity<>(FileCopyUtils.copyToByteArray(in)
                     ,headers , HttpStatus.OK);
@@ -73,7 +72,7 @@ public class AcademyController {
 
     @GetMapping("/academy")
     public String academy(Model model
-            , @PageableDefault(size=2, sort = "aid", direction = Sort.Direction.ASC) Pageable pageable
+            , @PageableDefault(size=10, sort = "aid", direction = Sort.Direction.ASC) Pageable pageable
             , @RequestParam(required = false, defaultValue = "") String search_txt){
 
         List<NoticeDTO> toplist = noticeService.findTopList();
@@ -126,9 +125,11 @@ public class AcademyController {
 
     @PostMapping("/insertAcademy")
     public String insertAcademyResult(@ModelAttribute AcademyDTO dto){
-        for(int i=0; i<dto.getFiles().size(); i++){
-            System.out.println(dto.getFiles().get(i).getOriginalFilename());
-        }
+//        for(int i=0; i<dto.getFiles().size(); i++){
+//            System.out.println(dto.getFiles().get(i).getOriginalFilename());
+//        }
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        dto.setEmail(email);
         Long newAid = academyService.insertAcademy(dto,saveFolder);
         return "redirect:/academy/"+newAid;
     }
@@ -144,7 +145,18 @@ public class AcademyController {
             model.addAttribute("imgPaths",imgPaths);
         }
         model.addAttribute("dto",dto);
-        model.addAttribute("insertAction", "/updateAcademy");
+        model.addAttribute("insertAction", "/updateAcademy/"+aid);
         return "boardupdate";
+    }
+
+    @PostMapping("/updateAcademy/{aid}")
+    public String updateNoticeResult(@PathVariable Long aid, @ModelAttribute AcademyDTO dto){
+//        for(String s: dto.getImgPaths()){
+//            System.out.println(s);
+//        }
+        log.info("AcademyController getDelImgPaths( delete target )...{}",dto.getImgPaths());
+        dto.setAid(aid);
+        Long modAid = academyService.updateAcademy(dto,saveFolder);
+        return "redirect:/academy/"+modAid;
     }
 }
