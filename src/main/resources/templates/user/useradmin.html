@@ -7,12 +7,13 @@
 	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
+	<link rel="stylesheet" th:href="@{/css/user/useradmin.css}">
 </head>
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
 <div id="wrap">
 	<!-- 회원 검색창 -->
-	<form th:method="get" th:action="@{/useradmin}">
+	<form th:method="get" th:action="@{/useradmin}" th:id="user_form">
 		<select th:name="search" th:id="search_user">
 			<option th:value="email">이메일</option>
 			<option th:value="nickname">닉네임</option>
@@ -30,13 +31,16 @@
 				<span>닉네임</span>
 				<span>회원유형</span>
 			</li>
-			<li th:each="item:${userList}">
+			<li th:if="${!userList.isEmpty()}" th:each="item:${userList}" th:class="userList">
 				<a th:href="@{'/userdetail/'+${item.uid}}">
 					<span th:text="${item.uid}"></span>
 					<span th:text="${item.email}"></span>
 					<span th:text="${item.nickname}"></span>
 					<span th:text="${item.role}"></span>
 				</a>
+			</li>
+			<li th:if="${userList.isEmpty()}">
+				회원이 존재하지 않습니다.
 			</li>
 		</ul>
 	</div>
