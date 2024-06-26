@@ -24,18 +24,20 @@ header ul li{
 
 #header_top img{
     /*width: 7vw;*/
-    width: 110px;
+    width: 135px;
     position: relative;
     top: 7px;
 }
 
 #header_top>form{
     margin-top: 50px;
+    white-space: nowrap;
 }
 
 #search{
+    width: 7vw;
     margin-right: 1vw;
-    padding: 8px;
+    padding: 0.5vw;
     border: 2px solid #12a60d;
     border-radius: 7px;
     opacity: 0.8;
@@ -78,6 +80,50 @@ header ul li{
 
 #header_top a{
     text-decoration: none;
+}
+
+/* 로그인, 로그아웃, 회원가입, 마이페이지, 관리자페이지 */
+.user_btn{
+    color: #444040;
+}
+
+.user_btn li:first-child{
+    position: relative;
+    left: 7px;
+}
+
+.logout{
+    background-color: #12a60d;
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    vertical-align: middle;
+    position: relative;
+    top: -5px;
+}
+
+.mypage, .admin, .login{
+    padding: 7px 12px;
+    font-size: 1rem;
+    color: #12a60d;
+    position: relative;
+    top: 2px;
+    white-space: nowrap;
+}
+
+.join{
+    padding: 7px 1.3vw;
+    font-size: 1rem;
+    color: #12a60d;
+    border: 2px solid #12a60d;
+    border-radius: 30px;
+    position: relative;
+    top: 2px;
+    white-space: nowrap;
 }
 
 
