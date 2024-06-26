@@ -1,8 +1,9 @@
 
 function updateImg(e) {
-    console.log(e.src);
-    console.log(e.src.split("/"));
-    let fname = e.src.split("/")[4];
+    console.log(e);
+    let path = decodeURIComponent(e.src);
+    console.log(path.split("/"));
+    let fname = path.split("/")[4];
     let uploadImgs = document.getElementById("uploadImgs");
     let input = document.createElement("input");
     input.setAttribute("type","input");
@@ -10,7 +11,7 @@ function updateImg(e) {
     input.setAttribute("value",fname);
     input.hidden = true;
     uploadImgs.appendChild(input);
-    //e.remove();
+    e.remove();
 }
 
 window.onload=function () {
