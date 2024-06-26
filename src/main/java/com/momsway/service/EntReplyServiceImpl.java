@@ -31,18 +31,17 @@ public class EntReplyServiceImpl implements EntReplyService{
     }
 
     @Override
-    public Long insertRep(EntReplyDTO dto) {
+    public Long insertRep(EntReplyDTO dto,String username) {
 
         Optional<EntExam> byEid
                 = entExamRepository.findById(dto.getEid());
         EntExam entExam1 = byEid.orElseThrow(() -> new IllegalArgumentException("invalid eid"));
-//      로그인 구현후 변경하기.임시로 uid=1 등록
-        User defaultUser = userRepository.findById(2L).orElseThrow(() -> new RuntimeException("Default User not found"));
+        User user = userRepository.findByEmail(username);
         log.info("....eid...{}",dto.getEid());
         EntReply entity = EntReply.builder()
                 .content(dto.getContent())
                 .replyEntExam(entExam1)
-                .entReplyUser(defaultUser)
+                .entReplyUser(user)
                 .build();
         EntReply save = entReplyRepository.save(entity);
         return save.getRepId();

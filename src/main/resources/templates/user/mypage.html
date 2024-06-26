@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
-<div>hi</div>
+<header layout:fragment="header" th:replace="~{header :: header_template}"></header>
+<div>
+    <h2>Logged in User Information</h2>
+    <p>Username: <span sec:authentication="name"></span></p>
+    <p>Authorities: <span sec:authentication="authorities"></span></p>
+</div>
+<div>글쓴거</div>
+<ul th:each="item:${myentlist}">
+    <li>
+        <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
+    </li>
+</ul>
+<div>좋아요</div>
+<ul th:each="like:${likeTitles}">
+    <li>
+        <span><a th:href="@{'/entdetail/'+${like.eid}}" th:text="${like.title}"></a></span>
+    </li>
+</ul>
+<footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
+
 </body>
 </html>

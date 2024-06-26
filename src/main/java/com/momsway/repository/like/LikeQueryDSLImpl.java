@@ -1,8 +1,11 @@
 package com.momsway.repository.like;
 
 import static com.momsway.domain.QEntLike.*;
+import static com.momsway.domain.QEntExam.*;
 
+import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.LikeDTO;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,20 +21,19 @@ import java.util.Optional;
 public class LikeQueryDSLImpl implements LikeQueryDSL {
     private final JPAQueryFactory queryFactory;
     @Override
-    public List<String> findByUid(Long uid) {
-        List<String> likeTitles = queryFactory.select(entLike.likeEntExam.title)
+    public List<EntExamDTO> findByUid(long uidByEmail) {
+        List<EntExamDTO> likeTitles = queryFactory.select(Projections.fields(EntExamDTO.class, entExam.title, entExam.eid))
                 .from(entLike)
-                .innerJoin(entLike.likeEntExam)
-                .fetchJoin()
-                .where(entLike.likeUser.uid.eq(uid))
+                .innerJoin(entLike.likeEntExam, entExam)
+                .where(entLike.likeUser.uid.eq(uidByEmail))
                 .fetch();
         return likeTitles;
     }
 
     @Override
-    public boolean findByUidAndEid(Long uid, Long eid) {
-        try {
+    public boolean findByUidAndEid(Long uid, Long eid,String username) {
 
+        try {
             Long count = queryFactory.select(entLike.count())
                     .from(entLike)
                     .where(entLike.likeEntExam.eid.eq(eid), entLike.likeUser.uid.eq(uid))

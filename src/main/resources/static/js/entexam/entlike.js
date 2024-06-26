@@ -3,6 +3,7 @@ window.entlike = window.entlike || {};
 window.entlike.init = function (eid){
     console.log('like eid: ',eid);
     checkLikeStatus(eid);
+
 }
 async function toggleLike(likeBtn, eid) {
     if (liked) {
