@@ -11,7 +11,7 @@
 <body>
 	<header th:fragment="header_template">
 		<div id="header_top">
-			<a th:href="@{/main}"><img th:src="@{/images/logo.png}" alt="로고이미지"></a>
+			<a th:href="@{/main}"><img th:src="@{/images/logo2.png}" alt="로고이미지"></a>
 			<!-- 검색창 -->
 			<form th:method="get" th:action="@{/entexam}" th:id="search_form">
 				<select th:name="search" th:id="search">
@@ -23,14 +23,14 @@
 					<i class="fa-solid fa-magnifying-glass fa-lg"></i>
 				</button>
 			</form>
-			<ul>
+			<ul class="user_btn">
 				<th:block sec:authorize="hasRole('ADMIN')">
 					<li>
 						<form th:method="post" th:action="@{/logout}">
 							<button type="submit" th:class="logout">로그아웃</button>
 						</form>
 					</li>
-					<li><a th:href="@{/report}" th:text="관리자페이지"></a></li>
+					<li><a th:href="@{/report}" th:text="관리자페이지" th:class="admin"></a></li>
 				</th:block>
 
 				<th:block sec:authorize="hasAnyRole('PARENT','ACADEMY')">
@@ -39,12 +39,12 @@
 							<button type="submit" th:class="logout">로그아웃</button>
 						</form>
 					</li>
-					<li><a th:href="@{/mypage}" th:text="마이페이지"></a></li>
+					<li><a th:href="@{/'#'}" th:text="마이페이지" th:class="mypage"></a></li>
 				</th:block>
 
 				<th:block sec:authorize="!isAuthenticated()">
-					<li><a th:href="@{/login}" th:text="로그인"></a></li>
-					<li><a th:href="@{/join}" th:text="회원가입"></a></li>
+					<li><a th:href="@{/login}" th:text="로그인" th:class="login"></a></li>
+					<li><a th:href="@{/join}" th:text="회원가입" th:class="join"></a></li>
 				</th:block>
 			</ul>
 		</div>

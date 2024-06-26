@@ -18,59 +18,94 @@
 		<img src="/images/Momsway.png" alt="메인이미지" id="main_img">
 	</div>
 	<!-- 밀크티 링크 -->
-	<div id="middle">
+	<div id="middle_milkt">
 		<h1>우리 아이 교육은?</h1>
 		<h3>천재교육 밀크티에서!</h3>
 		<ul>
-			<li class="milktea">
+			<li class="milkt">
 				<a href="https://i.milkt.co.kr/Main/frm_Main.aspx">
-					<img src="/images/밀크티아이.png" alt="밀크티아이" class="milktea_img">
+					<img src="/images/밀크티아이.png" alt="밀크티아이" class="milkt_img">
 				</a>
 			</li>
-			<li class="milktea">
+			<li class="milkt">
 				<a href="https://www.milkt.co.kr/Main/Main_new">
-					<img src="/images/밀크티초등.png" alt="밀크티초등" class="milktea_img">
+					<img src="/images/밀크티초등.png" alt="밀크티초등" class="milkt_img">
 				</a>
 			</li>
-			<li class="milktea">
+			<li class="milkt">
 				<a href="https://mid.milkt.co.kr/Main/frm_Main.aspx">
-					<img src="/images/밀크티중등.png" alt="밀크티중등" class="milktea_img">
+					<img src="/images/밀크티중등.png" alt="밀크티중등" class="milkt_img">
 				</a>
 			</li>
-			<li class="milktea">
+			<li class="milkt">
 				<a href="https://high.milkt.co.kr/Main/frm_Main.aspx">
-					<img src="/images/밀크티고등.png" alt="밀크티고등" class="milktea_img">
+					<img src="/images/밀크티고등.png" alt="밀크티고등" class="milkt_img">
 				</a>
 			</li>
 		</ul>
 	</div>
 
 	<!-- 입시게시판 인기글 -->
-	<ul>
-		<li th:each="item:${entLikeList}">
-			<span th:text="${item[0]}"></span>
-			<span th:text="${item[1]}"></span>
-			<span th:text="${item[2]}"></span>
-		</li>
-	</ul>
-	<ul>
-		<li th:each="item:${noticeList}">
-			<span th:text="${item.category}"></span>
-			<span th:text="${item.title}"></span>
-		</li>
-	</ul>
-	<ul>
-		<li th:each="item:${academyList}">
-			<span th:text="${item.title}"></span>
-			<span th:text="|조회수 ${item.readNo}|"></span>
-		</li>
-	</ul>
-	<ul>
-		<li th:each="item:${entLatestList}">
-			<span th:text="${item.title}"></span>
-			<span th:text="|조회수 ${item.readNo}|"></span>
-		</li>
-	</ul>
+	<div class="entLike_div">
+		<h2>입시 인기글</h2>
+		<ul class="entLike_ul">
+			<li th:each="item:${entLikeList}" class="entLike_li">
+				<!--			<span th:text="${item[0]}" class="entLike_span"></span>-->
+				<a th:href="@{'/entdetail/'+${item[0]}}">
+					<span class="entLike_span">&#10024인기</span>
+					<span th:text="${item[1]}" class="entLike_span"></span>
+					<span th:text="'&#129505'+${item[2]}" class="entLike_span"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="notice_academy">
+		<!-- 공지사항 -->
+		<div class="notice_div">
+			<h2>공지사항</h2>
+			<ul class="notice_ul">
+				<li th:each="item:${noticeList}" class="notice_li">
+					<a th:href="@{'/notice/'+${item.nid}}">
+						<span th:if="${item.category=='notice'}"
+						      class="notice_span cate_notice">
+							<span>공지</span>
+						</span>
+						<span th:if="${item.category=='event'}"
+						      class="notice_span cate_event">
+							<span>이벤트</span>
+						</span>
+						<span th:text="${item.title}" class="notice_span"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!-- 학원홍보 -->
+		<div class="academy_div">
+			<h2>학원 홍보</h2>
+			<ul class="academy_ul">
+				<li th:each="item:${academyList}" class="academy_li">
+					<a th:href="@{'/academy/'+${item.aid}}">
+						<span class="academy_span">new!</span>
+						<span th:text="${item.title}" class="academy_span"></span>
+						<span th:text="|조회수 ${item.readNo}|" class="academy_span"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 입시 -->
+	<div class="entLatest_div">
+		<h2>입시</h2>
+		<ul class="entLatest_ul">
+			<li th:each="item:${entLatestList}" class="entLatest_li">
+				<a th:href="@{'/entdetail/'+${item.eid}}">
+					<span class="entLatest_span">new!</span>
+					<span th:text="${item.title}" class="entLatest_span"></span>
+					<span th:text="|조회수 ${item.readNo}|" class="entLatest_span"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
 </div>
 <footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>
