@@ -47,7 +47,7 @@
             <div class="readdate">
                 <span th:text="|조회 ${dto.readNo}|"></span>
                 <span th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
-                <button type="button" onclick="document.getElementById('reportModal').style.display='block'">신고하기</button>
+                <button type="button" class="reportbtn" onclick="document.getElementById('reportModal').style.display='block'">신고하기</button>
             </div>
         </div>
         <div class="dtcontent">
@@ -62,12 +62,13 @@
         <div id="reportModal" style="display:none;">
             <div class="modal">
             <h2>신고페이지</h2>
-            <p>신고 하는 이유를 입력하고 신고 제출을 눌러주세요</p>
+            <p class="reportp">신고 하는 이유를 입력하고
+ 신고 제출을 눌러주세요</p>
             <input type="hidden" id="reportEid" th:value="${dto.eid}">
             <input type="hidden" id="reportUid" th:value="${dto.uid}">
             <textarea id="comment" name="comment" placeholder="신고 하는 이유를 적어주세요"></textarea>
-            <button type="button" onclick="entReport()">신고 제출</button>
-            <button type="button" onclick="document.getElementById('reportModal').style.display='none'">닫기</button>
+            <button type="button" class="reportbtn reportbtn1" onclick="entReport()">신고 제출</button>
+            <button type="button" class="reset" onclick="document.getElementById('reportModal').style.display='none'">닫기</button>
             </div>
         </div>
         <div class="tolist">

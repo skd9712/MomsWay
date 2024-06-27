@@ -36,29 +36,29 @@ public class UserServiceImpl implements UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     /** 회원가입 */
-   @Override
+    @Override
     public Long joinUser(UserDTO dto) {
-       // 비밀번호 암호화
-       String pwd = encoder.encode(dto.getPwd());
+        // 비밀번호 암호화
+        String pwd = encoder.encode(dto.getPwd());
 
-       // Role
-       UserRole userRole = UserRole.valueOf(dto.getRole());
+        // Role
+        UserRole userRole = UserRole.valueOf(dto.getRole());
 
-       boolean findEmail = findEmailCheck(dto.getEmail());
-       boolean findNickname = findNicknameCheck(dto.getNickname());
+        boolean findEmail = findEmailCheck(dto.getEmail());
+        boolean findNickname = findNicknameCheck(dto.getNickname());
 
-       if(findEmail || findNickname)
-           throw new RuntimeException("이미 사용 중입니다.");
+        if(findEmail || findNickname)
+            throw new RuntimeException("이미 사용 중입니다.");
 
-       User user = User.builder()
-               .email(dto.getEmail())
-               .pwd(pwd)
-               .nickname(dto.getNickname())
-               .role(userRole)
-               .reportNo(0)
-               .build();
+        User user = User.builder()
+                .email(dto.getEmail())
+                .pwd(pwd)
+                .nickname(dto.getNickname())
+                .role(userRole)
+                .reportNo(0)
+                .build();
 
-       User userSave=userRepository.save(user);
+        User userSave=userRepository.save(user);
 
         return userSave.getUid();
     }

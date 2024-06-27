@@ -30,10 +30,10 @@
                 <span>신고횟수</span>
                 <span>신고처리</span>
             </li>
-            <li class="reportlist" th:each="item: ${reportlist}">
-                <span><a th:href="@{'/repdeatail/'+${item.rid}}" th:text="${item.rid}"></a></span>
+            <li class="reportlist" th:each="item : ${reportlist}">
+                <span><a class="report" th:href="@{'/repdetail/'+${item.rid}}" th:text="${item.rid}"></a></span>
                 <span th:text="${item.uid}"></span>
-                <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
+                <span><a class="report" th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
                 <span th:text="${countReportsByEid[item.eid]}"></span>
                 <span class="repdel" id="reportdel">
                      <button type="button" class="repdel" th:onclick="|delReport(${item.rid})|">신고처리</button>
@@ -46,7 +46,7 @@
             <th:block th:if="${startPage>1}">
                 <a th:href="@{/report(page=${startPage}-1)}" th:text="이전"></a>
             </th:block>
-            <th:block th:each="index:${#numbers.sequence(startPage,endPage)}">
+            <th:block th:if="${reportlist.totalPages>1}" th:each="index:${#numbers.sequence(startPage,endPage)}">
                 <span th:if="${index==reportlist.pageable.getPageNumber()+1}"
                       th:text="${index}"></span>
                 <th:block th:if="${index!=reportlist.pageable.getPageNumber()+1}">

@@ -52,6 +52,9 @@ li span {
 .repdel{
     background-color: #f88686;
 }
+.repdel:hover{
+    background-color: #b65b5b;
+}
 .paging {
     text-align: center;
     padding: 2%;
@@ -66,3 +69,15 @@ li span {
 .repdel>button{
     border: none;
 }
+.boardwrap{
+    height: 30vw;
+}
+.report{
+ text-decoration: none;
+ color: black;
+}
+.report:hover{
+   color: #6b6b6b;
+
+}
+

@@ -4,6 +4,12 @@ async function entReport() {
         const uid = document.getElementById("reportUid").value;
         const comment = document.getElementById("comment").value;
 
+        // comment 값이 비어 있는지 확인
+        if (!comment.trim()) {
+            alert("신고 하는 이유를 입력해주세요");
+            return;  // 함수 실행 중단
+        }
+
         // CSRF 토큰 값 가져오기
         const csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
         const csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
