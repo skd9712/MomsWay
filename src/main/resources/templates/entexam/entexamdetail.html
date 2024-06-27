@@ -48,7 +48,7 @@
             <div class="readdate">
                 <span th:text="|조회 ${dto.readNo}|"></span>
                 <span th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
-                <button type="button" class="reportbtn" onclick="document.getElementById('reportModal').style.display='block'">신고하기</button>
+                <button th:if="${!#authentication.name.equals(dto.email)}" type="button" class="reportbtn" onclick="document.getElementById('reportModal').style.display='block'">신고하기</button>
             </div>
         </div>
         <div class="dtcontent">
@@ -59,6 +59,7 @@
         </div>
         <div class="func">
             <img th:src="@{'/images/like.png'}" th:id="likeBtn" th:onclick="toggleLike()">
+            <span>마음에 든다면?</span>
         </div>
         <div id="reportModal" style="display:none;">
             <div class="modal">
