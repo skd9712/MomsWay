@@ -9,44 +9,46 @@
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-	<script th:src="@{/js/header.js}"></script>
+	<script defer th:src="@{/js/header.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
-<div id="reportdetail">
-    <div class="dttop">
-        <span>신고상세정보</span>
-    </div>
-    <div class="dtbody">
-        <div class="dtcontent">
-            <ul id="repdetail">
-                <li class="list">
-                    <span class="rid">글번호</span>
-                    <span class="rid dto" th:text="${dto.rid}">글번호</span>
-                </li>
-                <li class="list">
-                    <span class="uid">신고당한유저</span>
-                    <span class="uid dto" th:text="${dto.uid}">신호당한유저</span>
-                </li>
-                <li class="list">
-                    <span class="eid">신고당한글번호</span>
-                    <span class="eid dto" th:text="${dto.eid}">신고당한입시글</span>
-                </li>
-                <li class="list">
-                    <span class="comment">신고이유</span>
-                    <textarea class="comment dto" cols="30" rows="3" th:text="${dto.comment}" readonly></textarea>
-                </li>
-                <li class="list">
-                    <span class="count">신고횟수</span>
-                    <span class="count dto" th:text="${count}">신고횟수</span>
-                </li>
-            </ul>
+<div id="wrap">
+	<div id="reportdetail">
+		<div class="dttop">
+			<span>신고상세정보</span>
+		</div>
+		<div class="dtbody">
+			<div class="dtcontent">
+				<ul id="repdetail">
+					<li class="list">
+						<span class="rid">글번호</span>
+						<span class="rid dto" th:text="${dto.rid}">글번호</span>
+					</li>
+					<li class="list">
+						<span class="uid">신고당한유저</span>
+						<span class="uid dto" th:text="${dto.uid}">신호당한유저</span>
+					</li>
+					<li class="list">
+						<span class="eid">신고당한글번호</span>
+						<span class="eid dto" th:text="${dto.eid}">신고당한입시글</span>
+					</li>
+					<li class="list">
+						<span class="comment">신고이유</span>
+						<textarea class="comment dto" cols="30" rows="3" th:text="${dto.comment}" readonly></textarea>
+					</li>
+					<li class="list">
+						<span class="count">신고횟수</span>
+						<span class="count dto" th:text="${count}">신고횟수</span>
+					</li>
+				</ul>
 
-        </div>
-        <div class="tolist">
-            <a href="/report">목록으로</a>
-        </div>
-    </div>
+			</div>
+			<div class="tolist">
+				<a href="/report">목록으로</a>
+			</div>
+		</div>
+	</div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>
