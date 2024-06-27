@@ -107,18 +107,15 @@ public class AcademyServiceImpl implements AcademyService{
         if(academy.getImgPath()!=null){
             // original imgList
             List<String> originPaths = Arrays.stream(academy.getImgPath().split(";-;")).toList();
-            for(String s:originPaths){
-                System.out.println(s);
-            }
-            // dto.imgPaths file delete, imgList modify
+            // dto.imgPaths file delete
             if(dto.getImgPaths()!=null && dto.getImgPaths().size()>0){
-                //academyImgFileRemove(dto.getImgPaths(),saveFolder);
-                //dto.getImgPaths() 에 있으면 original imgList 에서 빼기, 없으면 updateList 에 추가
-                updateImgPaths = updateImgList(updateImgPaths, originPaths, dto.getImgPaths());
-                log.info("updateImgPaths after del...{}",updateImgPaths);
+                academyImgFileRemove(dto.getImgPaths(),saveFolder);
             }
+            // updateImgPaths 에 기존 이미지는 넣고 삭제할 이미지는 빼기
+            updateImgPaths = updateImgList(updateImgPaths, originPaths, dto.getImgPaths());
+            log.info("updateImgPaths after del...{}",updateImgPaths);
         }
-        // dto.files 는 insertImg, insert 한 imgPath 를 updateList 와 합치기
+        // 새롭게 추가된 이미지 insert
         String addPaths = "";
         if(dto.getFiles()!=null && !dto.getFiles().get(0).getOriginalFilename().equals("")){
             addPaths = academyImgFileUpload(dto.getFiles(), saveFolder);
@@ -128,21 +125,35 @@ public class AcademyServiceImpl implements AcademyService{
         // set entity
         academy.setTitle(dto.getTitle());
         academy.setContent(dto.getContent());
-        academy.setImgPath(updateImgPaths.toString());
+        if(updateImgPaths==null)
+            academy.setImgPath(null);
+        else
+            academy.setImgPath(updateImgPaths.toString());
         return academy.getAid();
     }
 
     private StringBuilder updateImgList(StringBuilder updateImgPaths
             , List<String> originPaths, List<String> delPaths){
-        System.out.println(originPaths.size()+","+delPaths.size());
-        System.out.println(originPaths.get(0));
-        List<String> result = new ArrayList<>();
-
-        // 오리지널 리스트에서 삭제 리스트 빼는 거 다시 구현
-
-        for(String s:result){
-            updateImgPaths.append(s);
-            updateImgPaths.append(";-;");
+        if(delPaths==null)
+            delPaths = new ArrayList<>();
+        //System.out.println(originPaths.size()+","+delPaths.size());
+        boolean isSearchAll = false;
+        for(int i=0; i<originPaths.size(); i++){
+            int j=0;
+            while(j<=delPaths.size()){
+                if(j==delPaths.size()){
+                    isSearchAll = true;
+                    break;
+                }
+                if(originPaths.get(i).equals(delPaths.get(j)))
+                    break;
+                j++;
+            }
+            if(isSearchAll){
+                updateImgPaths.append(originPaths.get(i));
+                updateImgPaths.append(";-;");
+                isSearchAll = false;
+            }
         }
         System.out.println(updateImgPaths);
         return updateImgPaths;
