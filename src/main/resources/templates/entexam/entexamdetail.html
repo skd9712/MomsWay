@@ -15,7 +15,7 @@
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" th:href="@{/css/entexam/entmodal.css}">
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
-	<script defer th:src="@{/js/header.js}"></script>
+    <script defer th:src="@{/js/header.js}"></script>
     <script th:src="@{/js/entexam/entupdate.js}"></script>
     <script th:src="@{/js/entexam/entexamdetail.js}"></script>
     <script th:src="@{/js/entexam/entreply.js}"></script>
@@ -34,63 +34,68 @@
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
 <div id="wrap">
-	<div class="boarddetailwrap">
-		<div class="dttop">
-			<span th:text="${dto.title}"></span>
-			<input type="hidden" th:id="eid" th:value="${dto.eid}">
-			<th:block th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasRole(''ADMIN'')')}">
-				<button type="submit" id="mod">수정</button>
-				<button type="button" id="del" th:onclick="delEnt()">삭제</button>
-			</th:block>
-		</div>
-		<div class="dtbody">
-			<div class="dtinfo">
-				<span class="infowriter" th:text="${dto.nickname}"></span>
-				<div class="readdate">
-					<span th:text="|조회 ${dto.readNo}|"></span>
-					<span th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
-					<button th:if="${!#authentication.name.equals(dto.email)}" type="button" class="reportbtn" onclick="document.getElementById('reportModal').style.display='block'">신고하기</button>
-				</div>
-			</div>
-			<div class="dtcontent">
-				<th:block th:each="img:${dto.imgPath}">
-					<img th:src="@{'/getentimages/'+${img}}" alt="img">
-				</th:block>
-				<p th:text="${dto.content}"></p>
-			</div>
-			<div class="func">
-				<img th:src="@{'/images/like.png'}" th:id="likeBtn" th:onclick="toggleLike()">
-				<span>마음에 든다면?</span>
-			</div>
-			<div id="reportModal" style="display:none;">
-				<div class="modal">
-					<h2>신고페이지</h2>
-					<p class="reportp">신고 하는 이유를 입력하고
-						신고 제출을 눌러주세요</p>
-					<input type="hidden" id="reportEid" th:value="${dto.eid}">
-					<input type="hidden" id="reportUid" th:value="${dto.uid}">
-					<textarea id="comment" name="comment" placeholder="신고 하는 이유를 적어주세요"></textarea>
-					<button type="button" class="reportbtn reportbtn1" onclick="entReport()">신고 제출</button>
-					<button type="button" class="reset" onclick="document.getElementById('reportModal').style.display='none'">닫기</button>
-				</div>
-			</div>
-			<div class="tolist">
-				<a href="/entexam">목록으로</a>
-			</div>
-		</div>
-		<div class="comarea">
-			<ul>
-				<li class="cominput">
-					<input type="text" name="content" id="content" placeholder="댓글을 입력하세요">
-					<button id="submit" type="button">등록</button>
-				</li>
-			</ul>
-			<div th:id="comments">
-				<h2>댓글</h2>
-				<ul th:id="comments-list"></ul>
-			</div>
-		</div>
-	</div>
+    <div class="boarddetailwrap">
+        <div class="dttop">
+            <span th:text="${dto.title}"></span>
+            <input type="hidden" th:id="eid" th:value="${dto.eid}">
+            <th:block
+                    th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasRole(''ADMIN'')')}">
+                <button type="submit" id="mod">수정</button>
+                <button type="button" id="del" th:onclick="delEnt()">삭제</button>
+            </th:block>
+        </div>
+        <div class="dtbody">
+            <div class="dtinfo">
+                <span class="infowriter" th:text="${dto.nickname}"></span>
+                <div class="readdate">
+                    <span th:text="|조회 ${dto.readNo}|"></span>
+                    <span th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
+                    <button th:if="${!#authentication.name.equals(dto.email)}" type="button" class="reportbtn"
+                            onclick="document.getElementById('reportModal').style.display='block'">신고하기
+                    </button>
+                </div>
+            </div>
+            <div class="dtcontent">
+                <th:block th:each="img:${dto.imgPath}">
+                    <img th:src="@{'/getentimages/'+${img}}" alt="img">
+                </th:block>
+                <p th:text="${dto.content}"></p>
+            </div>
+            <div class="func">
+                <img th:src="@{'/images/like.png'}" th:id="likeBtn" th:onclick="toggleLike()">
+                <span>마음에 든다면?</span>
+            </div>
+            <div id="reportModal" style="display:none;">
+                <div class="modal">
+                    <h2>신고페이지</h2>
+                    <p class="reportp">신고 하는 이유를 입력하고
+                        신고 제출을 눌러주세요</p>
+                    <input type="hidden" id="reportEid" th:value="${dto.eid}">
+                    <input type="hidden" id="reportUid" th:value="${dto.uid}">
+                    <textarea id="comment" name="comment" placeholder="신고 하는 이유를 적어주세요"></textarea>
+                    <button type="button" class="reportbtn reportbtn1" onclick="entReport()">신고 제출</button>
+                    <button type="button" class="reset"
+                            onclick="document.getElementById('reportModal').style.display='none'">닫기
+                    </button>
+                </div>
+            </div>
+            <div class="tolist">
+                <a href="/entexam">목록으로</a>
+            </div>
+        </div>
+        <div class="comarea">
+            <ul>
+                <li class="cominput">
+                    <input type="text" name="content" id="content" placeholder="댓글을 입력하세요">
+                    <button id="submit" type="button">등록</button>
+                </li>
+            </ul>
+            <div th:id="comments">
+                <h2>댓글</h2>
+                <ul th:id="comments-list"></ul>
+            </div>
+        </div>
+    </div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>

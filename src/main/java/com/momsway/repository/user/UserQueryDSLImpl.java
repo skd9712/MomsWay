@@ -1,6 +1,7 @@
 package com.momsway.repository.user;
 
 import com.momsway.domain.User;
+import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.UserDTO;
 import com.querydsl.core.types.Projections;
@@ -11,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import static com.momsway.domain.QEntExam.*;
-
+import static com.momsway.domain.QAcademy.*;
 import static com.momsway.domain.QUser.user;
 
 import static com.momsway.domain.QUser.*;
@@ -34,6 +35,14 @@ public class UserQueryDSLImpl implements UserQueryDSL {
         return list;
     }
 
+    @Override
+    public List<AcademyDTO> myacalist(long uidByEmail) {
+        List<AcademyDTO> list = queryFactory.select(Projections.fields(AcademyDTO.class, academy.title, academy.aid))
+                .from(academy)
+                .where(academy.academyUser.uid.eq(uidByEmail))
+                .fetch();
+        return list;
+    }
     @Override
     public int getCount(String search, String search_txt) {
 

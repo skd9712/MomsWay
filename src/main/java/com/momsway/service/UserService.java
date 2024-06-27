@@ -1,5 +1,6 @@
 package com.momsway.service;
 
+import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.UserDTO;
 import org.springframework.data.domain.Page;
@@ -29,4 +30,5 @@ public interface UserService {
 
     long userUpdate(Long uid,UserDTO dto);
 
+    List<AcademyDTO> myacalist(String username);
 }

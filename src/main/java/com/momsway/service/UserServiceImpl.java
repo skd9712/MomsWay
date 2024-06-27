@@ -2,6 +2,7 @@ package com.momsway.service;
 
 import com.momsway.domain.User;
 import com.momsway.domain.UserRole;
+import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.UserDTO;
 import com.momsway.repository.like.LikeRepository;
@@ -92,6 +93,12 @@ public class UserServiceImpl implements UserService {
         return myentlist;
     }
 
+    @Override
+    public List<AcademyDTO> myacalist(String username) {
+        long uidByEmail = findUidByEmail(username);
+        List<AcademyDTO> myacalist = userRepository.myacalist(uidByEmail);
+        return myacalist;
+    }
     @Override
     public List<EntExamDTO> findByUid(String username) {
         long uidByEmail = findUidByEmail(username);

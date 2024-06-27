@@ -1,6 +1,7 @@
 package com.momsway.repository.user;
 
 import com.momsway.domain.User;
+import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.EntExamDTO;
 
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,5 @@ public interface UserQueryDSL {
 
     UserDTO findByUserInfo(long uidByEmail);
 
+    List<AcademyDTO> myacalist(long uidByEmail);
 }
