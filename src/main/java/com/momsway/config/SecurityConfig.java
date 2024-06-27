@@ -48,7 +48,7 @@ public class SecurityConfig {
 
                                 // 학부모, 관리자
                                 .requestMatchers("/insertent","/entupdate/*","/delentexam/*"
-                                        ,"/replist/*","/insertrep").hasAnyRole("PARENT", "ADMIN")
+                                        ,"/replist/*","/insertrep","/entreport").hasAnyRole("PARENT", "ADMIN")
 
                                 // 학원, 관리자
                                 .requestMatchers("/insertAcademy","/updateAcademy/*"

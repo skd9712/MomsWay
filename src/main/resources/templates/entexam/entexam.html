@@ -44,7 +44,7 @@
             <th:block th:if="${startPage>1}">
                 <a th:href="@{/entexam(page=${startPage}-1, search_txt=${search_txt})}" th:text="이전"></a>
             </th:block>
-            <th:block th:each="index:${#numbers.sequence(startPage,endPage)}">
+            <th:block th:if="${entlist.totalPages>1}" th:each="index:${#numbers.sequence(startPage,endPage)}">
                 <span th:if="${index==entlist.pageable.getPageNumber()+1}"
                       th:text="${index}"></span>
                 <th:block th:if="${index!=entlist.pageable.getPageNumber()+1}">
