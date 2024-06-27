@@ -87,7 +87,7 @@ public class UserController {
 
     /** 회원관리 */
     @GetMapping("/useradmin")
-    public String userAdmin(@PageableDefault(size = 2, page = 0) Pageable pageable
+    public String userAdmin(@PageableDefault(size = 10, page = 0) Pageable pageable
             , @RequestParam(required = false, defaultValue = "") String search
             , @RequestParam(required = false, defaultValue = "") String search_txt
             , Model model){
@@ -127,7 +127,7 @@ public class UserController {
     }
 
     /** 회원관리 탈퇴 */
-    @GetMapping("/delete/{uid}")
+    @GetMapping("/userdelete/{uid}")
     public String deleteUser(@PathVariable Long uid){
         // OneToMany에 cascade = CascadeType.ALL
         Long id = userService.deleteUser(uid);

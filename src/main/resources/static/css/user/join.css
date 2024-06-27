@@ -19,7 +19,7 @@
 
 #join_box{
     background-color: white;
-    width: 45%;
+    width: 45vw;
     margin: 0 auto;
     border-radius: 35px 0;
 }
@@ -33,38 +33,61 @@
 }
 
 #join_form{
-    /*padding: 45px 150px;*/
-    padding: 2vw 7vw;
     display: flex;
     justify-content: center;
 }
 
 #join_form ul{
-    width: 90%;
+    width: 80%;
+    margin: 2vw 0;
 }
 
 #join_form ul li{
     list-style: none;
-    margin: 40px 0;
-}
-
-#join_form label{
-    display: inline-block;
-    width: 120px;
+    margin: 2vw;
     font-size: 1.2rem;
     color: #777777;
+    display: flex;
+}
+
+#join_form ul li:nth-child(-n+5)
+, #join_form ul li:last-child{
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #join_form ul li:nth-child(6){
-    display: flex;
-    justify-content: flex-end;
+    justify-content: right;
     position: relative;
-    top: -30px;
+    top: -1vw;
 }
 
-#join_form ul li:nth-child(6)>label{
-    font-size: 1rem;
-    width: 10%;
+#check{
+    margin-left: 5px;
+}
+
+.join_form_span{
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+}
+
+.join_form_span>:first-child{
+    width: 20%;
+}
+
+.join_form_span>:last-child{
+    font-size: 1.1rem;
+    color: #777777;
+    position: relative;
+    top: -0.5vw;
+}
+
+.join_form_span>input{
+    width: 55%;
+    padding: 0.5vw 0.9vw;
+    border-radius: 25px;
+    border: 1px solid #d5d5d5;
 }
 
 .join_input{
@@ -75,19 +98,43 @@
     font-size: 1rem;
 }
 
-.join_input:focus{
+#role{
+    padding: 5px 10px 5px 3px;
+    font-size: 1rem;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+}
+
+.join_input:focus, #role:focus{
     outline: 1px solid #12a60d;
 }
 
-.label_input{
-    display: flex;
-    justify-content: space-between;
+.agree{
+    height: 10vw;
+    text-align: start;
+    overflow-y: scroll;
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+    resize: none;
+}
+
+#submit{
+    font-family: 'Pretendard-SemiBold';
+    font-size: 1.3rem;
+    padding: 0.8vw 6vw;
+    border-radius: 25px;
+    border: 1px solid #d5d5d5;
+    background-color: #12a60d;
+    color: white;
+    cursor: pointer;
 }
 
 #emsg, #nmsg
 , #nick_valid{
-    margin: 7px 0;
-    float: right;
+    margin: 5px 0;
+    display: flex;
+    justify-content: right;
+    font-size: 1rem;
 }
 
 .msg_error
@@ -99,39 +146,22 @@
     color: #1d3ed7;
 }
 
-#role{
-    padding: 5px 10px;
-    font-size: 1rem;
-    border: 1px solid #d5d5d5;
-    border-radius: 5px;
-}
-
-#role:focus{
-    outline: 1px solid #12a60d;
-}
-
-.agree{
-    width: 100%;
-    height: 200px;
-    text-align: start;
-    overflow-y: scroll;
-    border: 1px solid #d5d5d5;
-    padding: 10px;
-    resize: none;
-}
-
-#join_form ul li:last-child{
+#fail_msg{
     display: flex;
     justify-content: center;
+    position: relative;
+    top: 0.7vw;
 }
 
-#submit{
-    padding: 1.5vh 6vw;
-    border-radius: 25px;
-    border: 1px solid #d5d5d5;
-    background-color: #12a60d;
-    font-size: 1.2rem;
-    color: white;
-    font-family: 'Pretendard-SemiBold';
-    cursor: pointer;
-}
+
+
+
+
+
+
+
+
+
+
+
+

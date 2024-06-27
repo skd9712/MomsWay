@@ -33,13 +33,13 @@
 					<li><a th:href="@{/report}" th:text="관리자페이지" th:class="admin"></a></li>
 				</th:block>
 
-				<th:block sec:authorize="hasAnyRole('PARENT','ACADEMY')">
+				<th:block sec:authorize="hasAnyRole('PARENT','ACADEMY','SUSPENDED')">
 					<li>
 						<form th:method="post" th:action="@{/logout}">
 							<button type="submit" th:class="logout">로그아웃</button>
 						</form>
 					</li>
-					<li><a th:href="@{/'#'}" th:text="마이페이지" th:class="mypage"></a></li>
+					<li><a th:href="@{/mypage}" th:text="마이페이지" th:class="mypage"></a></li>
 				</th:block>
 
 				<th:block sec:authorize="!isAuthenticated()">
