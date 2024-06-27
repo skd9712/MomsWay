@@ -13,14 +13,12 @@
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
 <div class="mypagewrap">
+    <div class="gomyinfo">
     <a th:href="@{'/myinfo'}">내정보 수정</a>
-    <div class="myinfo">
-        <p>이메일: <span sec:authentication="name"></span></p>
-        <p>회원 구분: <span sec:authentication="authorities"></span></p>
     </div>
     <div class="mywriteinfo">
         <div class="mywrite">
-            <p>글쓴거</p>
+            <p>내가 쓴 글</p>
             <ul th:each="item:${myentlist}">
                 <li>
                     <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
@@ -28,7 +26,7 @@
             </ul>
         </div>
         <div class="mylike">
-            <p>좋아요</p>
+            <p>좋아요한 글</p>
             <ul th:each="like:${likeTitles}">
                 <li>
                     <span><a th:href="@{'/entdetail/'+${like.eid}}" th:text="${like.title}"></a></span>
