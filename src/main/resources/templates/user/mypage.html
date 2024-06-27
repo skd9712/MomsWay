@@ -30,7 +30,6 @@
         <div class="mylike">
             <p>좋아요</p>
             <ul th:each="like:${likeTitles}">
-
                 <li>
                     <span><a th:href="@{'/entdetail/'+${like.eid}}" th:text="${like.title}"></a></span>
                 </li>

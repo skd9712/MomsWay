@@ -13,25 +13,29 @@
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
 
 <div class="myinfowrap">
-    <h1>내정보 수정</h1>
-    <th:block th:object="${dto}">
-        <form method="post" th:action="@{'/myinfo'}">
-            <input type="hidden" th:field="*{uid}">
-            <ul>
-                <li>
-                    <label>이메일</label>
-                    <input type="text" th:field="*{email}">
-                </li>
-                <li>
-                    <label>닉네임</label>
-                    <input type="text" th:field="*{nickname}">
-                </li>
-                <li>
-                    <button type="submit">수정</button>
-                </li>
-            </ul>
-        </form>
-    </th:block>
+    <div class="middlebody">
+        <div class="myinfoform">
+            <h1>내정보 수정</h1>
+            <th:block th:object="${dto}">
+                <form method="post" th:action="@{'/myinfo'}">
+                    <input type="hidden" th:field="*{uid}">
+                    <ul>
+                        <li>
+                            <label>이메일</label>
+                            <input type="text" th:field="*{email}">
+                        </li>
+                        <li>
+                            <label>닉네임</label>
+                            <input type="text" th:field="*{nickname}">
+                        </li>
+                        <li>
+                            <button type="submit">수정</button>
+                        </li>
+                    </ul>
+                </form>
+            </th:block>
+        </div>
+    </div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>

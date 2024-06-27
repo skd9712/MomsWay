@@ -52,7 +52,7 @@
                 </th:block>
             </th:block>
             <th:block th:if="${endPage<entlist.getTotalPages()}">
-                <a th:href="@{/entexam(page=${endPage}+1), search_txt=${search_txt}}" th:text="다음"></a>
+                <a th:href="@{/entexam(page=${endPage+1}, search_txt=${search_txt})}" th:text="다음"></a>
             </th:block>
         </div>
         <a sec:authorize="hasAnyRole('ADMIN','PARENT')" th:href="@{/insertent}" id="writebtn" type="button">글쓰기</a>

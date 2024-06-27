@@ -69,7 +69,9 @@
     font-size: 18px;
     font-weight: bold;
     color: #292929;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
 }
 
 .mywrite ul, .mylike ul {
@@ -79,6 +81,8 @@
 
 .mywrite li, .mylike li {
     margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid silver;
 }
 
 .mywrite li a, .mylike li a {

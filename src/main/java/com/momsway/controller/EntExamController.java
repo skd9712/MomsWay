@@ -39,10 +39,10 @@ import java.util.Map;
 public class EntExamController {
 
 
-    @Value("D:\\backend\\upload_img")
+    @Value("D:\\uploadImg")
     private String saveFolder;
 
-    @Value("D:\\backend\\upload_img")
+    @Value("D:\\uploadImg")
     private String filePath;
     private final LikeService likeService;
     private final EntExamService entExamService;
@@ -113,12 +113,13 @@ public class EntExamController {
     public String entUpdate(@PathVariable Long eid, Model model){
         EntExamDTO dto = entExamService.findByEid(eid);
         model.addAttribute("dto",dto);
-        return "entexam/entupdate";
+        model.addAttribute("insertAction","/entupdate/"+eid);
+        return "boardupdate";
     }
     @PostMapping("/entupdate/{eid}")
     public String entUpdateResult(@PathVariable Long eid, @ModelAttribute("dto") EntExamDTO dto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "entexam/entupdate";
+            return "boardupdate";
         }else {
             long id =entExamService.entUpdate(eid,saveFolder, dto);
             return "redirect:/entexam";

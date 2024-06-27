@@ -8,7 +8,7 @@
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>MOMSWAY - 입시</title>
     <link rel="stylesheet" th:href="@{/css/board/boarddetail.css}">
     <link rel="stylesheet" th:href="@{/css/entexam/entdetail.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
@@ -36,7 +36,7 @@
     <div class="dttop">
         <span th:text="${dto.title}"></span>
         <input type="hidden" th:id="eid" th:value="${dto.eid}">
-        <th:block th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasAnyRole(''ADMIN'',''PARENT'')')}">
+        <th:block th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasRole(''ADMIN'')')}">
             <button type="submit" id="mod">수정</button>
             <button type="button" id="del" th:onclick="delEnt()">삭제</button>
         </th:block>
@@ -76,13 +76,13 @@
     </div>
     <div class="comarea">
     <ul>
-        <li>
-            <input type="text" name="content" id="content">
+        <li class="cominput">
+            <input type="text" name="content" id="content" placeholder="댓글을 입력하세요">
             <button id="submit" type="button">등록</button>
         </li>
     </ul>
     <div th:id="comments">
-        <p>댓글</p>
+        <h2>댓글</h2>
         <ul th:id="comments-list"></ul>
     </div>
     </div>
