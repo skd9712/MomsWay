@@ -34,9 +34,34 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers("/**").permitAll()
                                 .requestMatchers("/insertrep/**").permitAll()
-//                        .requestMatchers("/join","/login","/logout","/main").permitAll()
+
+                                // 모든사람
+                                .requestMatchers("/join","/login","/logout","/main"
+                                        ,"/entexam","/academy","/notice"
+                                        ,"/checkEmail","/checkNickname").permitAll()
+
+                                // 관리자
+                                .requestMatchers("/insertNotice","/updateNotice/*","/delnotice/*"
+                                        ,"/report","/repdetail/*","/entreport","/delreport/*"
+                                        ,"/useradmin","/userdetail/*", "/userdelete/*").hasRole("ADMIN")
+
+                                // 학부모, 관리자
+                                .requestMatchers("/insertent","/entupdate/*","/delentexam/*"
+                                        ,"/replist/*","/insertrep").hasAnyRole("PARENT", "ADMIN")
+
+                                // 학원, 관리자
+                                .requestMatchers("/insertAcademy","/updateAcademy/*"
+                                        ,"/delacademy/*").hasAnyRole("ACADEMY", "ADMIN")
+
+                                // 회원(정지회원 제외)
+                                .requestMatchers("/academy/*","/notice/*","/entdetail/*"
+                                        ,"/checklike","/insertlike","/dellike/*"
+                                        ,"/entreport").hasAnyRole("PARENT", "ACADEMY", "ADMIN")
+
+                                // 회원(정지회원 포함)
+                                .requestMatchers("/mypage","myinfo").authenticated()
+//
                                 .anyRequest().authenticated()
         );
 

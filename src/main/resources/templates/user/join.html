@@ -19,36 +19,38 @@
 			<form th:method="post" th:action="@{/join}" id="join_form" th:object="${userDTO}">
 				<ul>
 					<li>
-						<div class="label_input">
+						<span class="join_form_span">
 							<label>이메일</label>
 							<input type="email" th:name="email" th:id="email" th:class="join_input" required>
-						</div>
+						</span>
 						<span id="email_msg">
 						</span>
 					</li>
 					<li>
-						<div class="label_input">
+						<span class="join_form_span">
 							<label>비밀번호</label>
 							<input type="password" th:name="pwd" th:id="pwd" th:class="join_input" required>
-						</div>
-					</li>
-					<li>
-						<div class="label_input">
-							<label>닉네임</label>
-							<input type="text" th:name="nickname" th:id="nickname"
-							       th:class="join_input" th:field="*{nickname}" required>
-						</div>
-						<span id="nick_msg" >
-						<span th:id="nick_valid" th:if="${#fields.hasErrors('nickname')}"
-						      th:errors="*{nickname}">nickname</span>
 						</span>
 					</li>
 					<li>
-						<label>회원유형</label>
-						<select th:name="role" th:id="role">
-							<option th:value="PARENT">학부모</option>
-							<option th:value="ACADEMY">학원</option>
-						</select>
+						<span class="join_form_span">
+							<label>닉네임</label>
+							<input type="text" th:name="nickname" th:id="nickname"
+							       th:class="join_input" th:field="*{nickname}" required>
+						</span>
+						<span th:id="nick_valid" th:if="${#fields.hasErrors('nickname')}"
+						             th:errors="*{nickname}">nickname</span>
+						<span id="nick_msg">
+						</span>
+					</li>
+					<li>
+						<span class="join_form_span">
+							<label>회원유형</label>
+							<select th:name="role" th:id="role">
+								<option th:value="PARENT">학부모</option>
+								<option th:value="ACADEMY">학원</option>
+							</select>
+						</span>
 					</li>
 					<li>
 						<textarea  readonly class="agree">제1조(목적)
@@ -83,12 +85,12 @@
 							&#10;2. 구매계약이 체결된 재화 또는 용역의 배송
 							&#10;3. 기타 “몰”이 정하는 업무</textarea>
 					</li>
-					<li>
+					<li class="check_li">
 						<label for="check">동의함</label>
-						<input type="checkbox" id="check" required>
+						<input type="checkbox" name="check" id="check" required>
 					</li>
-					<li th:if="${joinError}">
-						<span id="fail_msg">이미 사용 중인 이메일 또는 닉네임입니다.</span>
+					<li th:if="${joinError}" id="fail_msg">
+						<span>이미 사용 중인 이메일 또는 닉네임입니다.</span>
 					</li>
 					<li>
 						<button type="submit" id="submit">회원가입</button>

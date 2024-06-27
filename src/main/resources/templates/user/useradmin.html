@@ -53,7 +53,7 @@
 			</a>
 		</th:block>
 
-		<th:block th:each="index:${#numbers.sequence(startPage, endPage)}" th:class="page">
+		<th:block th:if="${userList.totalPages>1}" th:each="index:${#numbers.sequence(startPage, endPage)}" th:class="page">
 			<span th:if="${index==userList.pageable.getPageNumber()+1}" th:text="${index}"></span>
 			<span th:if="${index!=userList.pageable.getPageNumber()+1}">
 				<a th:href="@{/useradmin(page=${index}, search=${search}, search_txt=${search_txt})}"

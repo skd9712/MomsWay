@@ -1,0 +1,38 @@
+#wrap{
+    width: 45vw;
+    margin: 70px auto;
+}
+
+#detail_div{
+    width: 45vw;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 36px 0;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px
+    , rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+#detail_div>h2{
+    background-color: #F5C943;
+    padding: 8px 25px 7px;
+    border-radius: 36px 0;
+}
+
+#detail_ul{
+    padding: 0 10px 2px;
+}
+
+#detail_ul li{
+    margin: 5px 4px;
+    padding: 5px;
+    list-style: none;
+    /*padding: 10px 0;*/
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+}
+
+#detail_ul li:last-child {
+    border-bottom: none; /* 마지막 아이템의 하단 경계선 제거 */
+}
