@@ -50,6 +50,16 @@ public class AcademyServiceImpl implements AcademyService{
 
     @Override
     @Transactional
+    public void addAcademyReadNo(Long aid) {
+        Optional<Academy> find = academyRepository.findById(aid);
+        Academy academy = find.orElseThrow(() -> {
+            throw new RuntimeException(" from addAcademyReadNo ");
+        });
+        academy.setReadNo(academy.getReadNo()+1);
+    }
+
+    @Override
+    @Transactional
     public int delAcademy(Long aid, String saveFolder) {
         int result = 0;
         try{

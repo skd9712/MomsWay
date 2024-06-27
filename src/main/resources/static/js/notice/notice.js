@@ -24,3 +24,13 @@ async function delNotice(){
         console.error(error);
     });
 }
+
+window.onload=function () {
+    const tolistBtn = document.querySelector("#toList");
+    tolistBtn.addEventListener("click",function (e) {
+        e.preventDefault();
+        //console.log(document.referrer);
+        location.href=document.referrer;
+    });
+
+}
