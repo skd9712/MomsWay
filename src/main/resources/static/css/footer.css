@@ -5,9 +5,23 @@
     font-style: normal;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding-bottom: 250px; /* footer 높이만큼 여백을 확보합니다 */
+}
+
 footer{
     background-color: #1e1e1e;
     color: #E1E1E1;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 250px;
 }
 
 footer *{

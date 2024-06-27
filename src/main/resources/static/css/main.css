@@ -9,6 +9,28 @@
     margin: 0;
 }
 
+/* 광고 영상 */
+#ad_div{
+    position: relative;
+    margin: 0 auto;
+    width: 70vw;
+    height: 0;
+    /*padding-top: 56.25%;*/
+    padding-top: 25%;
+    background-color: white;
+}
+
+iframe{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 32vw;
+    height: 18vw;
+    display: block;
+    margin: 0 auto;
+    border-radius: 30px;
+}
+
 /* 밀크티 */
 #middle_milkt{
     background-color: #E5E4EA;

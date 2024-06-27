@@ -9,41 +9,41 @@
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<link rel="stylesheet" th:href="@{/css/user/join.css}">
 	<script th:src="@{/js/user/joincheck.js}"></script>
+	<script th:src="@{/js/header.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
 <div id="wrap">
-	<div id="middle_body">
-		<div id="join_box">
-			<h1>회원가입</h1>
-			<form th:method="post" th:action="@{/join}" id="join_form" th:object="${userDTO}">
-				<ul>
-					<li>
+	<div id="join_box">
+		<h1>회원가입</h1>
+		<form th:method="post" th:action="@{/join}" id="join_form" th:object="${userDTO}">
+			<ul>
+				<li>
 						<span class="join_form_span">
 							<label>이메일</label>
 							<input type="email" th:name="email" th:id="email" th:class="join_input" required>
 						</span>
-						<span id="email_msg">
+					<span id="email_msg">
 						</span>
-					</li>
-					<li>
+				</li>
+				<li>
 						<span class="join_form_span">
 							<label>비밀번호</label>
 							<input type="password" th:name="pwd" th:id="pwd" th:class="join_input" required>
 						</span>
-					</li>
-					<li>
+				</li>
+				<li>
 						<span class="join_form_span">
 							<label>닉네임</label>
 							<input type="text" th:name="nickname" th:id="nickname"
 							       th:class="join_input" th:field="*{nickname}" required>
 						</span>
-						<span th:id="nick_valid" th:if="${#fields.hasErrors('nickname')}"
-						             th:errors="*{nickname}">nickname</span>
-						<span id="nick_msg">
+					<span th:id="nick_valid" th:if="${#fields.hasErrors('nickname')}"
+					      th:errors="*{nickname}">nickname</span>
+					<span id="nick_msg">
 						</span>
-					</li>
-					<li>
+				</li>
+				<li>
 						<span class="join_form_span">
 							<label>회원유형</label>
 							<select th:name="role" th:id="role">
@@ -51,8 +51,8 @@
 								<option th:value="ACADEMY">학원</option>
 							</select>
 						</span>
-					</li>
-					<li>
+				</li>
+				<li>
 						<textarea  readonly class="agree">제1조(목적)
 							&#10;이 약관은 전자상거래 사업자가 운영하는 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리의무 및 책임사항을 규정함을 목적으로 합니다.
 							&#10;※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다」
@@ -84,20 +84,19 @@
 							&#10;1. 재화 또는 용역에 대한 정보 제공 및 구매계약의 체결
 							&#10;2. 구매계약이 체결된 재화 또는 용역의 배송
 							&#10;3. 기타 “몰”이 정하는 업무</textarea>
-					</li>
-					<li class="check_li">
-						<label for="check">동의함</label>
-						<input type="checkbox" name="check" id="check" required>
-					</li>
-					<li th:if="${joinError}" id="fail_msg">
-						<span>이미 사용 중인 이메일 또는 닉네임입니다.</span>
-					</li>
-					<li>
-						<button type="submit" id="submit">회원가입</button>
-					</li>
-				</ul>
-			</form>
-		</div>
+				</li>
+				<li class="check_li">
+					<label for="check">동의함</label>
+					<input type="checkbox" name="check" id="check" required>
+				</li>
+				<li th:if="${joinError}" id="fail_msg">
+					<span>이미 사용 중인 이메일 또는 닉네임입니다.</span>
+				</li>
+				<li>
+					<button type="submit" id="submit">회원가입</button>
+				</li>
+			</ul>
+		</form>
 	</div>
 </div>
 <footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>

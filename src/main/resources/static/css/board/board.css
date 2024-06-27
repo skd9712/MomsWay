@@ -1,10 +1,21 @@
+#wrap{
+    background-color: #F5F5F5;
+    padding: 70px 0;
+}
+
 .boardwrap {
-    margin: 5vh 20vw;
+    margin: 0 20vw;
+    border-radius: 40px 0;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 /*#academywrap{*/
 /*    margin: 5vh 20vw;*/
 /*}*/
+
+a{
+    text-decoration: none;
+}
 
 .boardtop {
     text-align: center;
@@ -33,45 +44,52 @@
 
 .noticetop li, .boardlist li {
     border-bottom: 1px solid rgba(153, 153, 153, 0.5);
-    padding: 1.5%;
+    padding: 1.3vw;
 }
 
+/* 긴 제목 말줄임 처리 */
 li span {
     display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 /* toplist 타이틀 */
 .noticetop li span:nth-child(2) {
-    width: 65.5%;
+    width: 68%;
 }
 
 /* toplist 아이콘, 글번호 */
-.boardlist li span:nth-child(1), .noticetop li span:nth-child(1){
+.boardlist li span:nth-child(1)
+, .noticetop li span:nth-child(1){
     width: 10%;
-    text-align: center;
+}
+
+/* 정렬 */
+.boardlist li{
+    display: flex;
 }
 
 /* 타이틀 */
 .boardlist li span:nth-child(2){
-    width: 45%;
+    width: 49%;
 }
 
 /* 작성자 */
-.boardlist li span:nth-child(3){
+.boardlist li span:nth-child(3)
+, .noticetop span:nth-child(3){
     width: 20%;
-    text-align: center;
 }
 
 /* 작성일 */
 .boardlist li span:nth-child(4), .noticetop li span:nth-child(3){
     width: 15%;
-    text-align: center;
 }
 
 /* 조회수 */
 .boardlist li span:nth-child(5){
     width: 5%;
-    text-align: center;
 }
 
 .paging {

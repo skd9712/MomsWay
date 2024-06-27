@@ -1,8 +1,10 @@
 package com.momsway.repository.user;
 
 import com.momsway.domain.User;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -27,15 +29,18 @@ public interface UserRepository extends JpaRepository<User,Long>, UserQueryDSL {
 
     @Query(" select u " +
             " from User u " +
-            " where u.email like concat('%', :search_txt, '%') ")
+            " where u.email like concat('%', :search_txt, '%') and u.pwd<>'' ")
     List<User> findUsersEmail(Pageable pageable, String search_txt);
 
     @Query(" select u " +
             " from User u " +
-            " where u.nickname like concat('%', :search_txt, '%') ")
+            " where u.nickname like concat('%', :search_txt, '%') and u.pwd<>''  ")
     List<User> findUsersNick(Pageable pageable, String search_txt);
 
-    @Override
-    void deleteById(Long uid);
-
+    @Transactional
+    @Modifying
+    @Query(" update User u " +
+            " set u.pwd='' " +
+            " where u.uid=:uid ")
+    void deleteUser(Long uid);
 }

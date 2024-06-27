@@ -8,10 +8,12 @@
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<link rel="stylesheet" th:href="@{/css/user/useradmin.css}">
+	<script th:src="@{/js/header.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
 <div id="wrap">
+	<h2>회원 관리</h2>
 	<!-- 회원 검색창 -->
 	<form th:method="get" th:action="@{/useradmin}" th:id="user_form">
 		<select th:name="search" th:id="search_user">
