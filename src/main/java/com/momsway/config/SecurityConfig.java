@@ -43,7 +43,7 @@ public class SecurityConfig {
 
                                 // 관리자
                                 .requestMatchers("/insertNotice","/updateNotice/*","/delnotice/*"
-                                        ,"/report","/repdetail/*","/entreport","/delreport/*"
+                                        ,"/report","/repdetail/*","/delreport/*"
                                         ,"/useradmin","/userdetail/*", "/userdelete/*").hasRole("ADMIN")
 
                                 // 학부모, 관리자
