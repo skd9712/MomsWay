@@ -30,6 +30,6 @@ window.onload=function () {
     tolistBtn.addEventListener("click",function (e) {
         e.preventDefault();
         //console.log(document.referrer);
-        location.href=document.referrer;
+        location.href="/main";
     });
 }

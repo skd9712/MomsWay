@@ -48,7 +48,7 @@ public class SecurityConfig {
 
                                 // 학부모, 관리자
                                 .requestMatchers("/insertent","/entupdate/*","/delentexam/*"
-                                        ,"/replist/*","/insertrep","/entreport").hasAnyRole("PARENT", "ADMIN")
+                                        ,"/insertrep").hasAnyRole("PARENT", "ADMIN")
 
                                 // 학원, 관리자
                                 .requestMatchers("/insertAcademy","/updateAcademy/*"
@@ -56,7 +56,7 @@ public class SecurityConfig {
 
                                 // 회원(정지회원 제외)
                                 .requestMatchers("/academy/*","/notice/*","/entdetail/*"
-                                        ,"/checklike","/insertlike","/dellike/*"
+                                        ,"/checklike","/insertlike","/dellike/*" ,"/replist/*"
                                         ,"/entreport").hasAnyRole("PARENT", "ACADEMY", "ADMIN")
 
                                 // 회원(정지회원 포함)
