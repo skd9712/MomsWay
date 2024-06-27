@@ -63,7 +63,11 @@
 }
 .dtcontent{
     padding: 7% 0 7% 0;
+}
+
+.dtcontent p {
     white-space: pre-wrap;
+    padding-top: 7%;
 }
 
 .dtcontent img {
@@ -129,12 +133,17 @@
     padding: 5%;
 }
 
-.tolist a{
+.tolist a {
     display: inline-block;
     width: 100px;
     background-color: #F5C943;
     padding: 2%;
     text-decoration: none;
     color: #444040;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
