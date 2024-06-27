@@ -12,7 +12,7 @@ html {
 
 body {
     margin: 0;
-    padding-bottom: 250px; /* footer 높이만큼 여백을 확보합니다 */
+    padding-bottom: 230px; /* footer 높이만큼 여백을 확보합니다 */
 }
 
 footer{
@@ -21,7 +21,7 @@ footer{
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 250px;
+    height: 230px;
 }
 
 footer *{
@@ -29,7 +29,9 @@ footer *{
 }
 
 #footer_box{
-    padding: 30px 50px;
+    padding: 30px 9vw;
+    font-size: 0.9rem;
+    color: #bdbdbd;
 }
 
 #footer_box ul{
@@ -48,11 +50,11 @@ footer *{
 
 .footer_top a{
     text-decoration: none;
-    color: #E1E1E1;
+    color: #bdbdbd;
 }
 
 .line{
-    border: 1px solid #939393;
+    border: 1px solid #626262;
     margin: 15px 0 30px;
 }
 
