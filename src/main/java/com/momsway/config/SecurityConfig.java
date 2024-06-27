@@ -43,12 +43,12 @@ public class SecurityConfig {
 
                                 // 관리자
                                 .requestMatchers("/insertNotice","/updateNotice/*","/delnotice/*"
-                                        ,"/report","/repdetail/*","/entreport","/delreport/*"
+                                        ,"/report","/repdetail/*","/delreport/*"
                                         ,"/useradmin","/userdetail/*", "/userdelete/*").hasRole("ADMIN")
 
                                 // 학부모, 관리자
                                 .requestMatchers("/insertent","/entupdate/*","/delentexam/*"
-                                        ,"/replist/*","/insertrep").hasAnyRole("PARENT", "ADMIN")
+                                        ,"/replist/*","/insertrep","/entreport").hasAnyRole("PARENT", "ADMIN")
 
                                 // 학원, 관리자
                                 .requestMatchers("/insertAcademy","/updateAcademy/*"

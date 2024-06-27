@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/report/report.css}">
-    <link rel="stylesheet" th:href="@{css/board/board.css}">
+    <link rel="stylesheet" th:href="@{/css/board/board.css}">
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
@@ -32,11 +32,11 @@
             </li>
             <li class="reportlist" th:each="item : ${reportlist}">
                 <span><a class="report" th:href="@{'/repdetail/'+${item.rid}}" th:text="${item.rid}"></a></span>
-                <span th:text="${item.uid}"></span>
+                <span><a class="report" th:href="@{'/userdetail/'+${item.uid}}" th:text="${item.uid}"></a></span>
                 <span><a class="report" th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
                 <span th:text="${countReportsByEid[item.eid]}"></span>
                 <span class="repdel" id="reportdel">
-                     <button type="button" class="repdel" th:onclick="|delReport(${item.rid})|">신고처리</button>
+                     <button type="button" class="repdel2" th:onclick="|delReport(${item.rid})|">신고처리</button>
                 </span>
             </li>
         </ul>
