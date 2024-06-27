@@ -14,7 +14,7 @@
     <div class="intop">
         <span>게시글 등록하기</span>
     </div>
-    <form th:method="post" action="" th:action="@{${insertAction}}" enctype="multipart/form-data">
+    <form id="form" th:method="post" action="" th:action="@{${insertAction}}" enctype="multipart/form-data">
 <!--        <input type="text" th:name="email" th:value="${#authentication.name}" hidden>-->
         <ul class="inbody">
             <th:block th:if="${noticeOnly!=null}">
@@ -43,26 +43,26 @@
             </th:block>
             <li class="insertforms">
                 <label class="writelabel" th:for="title">제목</label>
-                <input class="writeinput titleinput" type="text" th:name="title" th:id="title" th:value="${dto.title}">
+                <input class="writeinput titleinput" type="text" th:name="title" th:id="title" th:value="${dto.title}" required>
             </li>
             <li class="insertforms">
                 <label class="writelabel" th:for="content">내용</label>
-                <textarea class="writeinput contentinput" th:name="content" th:id="content" th:text="${dto.content}"></textarea>
+                <textarea class="writeinput contentinput" th:name="content" th:id="content" th:text="${dto.content}" required></textarea>
             </li>
             <li class="insertforms">
                 <label class="writelabel" th:for="files">파일등록</label>
                 <input type="file" th:name="files" id="files" multiple="multiple">
             </li>
-            <th:block th:if="${imgPaths!=null}">
-                <li id="imgs">
+            <li id="imgs">
+                <th:block th:if="${imgPaths!=null}">
                     <th:block th:each="img:${imgPaths}">
                         <img class="thumb currfile" th:src="@{${img}}" onclick="updateImg(this)">
                     </th:block>
-                </li>
-            </th:block>
+                </th:block>
+            </li>
             <li id="uploadImgs"></li>
             <li class="insertBtns">
-                <button type="submit" id="submitBtn">등록</button>
+                <button type="button" id="submitBtn">등록</button>
                 <button type="reset" id="resetBtn">취소</button>
             </li>
         </ul>

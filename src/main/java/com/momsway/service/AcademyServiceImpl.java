@@ -63,12 +63,11 @@ public class AcademyServiceImpl implements AcademyService{
     public int delAcademy(Long aid, String saveFolder) {
         int result = 0;
         try{
-            // aid 로 객체 불러와서
             AcademyDTO find = findByAid(aid);
-            // imgPaths 를 리스트로 만든다음에
-            List<String> imgPaths = Arrays.stream(find.getImgPath().split(";-;")).toList();
-            // 이미지 파일 삭제 메서드
-            academyImgFileRemove(imgPaths,saveFolder);
+            if(find.getImgPath()!=null){
+                List<String> imgPaths = Arrays.stream(find.getImgPath().split(";-;")).toList();
+                academyImgFileRemove(imgPaths,saveFolder);
+            }
             academyRepository.deleteById(aid);
             result = 1;
         }catch (Exception e){
@@ -135,7 +134,8 @@ public class AcademyServiceImpl implements AcademyService{
         // set entity
         academy.setTitle(dto.getTitle());
         academy.setContent(dto.getContent());
-        if(updateImgPaths==null)
+        System.out.println(updateImgPaths.length());
+        if(updateImgPaths==null || updateImgPaths.length()==0)
             academy.setImgPath(null);
         else
             academy.setImgPath(updateImgPaths.toString());

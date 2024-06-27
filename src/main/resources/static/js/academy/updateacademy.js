@@ -42,7 +42,21 @@ window.onload=function () {
         }
     }
 
+    const submitBtn = document.querySelector("#submitBtn");
+    submitBtn.onclick=function () {
+        let form = document.querySelector("#form");
+        //console.log(form.files.files.length);
+        if(form.title.value==""){
+            alert("제목을 입력하세요");
+        } else if(form.content.value==""){
+            alert("내용을 입력하세요");
+        } else if(form.files.files.length>5){
+            alert("이미지는 한번에 최대 5개까지 등록할 수 있습니다.");
+        } else {
+            form.submit();
+        }
 
+    }
 
 
 }

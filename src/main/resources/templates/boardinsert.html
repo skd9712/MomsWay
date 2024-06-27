@@ -19,7 +19,7 @@
     <div class="intop">
         <span>게시글 등록하기</span>
     </div>
-    <form th:method="post" action="" th:action="@{${insertAction}}" enctype="multipart/form-data">
+    <form id="form" th:method="post" action="" th:action="@{${insertAction}}" enctype="multipart/form-data">
         <ul class="inbody">
             <th:block th:if="${noticeOnly!=null}">
                 <li class="insertforms">
@@ -39,11 +39,11 @@
             </th:block>
             <li class="insertforms">
                 <label class="writelabel" th:for="title">제목</label>
-                <input class="writeinput titleinput" type="text" th:name="title" th:id="title">
+                <input class="writeinput titleinput" type="text" th:name="title" th:id="title" required>
             </li>
             <li class="insertforms">
                 <label class="writelabel" th:for="content">내용</label>
-                <textarea class="writeinput contentinput" th:name="content" th:id="content"></textarea>
+                <textarea class="writeinput contentinput" th:name="content" th:id="content" required></textarea>
             </li>
             <li class="insertforms">
                 <label class="writelabel" th:for="files">파일등록</label>
