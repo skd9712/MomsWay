@@ -82,6 +82,7 @@ public class NoticeController {
 
     @GetMapping("/notice/{nid}")
     public String noticeDetail(@PathVariable Long nid, Model model){
+        noticeService.addNoticeReadNo(nid);
         NoticeDTO dto = noticeService.findByNid(nid);
         model.addAttribute("dto",dto);
         if(dto.getImgPaths()!=null)

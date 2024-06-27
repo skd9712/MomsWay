@@ -21,4 +21,6 @@ public interface NoticeService {
     Long insertNotice(NoticeDTO dto, String saveFolder);
 
     Long updateNotice(NoticeDTO dto, String saveFolder);
+
+    void addNoticeReadNo(Long nid);
 }

@@ -43,4 +43,8 @@ public class Academy {
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
+
+    public void setReadNo(Long readNo) {
+        this.readNo = readNo;
+    }
 }

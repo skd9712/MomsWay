@@ -17,4 +17,6 @@ public interface AcademyService {
     int delAcademy(Long aid, String saveFolder);
 
     Long updateAcademy(AcademyDTO dto, String saveFolder);
+
+    void addAcademyReadNo(Long aid);
 }

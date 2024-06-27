@@ -96,6 +96,7 @@ public class AcademyController {
 
     @GetMapping("/academy/{aid}")
     public String detail(@PathVariable Long aid, Model model){
+        academyService.addAcademyReadNo(aid);
         AcademyDTO dto = academyService.findByAid(aid);
         if(dto.getImgPath()!=null) {
             String[] imgPaths = dto.getImgPath().split(";-;");

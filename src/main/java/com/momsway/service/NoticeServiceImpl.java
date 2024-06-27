@@ -59,6 +59,13 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
+    @Transactional
+    public void addNoticeReadNo(Long nid) {
+        Notice notice = noticeRepository.findByNid(nid);
+        notice.setReadNo(notice.getReadNo()+1L);
+    }
+
+    @Override
     public NoticeDTO findByNid(Long nid) {
         Notice detail = noticeRepository.findByNid(nid);
         List<String> imgPaths = detail.getNoticeImgs().stream()
