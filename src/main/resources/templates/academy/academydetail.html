@@ -19,32 +19,34 @@
 </head>
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
-<div class="boarddetailwrap">
-    <div class="dttop">
-        <span th:text="${dto.title}"></span>
-        <th:block th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasRole(''ADMIN'')')}">
-            <button type="submit" id="mod" th:onclick="modAcademy()">수정</button>
-            <button type="button" id="del" th:onclick="delAcademy()">삭제</button>
-        </th:block>
-    </div>
-    <div class="dtbody">
-        <div class="dtinfo">
-            <span th:text="${dto.nickname}"></span>
-            <div class="readdate">
-                <span class="infospan" th:text="|조회 ${dto.readNo}|"></span>
-                <span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
-            </div>
-        </div>
-        <div class="dtcontent">
-            <th:block th:each="img:${imgPaths}">
-                <img th:src="@{|/getAcaImages/${img}|}" alt="academy_img">
-            </th:block>
-            <p th:text="${dto.content}"></p>
-        </div>
-        <div class="tolist">
-            <a href="/academy">목록으로</a>
-        </div>
-    </div>
+<div id="wrap">
+	<div class="boarddetailwrap">
+		<div class="dttop">
+			<span th:text="${dto.title}"></span>
+			<th:block th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasRole(''ADMIN'')')}">
+				<button type="submit" id="mod" th:onclick="modAcademy()">수정</button>
+				<button type="button" id="del" th:onclick="delAcademy()">삭제</button>
+			</th:block>
+		</div>
+		<div class="dtbody">
+			<div class="dtinfo">
+				<span th:text="${dto.nickname}"></span>
+				<div class="readdate">
+					<span class="infospan" th:text="|조회 ${dto.readNo}|"></span>
+					<span class="infospan" th:text="${#temporals.format(dto.createAt,'yyyy-MM-dd HH:mm')}"></span>
+				</div>
+			</div>
+			<div class="dtcontent">
+				<th:block th:each="img:${imgPaths}">
+					<img th:src="@{|/getAcaImages/${img}|}" alt="academy_img">
+				</th:block>
+				<p th:text="${dto.content}"></p>
+			</div>
+			<div class="tolist">
+				<a href="/academy">목록으로</a>
+			</div>
+		</div>
+	</div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>
