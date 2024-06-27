@@ -58,6 +58,12 @@ window.onload=function () {
 
     }
 
+    const resetBtn = document.querySelector("#resetBtn");
+    resetBtn.onclick = function () {
+        location.href=document.referrer;
+    }
+
+
 
 }
 
