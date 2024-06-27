@@ -8,6 +8,7 @@
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<link rel="stylesheet" th:href="@{/css/user/userdetail.css}">
+	<script th:src="@{/js/header.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
@@ -37,6 +38,7 @@
 			</li>
 		</ul>
 	</div>
+	<a th:href="@{/myinfo}">수정</a>
 	<a th:href="@{|/userdelete/${userDTO.uid}|}">탈퇴</a>
 </div>
 <footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>

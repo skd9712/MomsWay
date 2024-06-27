@@ -129,7 +129,6 @@ public class UserController {
     /** 회원관리 탈퇴 */
     @GetMapping("/userdelete/{uid}")
     public String deleteUser(@PathVariable Long uid){
-        // OneToMany에 cascade = CascadeType.ALL
         Long id = userService.deleteUser(uid);
         return "redirect:/useradmin";
     }

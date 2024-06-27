@@ -10,51 +10,54 @@
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <script th:src="@{js/academy/academy.js}"></script>
+	<script th:src="@{/js/header.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
-<div class="boardwrap">
-    <div class="boardtop">학원홍보</div>
-    <div class="list">
-        <ul class="noticetop">
-            <li th:each="t:${toplist}">
-                <th:block th:if="${t.category.equals('EVENT')}">
-                    <span>🎁</span>
-                </th:block>
-                <th:block th:if="${t.category.equals('NOTICE')}">
-                    <span>📌</span>
-                </th:block>
-                <span><a th:href="@{|/notice/${t.nid}|}" th:text="${t.title}"/></span>
-                <span th:text="${#temporals.format(t.createAt,'yyyy-MM-dd')}"/>
-            </li>
-        </ul>
-        <ul class="boardlist" th:each="item:${list}">
-            <li>
-                <span th:text="${item.aid}"></span>
-                <span><a th:href="@{'/academy/'+${item.aid}}" th:text="${item.title}"/></span>
-                <span th:text="${item.nickname}"></span>
-                <span th:text="${#temporals.format(item.createAt,'yyyy-MM-dd')}"></span>
-                <span th:text="${item.readNo}"></span>
-            </li>
-        </ul>
+<div id="wrap">
+    <div class="boardwrap">
+	    <div class="boardtop">학원홍보</div>
+	    <div class="list">
+		    <ul class="noticetop">
+			    <li th:each="t:${toplist}">
+				    <th:block th:if="${t.category.equals('EVENT')}">
+					    <span>🎁</span>
+				    </th:block>
+				    <th:block th:if="${t.category.equals('NOTICE')}">
+					    <span>📌</span>
+				    </th:block>
+				    <span><a th:href="@{|/notice/${t.nid}|}" th:text="${t.title}"/></span>
+				    <span th:text="${#temporals.format(t.createAt,'yyyy-MM-dd')}"/>
+			    </li>
+		    </ul>
+		    <ul class="boardlist" th:each="item:${list}">
+			    <li>
+				    <span th:text="${item.aid}"></span>
+				    <span><a th:href="@{'/academy/'+${item.aid}}" th:text="${item.title}"/></span>
+				    <span th:text="${item.nickname}"></span>
+				    <span th:text="${#temporals.format(item.createAt,'yyyy-MM-dd')}"></span>
+				    <span th:text="${item.readNo}"></span>
+			    </li>
+		    </ul>
 
-    </div>
-    <div class="boardbottom">
-        <div class="paging">
-            <th:block th:if="${startPage>1}">
-                <a th:href="@{/academy(page=${startPage}-1, search_txt=${search_txt})}" th:text="이전"/>
-            </th:block>
-            <th:block th:each="idx:${#numbers.sequence(startPage,endPage)}">
-                <span class="curr" th:if="${idx==list.pageable.getPageNumber()+1}" th:text="${idx}"/>
-                <span th:if="${idx!=list.pageable.getPageNumber()+1}">
-            <a th:href="@{/academy(page=${idx}, search_txt=${search_txt})}" th:text="${idx}"/>
-        </span>
-            </th:block>
-            <th:block th:if="${endPage<list.totalPages}">
-                <a th:href="@{/academy(page=${endPage+1}, search_txt=${search_txt})}" th:text="다음"/>
-            </th:block>
-            <a sec:authorize="hasAnyRole('ADMIN','ACADEMY')" th:href="@{/insertAcademy}" id="writebtn" type="button">글쓰기</a>
-        </div>
+	    </div>
+	    <div class="boardbottom">
+		    <div class="paging">
+			    <th:block th:if="${startPage>1}">
+				    <a th:href="@{/academy(page=${startPage}-1, search_txt=${search_txt})}" th:text="이전"/>
+			    </th:block>
+			    <th:block th:each="idx:${#numbers.sequence(startPage,endPage)}">
+				    <span class="curr" th:if="${idx==list.pageable.getPageNumber()+1}" th:text="${idx}"/>
+				    <span th:if="${idx!=list.pageable.getPageNumber()+1}">
+					    <a th:href="@{/academy(page=${idx}, search_txt=${search_txt})}" th:text="${idx}"/>
+				    </span>
+			    </th:block>
+			    <th:block th:if="${endPage<list.totalPages}">
+				    <a th:href="@{/academy(page=${endPage+1}, search_txt=${search_txt})}" th:text="다음"/>
+			    </th:block>
+			    <a sec:authorize="hasAnyRole('ADMIN','ACADEMY')" th:href="@{/insertAcademy}" id="writebtn" type="button">글쓰기</a>
+		    </div>
+	    </div>
     </div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>

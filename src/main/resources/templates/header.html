@@ -30,7 +30,8 @@
 							<button type="submit" th:class="logout">로그아웃</button>
 						</form>
 					</li>
-					<li><a th:href="@{/report}" th:text="관리자페이지" th:class="admin"></a></li>
+					<li><a th:href="@{/report}" th:text="신고관리" th:class="admin"></a></li>
+					<li><a th:href="@{/useradmin}" th:text="회원관리" th:class="admin"></a></li>
 				</th:block>
 
 				<th:block sec:authorize="hasAnyRole('PARENT','ACADEMY','SUSPENDED')">

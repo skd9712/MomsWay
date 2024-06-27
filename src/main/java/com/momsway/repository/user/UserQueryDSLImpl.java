@@ -42,18 +42,19 @@ public class UserQueryDSLImpl implements UserQueryDSL {
         if (search == "email" || "email".equals(search)) {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
-                    .where(user.email.like("%" + search_txt + "%"))
+                    .where(user.email.like("%" + search_txt + "%").and(user.pwd.isNotNull()))
                     .fetchOne();
             totalCount = count.intValue();
         } else if (search == "nickname" || "nickname".equals(search)) {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
-                    .where(user.nickname.like("%" + search_txt + "%"))
+                    .where(user.nickname.like("%" + search_txt + "%").and(user.pwd.isNotNull()))
                     .fetchOne();
             totalCount = count.intValue();
         } else {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
+                    .where(user.pwd.isNotNull())
                     .fetchOne();
             totalCount = count.intValue();
         }

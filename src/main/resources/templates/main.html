@@ -17,7 +17,7 @@
 	<div>
 		<img src="/images/Momsway.png" alt="메인이미지" id="main_img">
 	</div>
-	<!-- 밀크티 링크 -->
+<!--	&lt;!&ndash; 밀크티 링크 &ndash;&gt;
 	<div id="middle_milkt">
 		<h1>우리 아이 교육은?</h1>
 		<h3>천재교육 밀크티에서!</h3>
@@ -43,6 +43,16 @@
 				</a>
 			</li>
 		</ul>
+	</div>-->
+
+	<div id="ddd">
+		<div id="ad_div">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/Me7zhzokFCM?si=Q8dQqQNp7dmmd3Fi"
+			        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+		        encrypted-media; gyroscope; picture-in-picture; web-share"
+			        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+			</iframe>
+		</div>
 	</div>
 
 	<!-- 입시게시판 인기글 -->
@@ -66,11 +76,11 @@
 			<ul class="notice_ul">
 				<li th:each="item:${noticeList}" class="notice_li">
 					<a th:href="@{'/notice/'+${item.nid}}">
-						<span th:if="${item.category=='notice'}"
+						<span th:if="${item.category=='NOTICE'}"
 						      class="notice_span cate_notice">
 							<span>공지</span>
 						</span>
-						<span th:if="${item.category=='event'}"
+						<span th:if="${item.category=='EVENT'}"
 						      class="notice_span cate_event">
 							<span>이벤트</span>
 						</span>

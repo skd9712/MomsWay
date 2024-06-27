@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
     /** 회원관리 탈퇴 */
     @Override
     public Long deleteUser(Long uid) {
-        userRepository.deleteById(uid);
+        userRepository.deleteUser(uid);
         return uid;
     }
 

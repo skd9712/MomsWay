@@ -115,6 +115,11 @@ header ul li{
     white-space: nowrap;
 }
 
+.useradmin{
+    position: relative;
+    left: -5px;
+}
+
 .join{
     padding: 7px 1.3vw;
     font-size: 1rem;
