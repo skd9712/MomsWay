@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-	<script th:src="@{/js/header.js}"></script>
+	<script defer th:src="@{/js/header.js}"></script>
     <script th:src="@{/js/report/report.js}"></script>
         <script th:inline="javascript">
             document.addEventListener("DOMContentLoaded",function (){
@@ -20,49 +20,51 @@
 </head>
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
-<div class="boardwrap">
-    <div class="boardtop">신고관리</div>
-    <div class="list">
-        <ul class="reportlist">
-            <li class="reporttop">
-                <span>신고번호</span>
-                <span>신고당한유저</span>
-                <span>신고게시물</span>
-                <span>신고횟수</span>
-                <span>신고처리</span>
-            </li>
-            <li class="reportlist" th:each="item : ${reportlist}">
-                <span><a class="report" th:href="@{'/repdetail/'+${item.rid}}" th:text="${item.rid}"></a></span>
-                <span><a class="report" th:href="@{'/userdetail/'+${item.uid}}" th:text="${item.uid}"></a></span>
-                <span><a class="report" th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
-                <span th:text="${countReportsByEid[item.eid]}"></span>
-                <span class="repdel" id="reportdel">
+<div id="wrap">
+	<div class="boardwrap">
+		<div class="boardtop">신고관리</div>
+		<div class="list">
+			<ul class="reportlist">
+				<li class="reporttop">
+					<span>신고번호</span>
+					<span>신고당한유저</span>
+					<span>신고게시물</span>
+					<span>신고횟수</span>
+					<span>신고처리</span>
+				</li>
+				<li class="reportlist" th:each="item : ${reportlist}">
+					<span><a class="report" th:href="@{'/repdetail/'+${item.rid}}" th:text="${item.rid}"></a></span>
+					<span><a class="report" th:href="@{'/userdetail/'+${item.uid}}" th:text="${item.uid}"></a></span>
+					<span><a class="report" th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
+					<span th:text="${countReportsByEid[item.eid]}"></span>
+					<span class="repdel" id="reportdel">
                      <button type="button" class="repdel2" th:onclick="|delReport(${item.rid})|">신고처리</button>
                 </span>
-            </li>
-        </ul>
-    </div>
-    <div class="boardbottom">
-        <div class="paging">
-            <th:block th:if="${startPage>1}">
-                <a th:href="@{/report(page=${startPage}-1)}" th:text="이전"></a>
-            </th:block>
-            <th:block th:if="${reportlist.totalPages>1}" th:each="index:${#numbers.sequence(startPage,endPage)}">
+				</li>
+			</ul>
+		</div>
+		<div class="boardbottom">
+			<div class="paging">
+				<th:block th:if="${startPage>1}">
+					<a th:href="@{/report(page=${startPage}-1)}" th:text="이전"></a>
+				</th:block>
+				<th:block th:if="${reportlist.totalPages>1}" th:each="index:${#numbers.sequence(startPage,endPage)}">
                 <span th:if="${index==reportlist.pageable.getPageNumber()+1}"
                       th:text="${index}"></span>
-                <th:block th:if="${index!=reportlist.pageable.getPageNumber()+1}">
-                    <a th:href="@{/report(page=${index})}" th:text="${index}"></a>
-                </th:block>
-            </th:block>
-            <th:block th:if="${endPage<reportlist.getTotalPages()}">
-                <a th:href="@{/report(page=${endPage}+1)}" th:text="다음"></a>
-            </th:block>
-        </div>
-        </div>
-    </div>
+					<th:block th:if="${index!=reportlist.pageable.getPageNumber()+1}">
+						<a th:href="@{/report(page=${index})}" th:text="${index}"></a>
+					</th:block>
+				</th:block>
+				<th:block th:if="${endPage<reportlist.getTotalPages()}">
+					<a th:href="@{/report(page=${endPage}+1)}" th:text="다음"></a>
+				</th:block>
+			</div>
+		</div>
+	</div>
 
 </div>
 
+</div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>
 </html>

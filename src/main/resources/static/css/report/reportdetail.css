@@ -1,19 +1,30 @@
+#wrap{
+    background-color: #F5F5F5;
+    padding: 70px 0;
+}
+
+#reportdetail {
+    margin: 0 20vw;
+}
+
 .dttop {
     text-align: center;
     background: #F5C943;
     border-radius: 40px 0;
-    padding: 3%;
+    padding: 30px;
     font-weight: 600;
     font-size: 1.3rem;
     color: #444040;
     margin: auto;
 }
+
 .dtcontent{
     text-align: center;
     margin: auto;
+    background-color: rgba(255, 255, 255, 0.6);
 }
+
 #repdetail li{
-    margin: 5px 4px;
     padding: 5px;
     list-style: none;
     display: flex;
@@ -54,7 +65,7 @@ ul{
     padding: 5px;
 }
 .dto{
-     background: #f5f5f5
+     background: none;
 }
 
 .comment{
@@ -62,6 +73,11 @@ ul{
     border:none;
     text-align: center;
 }
+
+.comment:focus{
+    outline: none;
+}
+
 #reportdetail li:last-child{
     border-bottom: none;
 }

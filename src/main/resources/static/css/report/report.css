@@ -71,9 +71,9 @@ li span {
 .repdel>button{
     border: none;
 }
-.boardwrap{
-    height: 30vw;
-}
+/*.boardwrap{*/
+/*    height: 30vw;*/
+/*}*/
 .report{
  text-decoration: none;
  color: black;

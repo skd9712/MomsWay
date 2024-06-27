@@ -109,7 +109,6 @@ li span {
 
 #writebtn {
     width: 80px;
-    display: inline-block;
     font-size: 1rem;
     font-weight: 600;
     border: none;
@@ -121,7 +120,7 @@ li span {
     background: #F5C943;
 
     position: relative;
-    left: 27%;
+    left: 38%;
 }
 
 #writebtn:hover {

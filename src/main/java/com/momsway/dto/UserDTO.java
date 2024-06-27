@@ -17,7 +17,7 @@ public class UserDTO {
     private String pwd;
     private String role;
     @NotEmpty(message = "닉네임을 입력하세요.")
-    @Size(min = 4, max = 10, message = "닉네임은 1자 이상 15자 이하여야 합니다.")
+    @Size(min = 1, max = 10, message = "닉네임은 1자 이상 15자 이하여야 합니다.")
     private String nickname;
     private Integer reportNo;
 }

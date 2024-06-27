@@ -13,6 +13,9 @@ html {
 body {
     margin: 0;
     padding-bottom: 230px; /* footer 높이만큼 여백을 확보합니다 */
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* 행의 크기를 정의 (상단 요소, 중앙 여백, footer) */
+    min-height: 100vh;
 }
 
 footer{
@@ -22,6 +25,7 @@ footer{
     bottom: 0;
     width: 100%;
     height: 230px;
+    grid-row: 3;
 }
 
 footer *{
@@ -29,8 +33,8 @@ footer *{
 }
 
 #footer_box{
-    padding: 30px 9vw;
-    font-size: 0.9rem;
+    padding: 30px 14.5vw;
+    font-size: 1rem;
     color: #bdbdbd;
 }
 

@@ -56,7 +56,7 @@ public class SecurityConfig {
 
                                 // 회원(정지회원 제외)
                                 .requestMatchers("/academy/*","/notice/*","/entdetail/*"
-                                        ,"/checklike","/insertlike","/dellike/*" ,"/replist/*"
+                                        ,"/checklike","/insertlike","/dellike/*","/replist/*"
                                         ,"/entreport").hasAnyRole("PARENT", "ACADEMY", "ADMIN")
 
                                 // 회원(정지회원 포함)
