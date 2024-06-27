@@ -96,14 +96,18 @@ header ul li{
     background-color: #12a60d;
     color: white;
     border: none;
-    padding: 7px 15px;
+    padding: 5px 1vw;
     font-size: 1rem;
     cursor: pointer;
     border-radius: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     vertical-align: middle;
     position: relative;
-    top: -5px;
+    top: -0.25vw;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .mypage, .admin, .login{
@@ -136,7 +140,7 @@ header ul li{
 #header_nav ul{
     display: flex;
     justify-content: space-evenly;
-    margin: 35px 0;
+    margin: 25px 0;
 }
 
 #header_nav a{
