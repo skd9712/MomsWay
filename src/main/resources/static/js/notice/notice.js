@@ -32,5 +32,4 @@ window.onload=function () {
         //console.log(document.referrer);
         location.href=document.referrer;
     });
-
 }

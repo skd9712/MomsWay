@@ -49,7 +49,7 @@
     font-weight: bold;
     color: #292929;
     margin-bottom: 15px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     border-bottom: 1px solid black;
 }
 
@@ -60,7 +60,7 @@
 
 .mywrite li, .mylike li {
     margin-bottom: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     border-bottom: 1px solid silver;
 }
 

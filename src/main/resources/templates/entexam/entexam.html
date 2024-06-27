@@ -4,7 +4,7 @@
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>MOMSWAY - 입시</title>
     <link rel="stylesheet" th:href="@{/css/board/board.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
@@ -40,7 +40,10 @@
 				</li>
 			</ul>
 
-		</div>
+
+<!-- star		
+
+</div>
 		<div class="boardbottom">
 			<div class="paging">
 				<th:block th:if="${startPage>1}">
@@ -59,7 +62,28 @@
 			</div>
 			<a sec:authorize="hasAnyRole('ADMIN','PARENT')" th:href="@{/insertent}" id="writebtn" type="button">글쓰기</a>
 		</div>
-	</div>
+	</div> -->
+
+    </div>
+    <div class="boardbottom">
+        <div class="paging">
+            <th:block th:if="${startPage>1}">
+                <a th:href="@{/entexam(page=${startPage}-1, search_txt=${search_txt})}" th:text="이전"></a>
+            </th:block>
+            <th:block th:if="${entlist.totalPages>1}" th:each="index:${#numbers.sequence(startPage,endPage)}">
+                <span th:if="${index==entlist.pageable.getPageNumber()+1}"
+                      th:text="${index}"></span>
+                <th:block th:if="${index!=entlist.pageable.getPageNumber()+1}">
+                    <a th:href="@{/entexam(page=${index}, search_txt=${search_txt})}" th:text="${index}"></a>
+                </th:block>
+            </th:block>
+            <th:block th:if="${endPage<entlist.getTotalPages()}">
+                <a th:href="@{/entexam(page=${endPage+1}, search_txt=${search_txt})}" th:text="다음"></a>
+            </th:block>
+            <a sec:authorize="hasAnyRole('ADMIN','PARENT')" th:href="@{/insertent}" id="writebtn" type="button">글쓰기</a>
+        </div>
+    </div>
+
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 </body>

@@ -5,6 +5,7 @@ import com.momsway.dto.NoticeDTO;
 import com.momsway.service.AcademyService;
 import com.momsway.service.NoticeService;
 import com.momsway.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +41,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class AcademyController {
     private final AcademyService academyService;
     private final NoticeService noticeService;
@@ -120,15 +124,13 @@ public class AcademyController {
 
     @GetMapping("/insertAcademy")
     public String insertAcademy(Model model){
+        model.addAttribute("dto",new AcademyDTO());
         model.addAttribute("insertAction","/insertAcademy");
         return "boardinsert";
     }
 
     @PostMapping("/insertAcademy")
     public String insertAcademyResult(@ModelAttribute AcademyDTO dto){
-//        for(int i=0; i<dto.getFiles().size(); i++){
-//            System.out.println(dto.getFiles().get(i).getOriginalFilename());
-//        }
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         dto.setEmail(email);
         Long newAid = academyService.insertAcademy(dto,saveFolder);
@@ -146,18 +148,16 @@ public class AcademyController {
             model.addAttribute("imgPaths",imgPaths);
         }
         model.addAttribute("dto",dto);
+        System.out.println(dto.getTitle());
         model.addAttribute("insertAction", "/updateAcademy/"+aid);
         return "boardupdate";
     }
 
     @PostMapping("/updateAcademy/{aid}")
-    public String updateNoticeResult(@PathVariable Long aid, @ModelAttribute AcademyDTO dto){
-//        for(String s: dto.getImgPaths()){
-//            System.out.println(s);
-//        }
-        log.info("AcademyController getDelImgPaths( delete target )...{}",dto.getImgPaths());
+    public String updateNoticeResult(@PathVariable Long aid, @ModelAttribute("dto") AcademyDTO dto){
+        log.info("AcademyController getDelImgPaths( delete target )...{}", dto.getImgPaths());
         dto.setAid(aid);
-        Long modAid = academyService.updateAcademy(dto,saveFolder);
-        return "redirect:/academy/"+modAid;
+        Long modAid = academyService.updateAcademy(dto, saveFolder);
+        return "redirect:/academy/" + modAid;
     }
 }

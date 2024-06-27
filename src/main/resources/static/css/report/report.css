@@ -6,6 +6,7 @@
     font-weight: 600;
     font-size: 1.3rem;
     color: #444040;
+    margin-bottom: 2px;
 }
 .list {
     margin: 0 3%;
@@ -49,10 +50,11 @@ li span {
     text-align: center;
 }
 
-.repdel{
+.repdel2{
     background-color: #f88686;
+    padding: 5px;
 }
-.repdel:hover{
+.repdel2:hover{
     background-color: #b65b5b;
 }
 .paging {
