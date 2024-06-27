@@ -72,7 +72,7 @@ public class ReportController {
         }
     }
 
-    @GetMapping("/repdeatail/{rid}")
+    @GetMapping("/repdetail/{rid}")
     public String reportDetail(@PathVariable Long rid, Model model){
         ReportDTO dto=reportService.detail(rid);
         Map<Long, Long> countReportsByEid = reportService.countReportsByEid();

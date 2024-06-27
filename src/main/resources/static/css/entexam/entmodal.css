@@ -1,6 +1,6 @@
 
 #reportModal{
-    position:absolute;
+    position: fixed;
     display:none;
     justify-content: center;
     top:0;
@@ -9,7 +9,10 @@
     height:100%;
     background-color: rgba(0,0,0,0.4);
 }
-
+.reportp{
+    white-space: pre-wrap;
+    padding: 7px;
+}
 .modal{
     position: absolute;
     top: 50%;
@@ -22,4 +25,28 @@
     border-radius: 10px;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
      transform: translateY(-50%);
+}
+#comment{
+    width: 100%;
+    height: 78%;
+    text-align: center;
+    font-size: 15px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    border-radius: 5px
+}
+.reportbtn{
+    border-radius: 5px;
+    background: #f5c943;
+    border: none;
+    padding: 2px;
+}
+.reportbtn:hover{
+    background: #b88d31;
+}
+.reportbtn1{
+    margin: 8px 8px 7px;
+}
+.reset{
+    border-radius: 5px;
+    border: none;
 }
