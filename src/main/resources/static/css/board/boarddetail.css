@@ -63,6 +63,7 @@
 }
 .dtcontent{
     padding: 7% 0 7% 0;
+    white-space: pre-wrap;
 }
 
 .dtcontent img {

@@ -35,10 +35,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EntExamServiceImpl implements EntExamService {
 
-    @Value("D:\\backend\\upload_img")
+    @Value("D:\\uploadImg")
     private String saveFolder;
 
-    @Value("D:\\backend\\upload_img")
+    @Value("D:\\uploadImg")
     private String filePath;
     private final EntExamRepository entExamRepository;
     private final UserRepository userRepository;
@@ -90,6 +90,7 @@ public class EntExamServiceImpl implements EntExamService {
                 .createAt(detail.getCreateAt())
                 .imgPath(detail.getImgPath())
                 .uid(detail.getUid())
+                .email(detail.getEmail())
                 .nickname(detail.getNickname())
                 .build();
     }

@@ -2,24 +2,25 @@
     padding: 20px;
 }
 
-.comarea p {
-    font-size: 18px;
-    font-weight: bold;
-    color: #292929;
-    margin-bottom: 20px;
-}
-
 .comarea ul {
     list-style-type: none;
     padding: 0;
 }
-
-.comarea li {
+.comarea .cominput{
     display: flex;
+}
+.comarea li {
     align-items: center;
     margin-bottom: 20px;
 }
+.comarea li h3{
+    margin-bottom: 20px;
+}
 
+.comarea li p{
+    color: #292929;
+    margin-bottom: 20px;
+}
 .comarea input[type="text"] {
     flex: 1;
     padding: 10px;
@@ -31,7 +32,7 @@
 .comarea button {
     margin-left: 10px;
     padding: 10px 20px;
-    background-color: #0077b6;
+    background-color: #12a60d;
     color: white;
     border: none;
     border-radius: 5px;
@@ -41,7 +42,7 @@
 }
 
 .comarea button:hover {
-    background-color: #005b8f;
+    background-color: #0f8b53;
 }
 
 .comarea #comments-list {

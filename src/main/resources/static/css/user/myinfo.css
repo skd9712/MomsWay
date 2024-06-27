@@ -1,8 +1,16 @@
-.myinfowrap{
-    margin: 5vh 20vw;
+.middlebody{
+    background-color: #F5F5F5;
+    padding: 70px 0;
+}
+.myinfoform{
+    background-color: white;
+    width: 40%;
+    margin: 0 auto;
+    padding: 30px 30px 70px;
+    border-radius: 35px 0;
 }
 .myinfowrap h1{
-    color: black;
+    color: #12a60d;
     text-align: center;
     margin-bottom: 30px;
 }
