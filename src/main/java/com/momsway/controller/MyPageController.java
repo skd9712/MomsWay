@@ -1,5 +1,6 @@
 package com.momsway.controller;
 
+import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.UserDTO;
 import com.momsway.service.EntExamService;
@@ -25,6 +26,8 @@ public class MyPageController {
         String username = principal.getName();
         List<EntExamDTO> myentlist = userService.myentlist(username);
         model.addAttribute("myentlist",myentlist);
+        List<AcademyDTO> myacalist = userService.myacalist(username);
+        model.addAttribute("myacalist",myacalist);
         List<EntExamDTO> likeTitles = userService.findByUid(username);
         model.addAttribute("likeTitles",likeTitles);
         return "user/mypage";

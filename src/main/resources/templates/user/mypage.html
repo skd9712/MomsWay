@@ -21,6 +21,11 @@
     <div class="mywriteinfo">
         <div class="mywrite">
             <p>내가 쓴 글</p>
+            <ul th:each="item:${myacalist}">
+                <li>
+                    <span><a th:href="@{'/acadetail'+${item.aid}}" th:text="${item.title}"></a> </span>
+                </li>
+            </ul>
             <ul th:each="item:${myentlist}">
                 <li>
                     <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
