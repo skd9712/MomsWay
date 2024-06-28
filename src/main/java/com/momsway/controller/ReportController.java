@@ -30,12 +30,12 @@ public class ReportController {
         int startPage=((int) (Math.ceil(pageable.getPageNumber() /pagesize))) * pagesize +1;
         int endPage=Math.min(startPage + pagesize -1, reportlist.getTotalPages());
 
-//        Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
+        Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
 
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("reportlist", reportlist);
-//        model.addAttribute("countReportsByEid", countReportsByEid);
+        model.addAttribute("countReportsByEid", countReportsByEid);
         // 신고 리스트 불러오는 로직
         return "report/reportlist";
     }
@@ -69,13 +69,15 @@ public class ReportController {
         }
     }
 
-    @GetMapping("/repdetail/{rid}")
-    public String reportDetail(@PathVariable Long rid, Model model){
+    @GetMapping("/repdetail/{rid}/{eid}")
+    public String reportDetail(@PathVariable Long rid, @PathVariable Long eid, Model model){
         ReportDTO dto=reportService.detail(rid);
-//        Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
-//        Long count = countReportsByEid.get(dto.getEid());
+        Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
+        Long count = countReportsByEid.get(eid);
+        List<String> comments = reportService.findCommentByEid(eid);
         model.addAttribute("dto", dto);
-//        model.addAttribute("count", count);
+        model.addAttribute("count", count);
+        model.addAttribute("comments",comments);
         return "report/reportdetail";
     }
 

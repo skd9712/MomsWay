@@ -14,7 +14,8 @@ import java.util.List;
 @Repository
 public interface ReportRepository extends JpaRepository<Report,Long>, ReportQueryDSL {
 
-    List<Report> findByEid(Long eid);
+    @Query(" select r.comment from Report r where r.reportEntExam.eid=:eid ")
+    List<String> findComment(Long eid);
 
 //    @Query("select count (r.rid) from Report r " +
 //            " group by r.reportEntExam.eid " +
