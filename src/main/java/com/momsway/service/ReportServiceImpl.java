@@ -56,17 +56,17 @@ public class ReportServiceImpl implements ReportService {
 //    public List<Long> countReportsByEid() {
 //        return reportRepository.countByEid();
 //    }
-//    @Override
-//    public Map<Long, Long> countReportsByEid() {
-//    List<Object[]> results = reportRepository.countByEid();
-//    Map<Long, Long> eidCountMap = new HashMap<>();
-//    for (Object[] result : results) {
-//        Long eid = (Long) result[0];
-//        Long count = (Long) result[1];
-//        eidCountMap.put(eid, count);
-//    }
-//    return eidCountMap;
-//}
+    @Override
+    public Map<Long, Long> countReportsByEid() {
+    List<Object[]> results = reportRepository.countByEid();
+    Map<Long, Long> eidCountMap = new HashMap<>();
+    for (Object[] result : results) {
+        Long eid = (Long) result[0];
+        Long count = (Long) result[1];
+        eidCountMap.put(eid, count);
+    }
+    return eidCountMap;
+}
 
     @Override
     public ReportDTO detail(Long rid) {
@@ -80,6 +80,12 @@ public class ReportServiceImpl implements ReportService {
                 .eid(report.getReportEntExam().getEid())
                 .comment(report.getComment())
                 .build();
+    }
+
+    @Override
+    public List<String> findCommentByEid(Long eid) {
+        List<String> comments=reportRepository.findComment(eid);
+        return comments;
     }
 
 

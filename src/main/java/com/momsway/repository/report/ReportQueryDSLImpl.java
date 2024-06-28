@@ -90,7 +90,7 @@ public class ReportQueryDSLImpl implements ReportQueryDSL {
             dto.setComment(tuple.get(report.comment));
             dto.setEid(tuple.get(entExam.eid));
             dto.setUid(tuple.get(user.uid));
-//            dto.setCount(tuple.get(entExam.eid.count()));
+//           dto.setCount(tuple.get(entExam.eid.count()));
             return dto;
         }).collect(Collectors.toList());
 

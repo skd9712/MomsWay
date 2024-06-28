@@ -26,14 +26,14 @@
 		<div class="list">
 			<ul class="reportlist">
 				<li class="reporttop">
-					<span>신고번호</span>
+					<span>No</span>
 					<span>신고당한유저</span>
 					<span>신고게시물</span>
 <!--					<span>신고횟수</span>-->
 					<span>신고처리</span>
 				</li>
 				<li class="reportlist" th:each="item : ${reportlist}">
-					<span><a class="report" th:href="@{'/repdetail/'+${item.rid}}" th:text="${item.rid}"></a></span>
+					<span><a class="report" th:href="@{'/repdetail/'+${item.rid}+'/'+${item.eid}}" th:text="${item.rid}"></a></span>
 					<span><a class="report" th:href="@{'/userdetail/'+${item.uid}}" th:text="${item.uid}"></a></span>
 					<span><a class="report" th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
 <!--					<span th:text="${countReportsByEid[item.eid]}"></span>-->

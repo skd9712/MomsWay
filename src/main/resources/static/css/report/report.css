@@ -34,19 +34,15 @@ li span {
     text-align: center;
 }
 .reporttop li span:nth-child(2), .reportlist li span:nth-child(2){
-    width: 20%;
+    width: 25%;
     text-align: center;
 }
 .reporttop li span:nth-child(3), .reportlist li span:nth-child(3){
-    width: 20%;
+    width: 25%;
     text-align: center;
 }
 .reporttop li span:nth-child(4), .reportlist li span:nth-child(4){
-    width: 20%;
-    text-align: center;
-}
-.reporttop li span:nth-child(5), .reportlist li span:nth-child(5){
-    width: 15%;
+    width: 25%;
     text-align: center;
 }
 

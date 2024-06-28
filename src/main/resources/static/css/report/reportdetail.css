@@ -68,14 +68,29 @@ ul{
      background: none;
 }
 
-.comment{
+.dto{
     resize: none;
     border:none;
     text-align: center;
 }
 
-.comment:focus{
-    outline: none;
+.dto:focus{
+    /*outline: none;*/
+    /*border: none;*/
+}
+
+.list_comments{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_comments>.comment2{
+    display: flex;
+    flex-direction: column;
+}
+
+.comment2>.dto{
+    text-align: right;
 }
 
 #reportdetail li:last-child{

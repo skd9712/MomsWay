@@ -18,7 +18,10 @@ public interface ReportService {
     int EntReport(ReportDTO reportDTO);
 
 //    List<Long> countReportsByEid();
-//    Map<Long, Long> countReportsByEid();
+    Map<Long, Long> countReportsByEid();
 
     ReportDTO detail(Long rid);
+
+
+    List<String> findCommentByEid(Long eid);
 }

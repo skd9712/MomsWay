@@ -23,24 +23,28 @@
 				<ul id="repdetail">
 					<li class="list">
 						<span class="rid">글번호</span>
-						<span class="rid dto" th:text="${dto.rid}">글번호</span>
+						<span class="rid" th:text="${dto.rid}">글번호</span>
 					</li>
 					<li class="list">
 						<span class="uid">신고당한유저</span>
-						<span class="uid dto" th:text="${dto.uid}">신호당한유저</span>
+						<span class="uid" th:text="${dto.uid}">신호당한유저</span>
 					</li>
 					<li class="list">
-						<span class="eid">신고당한글번호</span>
-						<span class="eid dto" th:text="${dto.eid}">신고당한입시글</span>
+						<span class="eid">신고글번호</span>
+						<span class="eid" th:text="${dto.eid}">신고당한입시글</span>
 					</li>
-					<li class="list">
+					<li class="list list_comments">
 						<span class="comment">신고이유</span>
-						<textarea class="comment dto" cols="30" rows="3" th:text="${dto.comment}" readonly></textarea>
+						<span class="comment2">
+							<th:block th:each="item:${comments}">
+								<textarea class="dto" cols="30" rows="3" th:text="${item}" readonly></textarea>
+							</th:block>
+						</span>
 					</li>
-<!--					<li class="list">-->
-<!--						<span class="count">신고횟수</span>-->
-<!--						<span class="count dto" th:text="${count}">신고횟수</span>-->
-<!--					</li>-->
+					<li class="list">
+						<span class="count">신고횟수</span>
+						<span class="count" th:text="${count}">신고횟수</span>
+					</li>
 				</ul>
 
 			</div>
