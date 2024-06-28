@@ -32,7 +32,6 @@ public class ReportController {
 
         Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
 
-
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("reportlist", reportlist);
