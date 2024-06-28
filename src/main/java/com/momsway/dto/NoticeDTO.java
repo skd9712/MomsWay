@@ -18,7 +18,7 @@ public class NoticeDTO {
     private String content;
     private Long readNo;
     private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    //private LocalDateTime updateAt;
     private List<MultipartFile> files;
     private List<String> imgPaths;
 

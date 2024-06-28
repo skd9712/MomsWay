@@ -28,8 +28,8 @@ public class EntExam extends BaseEntity {
 
     @Builder
     public EntExam(Long eid, String imgPath, User entExamUser
-            , String title , String content , Long readNo , LocalDateTime createAt ,LocalDateTime updateAt){
-        super(title, content, readNo, createAt, updateAt);
+            , String title , String content , Long readNo , LocalDateTime createAt){
+        super(title, content, readNo, createAt);
         this.eid=eid;
         this.imgPath=imgPath;
         this.entExamUser=entExamUser;

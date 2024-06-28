@@ -8,7 +8,6 @@ import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,7 +41,6 @@ public class EntExamServiceImpl implements EntExamService {
     private String filePath;
     private final EntExamRepository entExamRepository;
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
     private static final Logger log = LoggerFactory.getLogger(EntExamService.class);
 
     @Override

@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
 public class NoticeServiceImpl implements NoticeService{
     private final NoticeRepository noticeRepository;
     private final NoticeImgRepository noticeImgRepository;
-    private final ModelMapper modelMapper;
 
     @Override
     public List<NoticeDTO> findTopList() {

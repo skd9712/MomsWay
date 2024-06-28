@@ -20,14 +20,14 @@ public class Notice extends BaseEntity {
     private Long nid;
     @Column(nullable = false)
     private Boolean notify;
-    //@Enumerated(EnumType.STRING)
+
     @Column(nullable = false)
     private String category;
 
     @Builder
-    public Notice(Long nid, String title, String content, Long readNo, LocalDateTime createAt, LocalDateTime updateAt
+    public Notice(Long nid, String title, String content, Long readNo, LocalDateTime createAt
     ,Boolean notify, String category){
-        super(title,content,readNo,createAt,updateAt);
+        super(title,content,readNo,createAt);
         this.nid=nid;
         this.notify=notify;
         this.category=category;
