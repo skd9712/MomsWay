@@ -106,6 +106,7 @@ public class NoticeController {
     public String insertNotice(Model model){
         model.addAttribute("insertAction","/insertNotice");
         model.addAttribute("noticeOnly","notice");
+        model.addAttribute("top", "공지사항");
         return "boardinsert";
     }
 
@@ -132,6 +133,7 @@ public class NoticeController {
         model.addAttribute("imgPaths",dto.getImgPaths());
         model.addAttribute("noticeOnly","notice");
         model.addAttribute("insertAction", "/updateNotice/"+nid);
+        model.addAttribute("top", "공지사항");
         return "boardupdate";
     }
 

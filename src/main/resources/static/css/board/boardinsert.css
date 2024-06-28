@@ -1,5 +1,20 @@
-body {
-    margin: 5vh 20vw;
+#wrap{
+    background-color: #F5F5F5;
+    padding: 70px 0;
+}
+
+#insertboardwrap{
+    margin: 0 auto;
+    width: 60vw;
+    border-radius: 40px 0;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#updateboardwrap{
+    margin: 0 auto;
+    width: 60vw;
+    border-radius: 40px 0;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .intop {
@@ -12,12 +27,12 @@ body {
     color: #444040;
 }
 
-form {
+#wrap form {
     margin: 0 7%;
     padding: 7% 0 7% 0;
 }
 
-form ul li {
+#wrap form ul li {
     list-style: none;
     padding: 2%;
 }

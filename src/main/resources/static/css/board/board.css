@@ -4,10 +4,12 @@
 }
 
 .boardwrap {
-    margin: 0 20vw;
+    margin: 0 auto;
+    width: 60vw;
     border-radius: 40px 0;
     background-color: rgba(255, 255, 255, 0.6);
 }
+
 .boardwrap a{
     text-decoration: none;
     color: #000000;

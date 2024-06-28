@@ -72,6 +72,7 @@ public class EntExamController {
     @GetMapping("/insertent")
     public String insertEnt(Model model) {
         model.addAttribute("insertAction","/insertent");
+        model.addAttribute("top", "입시");
         return "boardinsert";
     }
 
@@ -114,6 +115,7 @@ public class EntExamController {
         EntExamDTO dto = entExamService.findByEid(eid);
         model.addAttribute("dto",dto);
         model.addAttribute("insertAction","/entupdate/"+eid);
+        model.addAttribute("top", "입시");
         return "boardupdate";
     }
     @PostMapping("/entupdate/{eid}")

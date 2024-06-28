@@ -6,6 +6,7 @@
     <title>🐸MomsWay</title>
 	<script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
 	<script defer th:src="@{/js/header.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/footer.css}">
 	<link rel="stylesheet" th:href="@{/css/main.css}">
@@ -17,41 +18,25 @@
 	<div>
 		<img src="/images/Momsway.png" alt="메인이미지" id="main_img">
 	</div>
-<!--	&lt;!&ndash; 밀크티 링크 &ndash;&gt;
-	<div id="middle_milkt">
-		<h1>우리 아이 교육은?</h1>
-		<h3>천재교육 밀크티에서!</h3>
-		<ul>
-			<li class="milkt">
-				<a href="https://i.milkt.co.kr/Main/frm_Main.aspx">
-					<img src="/images/밀크티아이.png" alt="밀크티아이" class="milkt_img">
-				</a>
-			</li>
-			<li class="milkt">
-				<a href="https://www.milkt.co.kr/Main/Main_new">
-					<img src="/images/밀크티초등.png" alt="밀크티초등" class="milkt_img">
-				</a>
-			</li>
-			<li class="milkt">
-				<a href="https://mid.milkt.co.kr/Main/frm_Main.aspx">
-					<img src="/images/밀크티중등.png" alt="밀크티중등" class="milkt_img">
-				</a>
-			</li>
-			<li class="milkt">
-				<a href="https://high.milkt.co.kr/Main/frm_Main.aspx">
-					<img src="/images/밀크티고등.png" alt="밀크티고등" class="milkt_img">
-				</a>
-			</li>
-		</ul>
-	</div>-->
 
-	<div id="ddd">
-		<div id="ad_div">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/Me7zhzokFCM?si=Q8dQqQNp7dmmd3Fi"
-			        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
-		        encrypted-media; gyroscope; picture-in-picture; web-share"
-			        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-			</iframe>
+	<!-- 배너 -->
+	<div id="banner_div">
+		<div class="btn_div">
+			<button id="prev_btn">&lang;</button>
+		</div>
+		<div id="img_div">
+			<a href="#">
+				<img src="/images/banner1.png" alt="배너이미지1" class="banner_img">
+			</a>
+			<a href="#">
+				<img src="/images/banner2.png" alt="배너이미지2" class="banner_img">
+			</a>
+			<a href="#">
+				<img src="/images/banner3.png" alt="배너이미지3" class="banner_img">
+			</a>
+		</div>
+		<div class="btn_div">
+			<button id="next_btn">&rang;</button>
 		</div>
 	</div>
 

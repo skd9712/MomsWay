@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>🐸MomsWay</title>
+	<script defer th:src="@{/js/header.js}"></script>
     <link rel="stylesheet" th:href="@{css/entexam/insertent.css}">
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/footer.css}">
 </head>
 <body>
+<header layout:fragment="header" th:replace="header :: header_template"></header>
 <form th:method="post" th:action="@{insertent}" enctype="multipart/form-data">
     <ul>
         <li>
@@ -25,5 +30,6 @@
         </li>
     </ul>
 </form>
+<footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>
 </html>
