@@ -50,7 +50,7 @@
 				<th:block th:if="${startPage>1}">
 					<a th:href="@{/notice(page=${startPage}-1)}" th:text="이전"/>
 				</th:block>
-				<th:block th:each="idx:${#numbers.sequence(startPage,endPage)}">
+				<th:block th:if="${list.totalPages>1}" th:each="idx:${#numbers.sequence(startPage,endPage)}">
 					<span class="curr" th:if="${idx==list.pageable.getPageNumber()+1}" th:text="${idx}"/>
 					<span th:if="${idx!=list.pageable.getPageNumber()+1}">
             <a th:href="@{/notice(page=${idx})}" th:text="${idx}"/>
