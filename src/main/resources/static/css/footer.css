@@ -50,6 +50,10 @@ footer *{
 .footer_top li{
     list-style: none;
     margin-right: 75px;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .footer_top a{
@@ -71,6 +75,11 @@ footer *{
 
 .footer_middle li p{
     margin-right: 50px;
+
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .copyright{

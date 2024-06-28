@@ -1,5 +1,4 @@
 #wrap{
-    background-color: #F5F5F5;
     padding-bottom: 80px;
 }
 
@@ -9,67 +8,42 @@
     margin: 0;
 }
 
-/* 광고 영상 */
-#ad_div{
-    position: relative;
+/* 배너 이미지 */
+#banner_div{
+    margin: 0 auto;
+    padding-top: 5vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.banner_img{
     margin: 0 auto;
     width: 70vw;
-    height: 0;
-    /*padding-top: 56.25%;*/
-    padding-top: 25%;
-    background-color: white;
 }
 
-iframe{
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 32vw;
-    height: 18vw;
-    display: block;
-    margin: 0 auto;
-    border-radius: 30px;
-}
-
-/* 밀크티 */
-#middle_milkt{
-    background-color: #E5E4EA;
-    padding: 6vw 10vw;
+.btn_div{
+    margin: auto 0;
     position: relative;
-    top: -5px;
 }
 
-#middle_milkt h1, #middle_milkt h3{
-    text-align: center;
+.btn_div:first-child{
+    left: 11vw;
 }
 
-#middle_milkt h1{
-    font-size: 2.7vw;
+.btn_div:last-child{
+    right: 11vw;
 }
 
-#middle_milkt h3{
-    margin-top: 8px;
-    font-size: 1.6vw;
-    color: #4A4A4A;
+#prev_btn, #next_btn{
+    padding: 0.5vw;
+    color: #12a60d;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 2.5vw;
+    cursor: pointer;
 }
 
-#middle_milkt ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 3vw 0;
-}
-
-#middle_milkt ul li{
-    list-style: none;
-    margin: 0 20px;
-}
-
-.milkt_img{
-    width: 80%;
-    border-radius: 50%;
-    /*box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;*/
-}
 
 /* 게시판 공통 */
 ul li{
@@ -80,7 +54,7 @@ ul li{
 , .entLatest_div{
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 36px 0;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 6px -1px
             , rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 

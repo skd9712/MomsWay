@@ -126,6 +126,7 @@ public class AcademyController {
     public String insertAcademy(Model model){
         model.addAttribute("dto",new AcademyDTO());
         model.addAttribute("insertAction","/insertAcademy");
+        model.addAttribute("top", "학원홍보");
         return "boardinsert";
     }
 
@@ -150,6 +151,7 @@ public class AcademyController {
         model.addAttribute("dto",dto);
         System.out.println(dto.getTitle());
         model.addAttribute("insertAction", "/updateAcademy/"+aid);
+        model.addAttribute("top", "학원홍보");
         return "boardupdate";
     }
 

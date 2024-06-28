@@ -1,11 +1,25 @@
 /* .mypagewrap */
+#wrap{
+    background: #f5f5f5;
+    padding: 70px 0;
+}
+
+#wrap>h2{
+    text-align: center;
+}
+
 .mypagewrap {
-    margin: 5vh 20vw;
-    background-color: #f5f5f5;
+    margin: 0 auto;
+    width: 60vw;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
+
+/*.mypage_line{
+    border: 1px solid #bebebe;
+    margin: 0 auto;
+    width: 60vw;
+}*/
 
 /* .myinfo */
 .myinfo {

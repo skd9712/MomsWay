@@ -14,33 +14,38 @@
 </head>
 <body>
 <header layout:fragment="header" th:replace="~{header :: header_template}"></header>
-<div class="mypagewrap">
-    <div class="gomyinfo">
-    <a th:href="@{'/myinfo'}">내정보 수정</a>
-    </div>
-    <div class="mywriteinfo">
-        <div class="mywrite">
-            <p>내가 쓴 글</p>
-            <ul th:each="item:${myacalist}">
-                <li>
-                    <span><a th:href="@{'/acadetail'+${item.aid}}" th:text="${item.title}"></a> </span>
-                </li>
-            </ul>
-            <ul th:each="item:${myentlist}">
-                <li>
-                    <span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
-                </li>
-            </ul>
-        </div>
-        <div class="mylike">
-            <p>좋아요한 글</p>
-            <ul th:each="like:${likeTitles}">
-                <li>
-                    <span><a th:href="@{'/entdetail/'+${like.eid}}" th:text="${like.title}"></a></span>
-                </li>
-            </ul>
-        </div>
-    </div>
+<div id="wrap">
+	<h2>마이페이지</h2>
+	<div class="mypage_line"></div>
+	<div class="mypagewrap">
+		<div class="gomyinfo">
+			<a th:href="@{'/myinfo'}">내정보 수정</a>
+		</div>
+		<div class="mywriteinfo">
+			<div class="mywrite">
+				<p>내가 쓴 글</p>
+				<ul th:each="item:${myacalist}">
+					<li>
+						<span><a th:href="@{'/acadetail'+${item.aid}}" th:text="${item.title}"></a> </span>
+					</li>
+				</ul>
+				<ul th:each="item:${myentlist}">
+					<li>
+						<span><a th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.title}"></a></span>
+					</li>
+				</ul>
+			</div>
+			<div class="mylike">
+				<p>좋아요한 글</p>
+				<ul th:each="like:${likeTitles}">
+					<li>
+						<span><a th:href="@{'/entdetail/'+${like.eid}}" th:text="${like.title}"></a></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="mypage_line"></div>
 </div>
 <footer layout:fragment="footer" th:replace="~{footer :: footer_template}"></footer>
 
