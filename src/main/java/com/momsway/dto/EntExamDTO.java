@@ -18,7 +18,7 @@ public class EntExamDTO {
     private String content;
     private Long readNo;
     private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    //private LocalDateTime updateAt;
     private String email;
     private String nickname;
     private List<MultipartFile> files;
