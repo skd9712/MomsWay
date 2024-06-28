@@ -35,12 +35,12 @@ public class EntExam extends BaseEntity {
         this.entExamUser=entExamUser;
     }
 
-    @OneToMany(mappedBy = "likeEntExam",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "likeEntExam", orphanRemoval = true)
     private List<EntLike> entExamEntLikes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "reportEntExam",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "reportEntExam",orphanRemoval = true)
     private List<Report> entExamReports = new ArrayList<>();
 
-    @OneToMany(mappedBy = "replyEntExam",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "replyEntExam",orphanRemoval = true)
     private List<EntReply> entExamReplies = new ArrayList<>();
 }

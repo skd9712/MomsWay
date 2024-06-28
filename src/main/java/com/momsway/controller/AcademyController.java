@@ -55,7 +55,7 @@ public class AcademyController {
 //            uid = userService.findUidByEmail(sessionId);
 //    }
 
-    @Value("D:\\uploadImg")
+    @Value("${spring.servlet.multipart.location}")
     private String saveFolder;
 
     @GetMapping( value="/getAcaImages/{filename}")

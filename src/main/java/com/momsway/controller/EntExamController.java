@@ -39,10 +39,10 @@ import java.util.Map;
 public class EntExamController {
 
 
-    @Value("D:\\uploadImg")
+    @Value("${spring.servlet.multipart.location}")
     private String saveFolder;
 
-    @Value("D:\\uploadImg")
+    @Value("${spring.servlet.multipart.location}")
     private String filePath;
     private final LikeService likeService;
     private final EntExamService entExamService;
