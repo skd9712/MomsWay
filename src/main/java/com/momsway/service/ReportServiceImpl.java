@@ -56,17 +56,17 @@ public class ReportServiceImpl implements ReportService {
 //    public List<Long> countReportsByEid() {
 //        return reportRepository.countByEid();
 //    }
-    @Override
-    public Map<Long, Long> countReportsByEid() {
-    List<Object[]> results = reportRepository.countByEid();
-    Map<Long, Long> eidCountMap = new HashMap<>();
-    for (Object[] result : results) {
-        Long eid = (Long) result[0];
-        Long count = (Long) result[1];
-        eidCountMap.put(eid, count);
-    }
-    return eidCountMap;
-}
+//    @Override
+//    public Map<Long, Long> countReportsByEid() {
+//    List<Object[]> results = reportRepository.countByEid();
+//    Map<Long, Long> eidCountMap = new HashMap<>();
+//    for (Object[] result : results) {
+//        Long eid = (Long) result[0];
+//        Long count = (Long) result[1];
+//        eidCountMap.put(eid, count);
+//    }
+//    return eidCountMap;
+//}
 
     @Override
     public ReportDTO detail(Long rid) {
@@ -124,6 +124,7 @@ public class ReportServiceImpl implements ReportService {
 
 
     @Override
+    @Transactional
     public int EntReport(ReportDTO reportDTO) {
         try {
             User user = userRepository.findById(reportDTO.getUid())
@@ -131,11 +132,11 @@ public class ReportServiceImpl implements ReportService {
             EntExam entExam = entExamRepository.findById(reportDTO.getEid())
                     .orElseThrow(() -> new RuntimeException("EntExam not found"));
             // 중복 신고 검사
-            boolean exists = reportRepository.existsByReportUserAndReportEntExam(user, entExam);
-            if (exists) {
-                // 이미 신고한 경우
-                return -1;  // 중복 신고 표시 값 (예: -1)
-            }
+//            boolean exists = reportRepository.existsByReportUserAndReportEntExam(user, entExam);
+//            if (exists) {
+//                // 이미 신고한 경우
+//                return -1;  // 중복 신고 표시 값 (예: -1)
+//            }
 
             Report report = Report.builder()
                     .comment(reportDTO.getComment())

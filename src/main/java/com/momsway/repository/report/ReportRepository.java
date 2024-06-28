@@ -30,5 +30,7 @@ public interface ReportRepository extends JpaRepository<Report,Long>, ReportQuer
     long countByReportEid(Long eid);
 
 
-    boolean existsByReportUserAndReportEntExam(User user, EntExam entExam);
+    //boolean existsByReportUserAndReportEntExam(User user, EntExam entExam);
+
+
 }
