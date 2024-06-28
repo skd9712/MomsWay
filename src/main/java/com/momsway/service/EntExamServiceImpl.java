@@ -34,10 +34,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EntExamServiceImpl implements EntExamService {
 
-    @Value("D:\\uploadImg")
+    @Value("${spring.servlet.multipart.location}")
     private String saveFolder;
 
-    @Value("D:\\uploadImg")
+    @Value("${spring.servlet.multipart.location}")
     private String filePath;
     private final EntExamRepository entExamRepository;
     private final UserRepository userRepository;
