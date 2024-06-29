@@ -13,33 +13,40 @@
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
 <div id="wrap">
-	<div id="detail_div">
-		<h2>회원정보</h2>
-		<ul id="detail_ul">
-			<li>
-				<span>회원번호</span>
-				<span th:text="${userDTO.uid}"></span>
-			</li>
-			<li>
-				<span>이메일</span>
-				<span th:text="${userDTO.email}"></span>
-			</li>
-			<li>
-				<span>닉네임</span>
-				<span th:text="${userDTO.nickname}"></span>
-			</li>
-			<li>
-				<span>회원유형</span>
-				<span th:text="${userDTO.role}"></span>
-			</li>
-			<li>
-				<span>신고누적수</span>
-				<span th:text="${userDTO.reportNo}"></span>
-			</li>
-		</ul>
+	<div id="detail_wrap">
+		<div id="detail_div">
+			<h2>회원정보</h2>
+			<ul id="detail_ul">
+				<li>
+					<span>회원번호</span>
+					<span th:text="${userDTO.uid}"></span>
+				</li>
+				<li>
+					<span>이메일</span>
+					<span th:text="${userDTO.email}"></span>
+				</li>
+				<li>
+					<span>닉네임</span>
+					<span th:text="${userDTO.nickname}"></span>
+				</li>
+				<li>
+					<span>회원유형</span>
+					<span th:if="${userDTO.role=='ADMIN'}" th:text="관리자"></span>
+					<span th:if="${userDTO.role=='PARENT'}" th:text="학부모"></span>
+					<span th:if="${userDTO.role=='ACADEMY'}" th:text="학원"></span>
+					<span th:if="${userDTO.role=='SUSPENDED'}" th:text="정지회원"></span>
+				</li>
+				<li>
+					<span>신고누적수</span>
+					<span th:text="${userDTO.reportNo}"></span>
+				</li>
+			</ul>
+		</div>
+		<div id="a_div">
+			<a th:href="@{/myinfo}">수정</a>
+			<a th:href="@{|/userdelete/${userDTO.uid}|}">탈퇴</a>
+		</div>
 	</div>
-	<a th:href="@{/myinfo}">수정</a>
-	<a th:href="@{|/userdelete/${userDTO.uid}|}">탈퇴</a>
 </div>
 <footer layout:fragment="footer" th:replace="footer :: footer_template"></footer>
 </body>

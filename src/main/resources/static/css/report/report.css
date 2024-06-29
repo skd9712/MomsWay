@@ -1,30 +1,33 @@
-.boardtop {
-    text-align: center;
-    background: #F5C943;
-    border-radius: 40px 0;
-    padding: 3%;
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: #444040;
-    margin-bottom: 2px;
-}
-.list {
-    margin: 0 3%;
-    border-bottom: 2px solid #58B27B;
+#wrap{
+    background-color: #F5F5F5;
+    padding: 45px 0;
 }
 
-.reporttop, .reportlist{
+#wrap h2{
+    text-align: center;
+}
+
+.reportlist_div{
+    width: 60vw;
+    margin: 30px auto 10px;
+    padding: 3px 10px;
+    border-top: 5px solid #d7d7d7;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px
+    , rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.reportlist_div ul li{
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 1vw;
 }
-.reporttop{
-    background: #58B27B;
-}
-.reporttop li, .reportlist li{
+
+.reporttop li
+, .reportlist li:not(:last-child){
     border-bottom: 1px solid rgba(153, 153, 153, 0.5);
-    padding: 1.5%;
 }
+
 li span {
     display: inline-block;
 }
@@ -49,6 +52,7 @@ li span {
 .repdel2{
     background-color: #f88686;
     padding: 5px;
+    border-radius: 15px;
 }
 .repdel2:hover{
     background-color: #b65b5b;
