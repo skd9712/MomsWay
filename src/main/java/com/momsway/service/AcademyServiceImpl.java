@@ -3,7 +3,6 @@ package com.momsway.service;
 import com.momsway.domain.Academy;
 import com.momsway.domain.User;
 import com.momsway.dto.AcademyDTO;
-import com.momsway.dto.NoticeDTO;
 import com.momsway.repository.academy.AcademyRepository;
 import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
@@ -50,12 +49,13 @@ public class AcademyServiceImpl implements AcademyService{
 
     @Override
     @Transactional
-    public void addAcademyReadNo(Long aid) {
+    public void addAcademyReadNo(Long aid, String user) {
         Optional<Academy> find = academyRepository.findById(aid);
         Academy academy = find.orElseThrow(() -> {
             throw new RuntimeException(" from addAcademyReadNo ");
         });
-        academy.setReadNo(academy.getReadNo()+1);
+        if(!academy.getAcademyUser().getEmail().equals(user))
+            academy.setReadNo(academy.getReadNo()+1);
     }
 
     @Override

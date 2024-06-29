@@ -4,8 +4,6 @@ import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.NoticeDTO;
 import com.momsway.service.AcademyService;
 import com.momsway.service.NoticeService;
-import com.momsway.service.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,8 +31,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -45,15 +40,6 @@ import java.util.List;
 public class AcademyController {
     private final AcademyService academyService;
     private final NoticeService noticeService;
-    private final UserService userService;
-
-//    private long uid = 0;
-//
-//    private void uidInit(String sessionId){
-//        log.info("uidInit sessionId... {}",sessionId);
-//        if(!sessionId.equals("anonymousUser"))
-//            uid = userService.findUidByEmail(sessionId);
-//    }
 
     @Value("${spring.servlet.multipart.location}")
     private String saveFolder;
@@ -100,7 +86,8 @@ public class AcademyController {
 
     @GetMapping("/academy/{aid}")
     public String detail(@PathVariable Long aid, Model model){
-        academyService.addAcademyReadNo(aid);
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+        academyService.addAcademyReadNo(aid,user);
         AcademyDTO dto = academyService.findByAid(aid);
         if(dto.getImgPath()!=null) {
             String[] imgPaths = dto.getImgPath().split(";-;");

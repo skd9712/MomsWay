@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/board/boardinsert.css}">
     <link rel="stylesheet" th:href="@{/css/board/updateBoard.css}">
 	<script defer th:src="@{/js/header.js}"></script>
-    <script th:src="@{/js/academy/updateacademy.js}"></script>
+    <script th:src="@{/js/board.js}"></script>
 </head>
 <body>
 <header layout:fragment="header" th:replace="header :: header_template"></header>
@@ -67,7 +67,7 @@
 				<li id="uploadImgs"></li>
 				<li class="insertBtns">
 					<button type="button" id="submitBtn">등록</button>
-					<button type="reset" id="resetBtn">취소</button>
+					<button type="button" id="resetBtn">취소</button>
 				</li>
 			</ul>
 		</form>
