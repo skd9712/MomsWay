@@ -52,10 +52,6 @@ public class ReportServiceImpl implements ReportService {
         return new PageImpl<>(reportDTOList, pageable, reportPage.getTotalElements());
     }
 
-//    @Override
-//    public List<Long> countReportsByEid() {
-//        return reportRepository.countByEid();
-//    }
     @Override
     public Map<Long, Long> countReportsByEid() {
     List<Object[]> results = reportRepository.countByEid();
@@ -86,6 +82,18 @@ public class ReportServiceImpl implements ReportService {
     public List<String> findCommentByEid(Long eid) {
         List<String> comments=reportRepository.findComment(eid);
         return comments;
+    }
+
+    @Override
+    public Map<Long, String> userNickName() {
+        List<Object[]> results = reportRepository.userNickName();
+        Map<Long, String> nickMap = new HashMap<>();
+        for (Object[] result : results) {
+            Long uid = (Long) result[0];
+            String nickname = (String) result[1];
+            nickMap.put(uid, nickname);
+        }
+        return nickMap;
     }
 
 
@@ -131,19 +139,12 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     @Transactional
-    public int EntReport(ReportDTO reportDTO) {
+    public int entReport(ReportDTO reportDTO) {
         try {
             User user = userRepository.findById(reportDTO.getUid())
                     .orElseThrow(() -> new RuntimeException("User not found"));
             EntExam entExam = entExamRepository.findById(reportDTO.getEid())
                     .orElseThrow(() -> new RuntimeException("EntExam not found"));
-            // 중복 신고 검사
-//            boolean exists = reportRepository.existsByReportUserAndReportEntExam(user, entExam);
-//            if (exists) {
-//                // 이미 신고한 경우
-//                return -1;  // 중복 신고 표시 값 (예: -1)
-//            }
-
             Report report = Report.builder()
                     .comment(reportDTO.getComment())
                     .status(false) // 초기 신고 상태는 false로 설정

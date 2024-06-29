@@ -17,11 +17,6 @@ public interface ReportRepository extends JpaRepository<Report,Long>, ReportQuer
     @Query(" select r.comment from Report r where r.reportEntExam.eid=:eid ")
     List<String> findComment(Long eid);
 
-//    @Query("select count (r.rid) from Report r " +
-//            " group by r.reportEntExam.eid " +
-//            " order by r.rid desc ")
-//    List<Long> countByEid();
-
     @Query("select r.reportEntExam.eid, count(r.rid) from Report r " +
             "group by r.reportEntExam.eid " +
             "order by r.rid desc")
@@ -29,9 +24,5 @@ public interface ReportRepository extends JpaRepository<Report,Long>, ReportQuer
 
     @Query( " select  count(r) from Report  r where r.reportEntExam.eid=:eid")
     long countByReportEid(Long eid);
-
-
-    //boolean existsByReportUserAndReportEntExam(User user, EntExam entExam);
-
 
 }

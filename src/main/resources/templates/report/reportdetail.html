@@ -25,9 +25,12 @@
 						<span class="rid">글번호</span>
 						<span class="rid" th:text="${dto.rid}">글번호</span>
 					</li>
-					<li class="list">
-						<span class="uid">신고당한유저</span>
+					<li class="list list_uid">
+						<span class="uid">신고당한유저번호 & 닉네임</span>
+						<span class="uid2">
 						<span class="uid" th:text="${dto.uid}">신호당한유저</span>
+						<span class="nickname" th:text="${userNicknames[dto.uid]}"></span>
+						</span>
 					</li>
 					<li class="list">
 						<span class="eid">신고글번호</span>

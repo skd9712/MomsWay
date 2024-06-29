@@ -15,13 +15,14 @@ public interface ReportService {
     int delReports(Long rid);
 
 
-    int EntReport(ReportDTO reportDTO);
+    int entReport(ReportDTO reportDTO);
 
-//    List<Long> countReportsByEid();
     Map<Long, Long> countReportsByEid();
 
     ReportDTO detail(Long rid);
 
 
     List<String> findCommentByEid(Long eid);
+
+    Map<Long, String> userNickName();
 }

@@ -57,13 +57,6 @@ public class ReportQueryDSLImpl implements ReportQueryDSL {
                 .where(builder)
                 .fetchOne();
 
-//        List<Tuple> eidCounts = queryFactory.select(report.reportEntExam.eid, report.count())
-//                .from(report)
-//                .where(builder)
-//                .groupBy(report.reportEntExam.eid)
-//                .fetch();
-
-
         return new PageImpl<>(fetch, pageable, totalCount);
     }
 
@@ -90,21 +83,23 @@ public class ReportQueryDSLImpl implements ReportQueryDSL {
             dto.setComment(tuple.get(report.comment));
             dto.setEid(tuple.get(entExam.eid));
             dto.setUid(tuple.get(user.uid));
-//           dto.setCount(tuple.get(entExam.eid.count()));
             return dto;
         }).collect(Collectors.toList());
 
         return list;
     }
 
+    @Override
+    public List<Object[]> userNickName() {
+        List<Tuple> results = queryFactory
+                .select(user.uid, user.nickname)
+                .from(user)
+                .fetch();
 
-//    @Override
-//    public List<Long> countByEid1() {
-//        queryFactory.select()
-//                .from()
-//                .groupBy();
-//        return null;
-//    }
+        return results.stream()
+                .map(tuple -> new Object[]{tuple.get(user.uid), tuple.get(user.nickname)})
+                .collect(Collectors.toList());
+    }
 
 
 }
