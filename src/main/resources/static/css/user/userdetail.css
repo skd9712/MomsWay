@@ -1,11 +1,15 @@
 #wrap{
+    padding: 70px 0;
+    background-color: #F5F5F5;
+}
+
+#detail_wrap{
     width: 45vw;
-    margin: 70px auto;
+    margin: 0 auto;
 }
 
 #detail_div{
     width: 45vw;
-
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 36px 0;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px
@@ -35,4 +39,25 @@
 
 #detail_ul li:last-child {
     border-bottom: none; /* 마지막 아이템의 하단 경계선 제거 */
+}
+
+#a_div{
+    margin: 2vw 0.7vw 0 0;
+    display: flex;
+    justify-content: right;
+}
+
+#a_div>a{
+    color: #3d3d3d;
+    background-color: rgba(240, 128, 128, 0.75);
+    padding: 0.5vw 1vw;
+    margin-left: 0.7vw;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+#a_div>a:hover
+, #a_div>a:active{
+    color: black;
 }
