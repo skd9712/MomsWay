@@ -33,7 +33,7 @@ public class Notice extends BaseEntity {
         this.category=category;
     }
 
-    @OneToMany(mappedBy = "notice", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "notice", orphanRemoval = true)
     private List<NoticeImg> noticeImgs = new ArrayList<>();
 
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/board/boardinsert.css}">
     <link rel="stylesheet" th:href="@{/css/board/updateBoard.css}">
 	<script defer th:src="@{/js/header.js}"></script>
-    <script th:src="@{/js/academy/updateacademy.js}"></script>
+    <script th:src="@{/js/board.js}"></script>
     <script th th:inline="javascript">
         document.addEventListener("DOMContentLoaded", function () {
             let username=[[${#authentication.principal.username}]]
@@ -56,7 +56,7 @@
 				</li>
 				<li id="imgs"></li>
 				<li class="insertBtns">
-					<button type="submit" id="submitBtn">등록</button>
+					<button type="button" id="submitBtn">등록</button>
 					<button type="button" id="resetBtn">취소</button>
 				</li>
 			</ul>

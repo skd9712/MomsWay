@@ -18,5 +18,5 @@ public interface AcademyService {
 
     Long updateAcademy(AcademyDTO dto, String saveFolder);
 
-    void addAcademyReadNo(Long aid);
+    void addAcademyReadNo(Long aid, String user);
 }
