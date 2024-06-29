@@ -88,11 +88,23 @@ ul{
     display: flex;
     flex-direction: column;
 }
-
+.list_uid{
+    display: flex;
+    justify-content: space-between;
+}
+.list_uid>.uid2{
+    display: flex;
+    flex-direction: row;
+}
 .comment2>.dto{
     text-align: right;
 }
-
+.uid{
+    padding: 7px;
+}
+.nickname{
+    padding: 7px;
+}
 #reportdetail li:last-child{
     border-bottom: none;
 }

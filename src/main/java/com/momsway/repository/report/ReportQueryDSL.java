@@ -21,10 +21,6 @@ public interface ReportQueryDSL {
 
     List<ReportDTO> findByRid(Long rid);
 
-//    @Query("select r from Report r where r.reportEntExam.eid = :eid")
-//    List<Report> findByEid(@Param("eid") Long eid);
 
-
-
-//    List<Long> countByEid1();
+    List<Object[]> userNickName();
 }

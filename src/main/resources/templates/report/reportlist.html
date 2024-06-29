@@ -34,7 +34,7 @@
 				</li>
 				<li class="reportlist" th:each="item : ${reportlist}">
 					<span><a class="report" th:href="@{'/repdetail/'+${item.rid}+'/'+${item.eid}}" th:text="${item.rid}"></a></span>
-					<span><a class="report" th:href="@{'/userdetail/'+${item.uid}}" th:text="${item.uid}"></a></span>
+					<span><a class="report" th:href="@{'/userdetail/'+${item.uid}}" th:text="${userNicknames[item.uid]}"></a></span>
 					<span><a class="report" th:href="@{'/entdetail/'+${item.eid}}" th:text="${item.eid}"></a></span>
 <!--					<span th:text="${countReportsByEid[item.eid]}"></span>-->
 					<span class="repdel" id="reportdel">

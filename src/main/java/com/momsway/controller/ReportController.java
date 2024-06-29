@@ -31,11 +31,13 @@ public class ReportController {
         int endPage=Math.min(startPage + pagesize -1, reportlist.getTotalPages());
 
         Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
+        Map<Long, String> userNicknames = reportService.userNickName();
 
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("reportlist", reportlist);
         model.addAttribute("countReportsByEid", countReportsByEid);
+        model.addAttribute("userNicknames",userNicknames);
         // 신고 리스트 불러오는 로직
         return "report/reportlist";
     }
@@ -55,7 +57,7 @@ public class ReportController {
             reportDTO.setEid(eid);
             reportDTO.setUid(uid);
             reportDTO.setComment(comment);
-            int result = reportService.EntReport(reportDTO);
+            int result = reportService.entReport(reportDTO);
             String msg;
             if (result == 1) {
                 msg = "신고 성공";
@@ -73,11 +75,13 @@ public class ReportController {
     public String reportDetail(@PathVariable Long rid, @PathVariable Long eid, Model model){
         ReportDTO dto=reportService.detail(rid);
         Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
+        Map<Long, String> userNicknames = reportService.userNickName();
         Long count = countReportsByEid.get(eid);
         List<String> comments = reportService.findCommentByEid(eid);
         model.addAttribute("dto", dto);
         model.addAttribute("count", count);
         model.addAttribute("comments",comments);
+        model.addAttribute("userNicknames",userNicknames);
         return "report/reportdetail";
     }
 
