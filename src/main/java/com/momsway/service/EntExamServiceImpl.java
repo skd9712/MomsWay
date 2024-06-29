@@ -137,16 +137,19 @@ public class EntExamServiceImpl implements EntExamService {
         entExam.setContent(dto.getContent());
         EntExam saveEntity = entExamRepository.save(entExam);
         log.info("Updated title and content for EntExam: {}", saveEntity);
-        String imgPath = entExam.getImgPath();
-        log.info("...이미지경로 가져오기:{}",imgPath);
+        if(entExam.getImgPath()!=null){
+            String imgPath = entExam.getImgPath();
+            log.info("...이미지경로 가져오기:{}",imgPath);
+            File file = new File(saveFolder, imgPath);
+            log.info("기존 이미지:{}",imgPath);
+            file.delete();
+        }
+
         List<String> fnames = new ArrayList<>();
         if(dto.getFiles()!=null && !dto.getFiles().isEmpty()){
 
             fnames = fileUpload(saveFolder, dto.getFiles());
             if (!fnames.isEmpty()) {
-                File file = new File(saveFolder, imgPath);
-                log.info("기존 이미지:{}",imgPath);
-                file.delete();
                 saveEntity.setImgPath(fnames.get(0));
                 log.info("Set imgPath for EntExam: {}", saveEntity.getImgPath());
             }
