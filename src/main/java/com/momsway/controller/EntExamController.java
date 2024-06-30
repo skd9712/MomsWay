@@ -91,6 +91,10 @@ public class EntExamController {
     @GetMapping("/entdetail/{eid}")
     public String entexamDetail(@PathVariable Long eid, Model model) {
         EntExamDTO dto = entExamService.findByEid(eid);
+        if(dto.getImgPath()!=null){
+            String imgPaths = dto.getImgPath();
+            model.addAttribute("imgPaths",imgPaths);
+        }
         model.addAttribute("dto", dto);
         return "entexam/entexamdetail";
     }
@@ -113,6 +117,10 @@ public class EntExamController {
     @GetMapping("/entupdate/{eid}")
     public String entUpdate(@PathVariable Long eid, Model model){
         EntExamDTO dto = entExamService.findByEid(eid);
+        if(dto.getImgPath()!=null){
+            String imgPaths = "/getentimages/"+dto.getImgPath();
+            model.addAttribute("imgPaths",imgPaths);
+        }
         model.addAttribute("dto",dto);
         model.addAttribute("insertAction","/entupdate/"+eid);
         model.addAttribute("top", "입시");

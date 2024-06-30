@@ -17,7 +17,7 @@
     <script src="https://kit.fontawesome.com/4e5b2f86bb.js" crossorigin="anonymous"></script>
     <script defer th:src="@{/js/header.js}"></script>
     <script th:src="@{/js/entexam/entupdate.js}"></script>
-    <script th:src="@{/js/entexam/entexamdetail.js}"></script>
+    <!--    <script th:src="@{/js/entexam/entexamdetail.js}"></script>-->
     <script th:src="@{/js/entexam/entreply.js}"></script>
     <script th:src="@{/js/entexam/entlike.js}"></script>
     <script th:src="@{/js/entexam/entreport.js}"></script>
@@ -40,7 +40,7 @@
             <input type="hidden" th:id="eid" th:value="${dto.eid}">
             <th:block
                     th:if="${#authentication.name.equals(dto.email) or #authorization.expression('hasRole(''ADMIN'')')}">
-                <button type="submit" id="mod">수정</button>
+                <button type="submit" id="mod" th:onclick="modEnt()">수정</button>
                 <button type="button" id="del" th:onclick="delEnt()">삭제</button>
             </th:block>
         </div>
@@ -56,8 +56,8 @@
                 </div>
             </div>
             <div class="dtcontent">
-                <th:block th:each="img:${dto.imgPath}">
-                    <img th:src="@{'/getentimages/'+${img}}" alt="img">
+                <th:block th:each="img:${imgPaths}">
+                    <img th:src="@{|/getentimages/${img}|}" alt="img">
                 </th:block>
                 <p th:text="${dto.content}"></p>
             </div>

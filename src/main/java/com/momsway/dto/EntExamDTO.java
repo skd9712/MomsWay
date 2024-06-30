@@ -22,5 +22,5 @@ public class EntExamDTO {
     private String email;
     private String nickname;
     private List<MultipartFile> files;
-    private List<String> filePath;
+    private List<String> imgPaths;
 }

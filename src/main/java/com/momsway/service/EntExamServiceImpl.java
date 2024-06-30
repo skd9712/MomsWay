@@ -24,10 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,28 +48,22 @@ public class EntExamServiceImpl implements EntExamService {
 
     @Override
     public long upload(String saveFolder, EntExamDTO dto,String username) {
+        String imgPaths = null;
+        if(!dto.getFiles().get(0).getOriginalFilename().equals(""))
+            imgPaths = fileUpload(saveFolder,dto.getFiles());
         User user = userRepository.findByEmail(username);
         EntExam entity = EntExam.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .imgPath(dto.getImgPath())
                 .entExamUser(user)
+                .imgPath(imgPaths)
                 .readNo(0L)
                 .build();
-        EntExam savedEntity = entExamRepository.save(entity);
         log.info("service..uid...{}",dto.getUid());
-        List<String> fnames = new ArrayList<>();
-        if (dto.getFiles() != null && dto.getFiles().size() != 0) {
-            fnames = fileUpload(saveFolder, dto.getFiles());
-            if (!fnames.isEmpty()) {
-                savedEntity.setImgPath(fnames.get(0));
-            }
-            for (String item : fnames)
-                log.info("....items..{}", item);
-        }
-        entExamRepository.save(savedEntity);
 
-        return fnames.size();
+        EntExam saveEntity = entExamRepository.save(entity);
+
+        return saveEntity.getEid();
     }
 
     @Override
@@ -133,41 +124,46 @@ public class EntExamServiceImpl implements EntExamService {
         EntExam entExam = entExamRepository.findById(eid)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid eid: " + eid));
         log.info("Fetched EntExam: {}", entExam);
+        log.info("...기존title...{}",dto.getTitle());
+        log.info("...기존content...{}",dto.getContent());
+        log.info("...기존Paths...{}",entExam.getImgPath());
+
+        // 새로운 이미지 업로드
+        String newImgPath = null;
+        if (dto.getFiles() != null && !dto.getFiles().get(0).getOriginalFilename().equals("")) {
+            newImgPath = fileUpload(saveFolder, dto.getFiles());
+            log.info("newImgPath...{}",newImgPath);
+        }
+
+        if (entExam.getImgPath() != null && newImgPath !=null) {
+            File existingFile = new File(saveFolder + "/" + entExam.getImgPath());
+            if (existingFile.exists()) {
+                existingFile.delete();
+            }
+        }
+
+
         entExam.setTitle(dto.getTitle());
         entExam.setContent(dto.getContent());
-        EntExam saveEntity = entExamRepository.save(entExam);
-        log.info("Updated title and content for EntExam: {}", saveEntity);
-        if(entExam.getImgPath()!=null){
-            String imgPath = entExam.getImgPath();
-            log.info("...이미지경로 가져오기:{}",imgPath);
-            File file = new File(saveFolder, imgPath);
-            log.info("기존 이미지:{}",imgPath);
-            file.delete();
+        if(newImgPath!=null){
+            entExam.setImgPath(newImgPath);
+        }else if(entExam.getImgPath()!=null){
+            entExam.setImgPath(entExam.getImgPath());
+        }else {
+            entExam.setImgPath(null);
         }
 
-        List<String> fnames = new ArrayList<>();
-        if(dto.getFiles()!=null && !dto.getFiles().isEmpty()){
+        entExamRepository.save(entExam); // 엔티티 저장
 
-            fnames = fileUpload(saveFolder, dto.getFiles());
-            if (!fnames.isEmpty()) {
-                saveEntity.setImgPath(fnames.get(0));
-                log.info("Set imgPath for EntExam: {}", saveEntity.getImgPath());
-            }
-            for (String item : fnames)
-                log.info("....items..{}", item);
+        return entExam.getEid();
 
-
-        }
-
-        entExamRepository.save(saveEntity);
-        log.info("Final saved EntExam: {}", saveEntity);
-        return saveEntity.getEid();
     }
 
 
-    private List<String> fileUpload(String saveFolder, List<MultipartFile> files) {
+
+    private String fileUpload(String saveFolder, List<MultipartFile> files) {
         List<File> saveFile = new ArrayList<>();
-        List<String> saveFileNames = new ArrayList<>();
+        StringBuilder imgPaths = new StringBuilder();
         for (int i = 0; i < files.size(); i++) {
             UUID uuid = UUID.randomUUID();
             String fname = files.get(i).getOriginalFilename();
@@ -175,7 +171,7 @@ public class EntExamServiceImpl implements EntExamService {
                     .replace("+", "%20");
             String filename = uuid + "_" + fname;
             saveFile.add(new File(saveFolder, filename));
-            saveFileNames.add(filename);
+            imgPaths.append(filename);
         }
         try {
             for (int i = 0; i < files.size(); i++) {
@@ -186,7 +182,7 @@ public class EntExamServiceImpl implements EntExamService {
             for (int i = 0; i < files.size(); i++)
                 saveFile.get(i).delete();
         }
-        return saveFileNames;
+        return imgPaths.toString();
     }
 
 
