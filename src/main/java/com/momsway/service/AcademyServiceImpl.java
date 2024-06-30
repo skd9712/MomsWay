@@ -32,14 +32,14 @@ public class AcademyServiceImpl implements AcademyService{
     private final ModelMapper modelMapper;
     @Override
     public Page<AcademyDTO> findAcademyList(Pageable pageable, String search_txt) {
-        long count = listCount();
+        long count = listCount(search_txt);
         List<AcademyDTO> list = academyRepository.findList(pageable, search_txt);
         return new PageImpl<>(list,pageable,count);
     }
 
     @Override
-    public long listCount() {
-        return academyRepository.count();
+    public long listCount(String search_txt) {
+        return academyRepository.count(search_txt);
     }
 
     @Override
