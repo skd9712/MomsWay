@@ -1,6 +1,7 @@
 package com.momsway.repository.user;
 
 import com.momsway.domain.User;
+import com.momsway.domain.UserRole;
 import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.EntExamDTO;
 import com.momsway.dto.UserDTO;
@@ -51,19 +52,21 @@ public class UserQueryDSLImpl implements UserQueryDSL {
         if (search == "email" || "email".equals(search)) {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
-                    .where(user.email.like("%" + search_txt + "%").and(user.pwd.isNotNull()))
+                    .where(user.email.like("%" + search_txt + "%").and(user.pwd.isNotNull())
+                            .and(user.role.ne(UserRole.ADMIN)))
                     .fetchOne();
             totalCount = count.intValue();
         } else if (search == "nickname" || "nickname".equals(search)) {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
-                    .where(user.nickname.like("%" + search_txt + "%").and(user.pwd.isNotNull()))
+                    .where(user.nickname.like("%" + search_txt + "%").and(user.pwd.isNotNull())
+                            .and(user.role.ne(UserRole.ADMIN)))
                     .fetchOne();
             totalCount = count.intValue();
         } else {
             Long count = queryFactory.select(user.uid.count())
                     .from(user)
-                    .where(user.pwd.isNotNull())
+                    .where(user.pwd.isNotNull().and(user.role.ne(UserRole.ADMIN)))
                     .fetchOne();
             totalCount = count.intValue();
         }
