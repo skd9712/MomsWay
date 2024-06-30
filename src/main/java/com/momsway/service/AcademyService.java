@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 public interface AcademyService {
     Page<AcademyDTO> findAcademyList(Pageable pageable, String search_txt);
 
-    long listCount();
+    long listCount(String search_txt);
 
     AcademyDTO findByAid(Long aid);
 

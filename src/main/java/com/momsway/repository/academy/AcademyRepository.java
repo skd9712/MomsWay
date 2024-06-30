@@ -17,8 +17,12 @@ public interface AcademyRepository extends JpaRepository<Academy,Long>, AcademyQ
             " order by a.aid desc ")
     List<AcademyDTO> findList(Pageable pageable, String search_txt);
 
-    @Override
-    long count();
+    @Query(" select count(a.aid) " +
+            " from Academy a " +
+            " where a.title like %:search_txt% " +
+            " or a.content like %:search_txt% " +
+            " order by a.aid desc ")
+    long count(String search_txt);
 
     @Override
     void deleteById(Long aLong);
