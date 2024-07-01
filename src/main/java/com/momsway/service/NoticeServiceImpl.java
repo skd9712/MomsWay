@@ -3,6 +3,7 @@ package com.momsway.service;
 import com.momsway.domain.Notice;
 import com.momsway.domain.NoticeImg;
 import com.momsway.dto.NoticeDTO;
+import com.momsway.exception.CustomException;
 import com.momsway.repository.notice.NoticeRepository;
 import com.momsway.repository.noticeimg.NoticeImgRepository;
 import jakarta.transaction.Transactional;
@@ -61,7 +62,11 @@ public class NoticeServiceImpl implements NoticeService{
     @Transactional
     public void addNoticeReadNo(Long nid) {
         Notice notice = noticeRepository.findByNid(nid);
-        notice.setReadNo(notice.getReadNo()+1L);
+        if(notice==null){
+            throw new CustomException("from noticeservice addNoticeReadNo");
+        } else {
+            notice.setReadNo(notice.getReadNo() + 1L);
+        }
     }
 
     @Override

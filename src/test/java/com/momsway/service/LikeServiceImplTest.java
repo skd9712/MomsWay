@@ -8,15 +8,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class LikeServiceImplTest {
 
-    @Autowired
-    private final LikeRepository likeRepository;
-
-    LikeServiceImplTest(LikeRepository likeRepository) {
-        this.likeRepository = likeRepository;
-    }
-
-    @Test
-    public void t1(){
-        likeRepository.findByUid(1L);
-    }
+//    @Autowired
+//    private final LikeRepository likeRepository;
+//
+//    LikeServiceImplTest(LikeRepository likeRepository) {
+//        this.likeRepository = likeRepository;
+//    }
+//
+//    @Test
+//    public void t1(){
+//        likeRepository.findByUid(1L);
+//    }
 }

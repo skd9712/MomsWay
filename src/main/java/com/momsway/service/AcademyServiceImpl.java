@@ -3,6 +3,7 @@ package com.momsway.service;
 import com.momsway.domain.Academy;
 import com.momsway.domain.User;
 import com.momsway.dto.AcademyDTO;
+import com.momsway.exception.CustomException;
 import com.momsway.repository.academy.AcademyRepository;
 import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
@@ -12,8 +13,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +55,7 @@ public class AcademyServiceImpl implements AcademyService{
     public void addAcademyReadNo(Long aid, String user) {
         Optional<Academy> find = academyRepository.findById(aid);
         Academy academy = find.orElseThrow(() -> {
-            throw new RuntimeException(" from addAcademyReadNo ");
+            throw new CustomException("from academyservice addAcademyReadNo");
         });
         if(!academy.getAcademyUser().getEmail().equals(user))
             academy.setReadNo(academy.getReadNo()+1);

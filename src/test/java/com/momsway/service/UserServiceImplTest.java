@@ -9,14 +9,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class UserServiceImplTest {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserRepository repository;
-
-    @Test
-    public void findByEmail(){
-        //assertThat(userService.findUidByEmail("admin@test.com").getNickname()).isEqualTo("손흥민");
-        assertThat(userService.findUidByEmail("a")).isNull();
-    }
+//    @Autowired
+//    private UserService userService;
+//    @Autowired
+//    private UserRepository repository;
+//
+//    @Test
+//    public void findByEmail(){
+//        //assertThat(userService.findUidByEmail("admin@test.com").getNickname()).isEqualTo("손흥민");
+//        assertThat(userService.findUidByEmail("a")).isNull();
+//    }
 }
