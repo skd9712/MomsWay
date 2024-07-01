@@ -47,10 +47,10 @@ public class EntExamServiceImpl implements EntExamService {
     }
 
     @Override
-    public long upload(String saveFolder, EntExamDTO dto,String username) {
+    public long upload(String saveFolder, EntExamDTO dto, String username) {
         String imgPaths = null;
-        if(!dto.getFiles().get(0).getOriginalFilename().equals(""))
-            imgPaths = fileUpload(saveFolder,dto.getFiles());
+        if (!dto.getFiles().get(0).getOriginalFilename().equals(""))
+            imgPaths = fileUpload(saveFolder, dto.getFiles());
         User user = userRepository.findByEmail(username);
         EntExam entity = EntExam.builder()
                 .title(dto.getTitle())
@@ -59,7 +59,7 @@ public class EntExamServiceImpl implements EntExamService {
                 .imgPath(imgPaths)
                 .readNo(0L)
                 .build();
-        log.info("service..uid...{}",dto.getUid());
+        log.info("service..uid...{}", dto.getUid());
 
         EntExam saveEntity = entExamRepository.save(entity);
 
@@ -75,7 +75,7 @@ public class EntExamServiceImpl implements EntExamService {
                 .eid(detail.getEid())
                 .title(detail.getTitle())
                 .content(detail.getContent())
-                .readNo(detail.getReadNo()+1)
+                .readNo(detail.getReadNo() + 1)
                 .createAt(detail.getCreateAt())
                 .imgPath(detail.getImgPath())
                 .uid(detail.getUid())
@@ -93,8 +93,8 @@ public class EntExamServiceImpl implements EntExamService {
                 String imgPath = entExamDTO.getImgPath();
                 log.info("해당파일을 삭제합니다: {}", imgPath);
                 if (imgPath != null && !imgPath.isEmpty()) {
-                    File file = new File(saveFolder,imgPath);
-                    log.info("절대 경로: {}",file.getAbsolutePath());
+                    File file = new File(saveFolder, imgPath);
+                    log.info("절대 경로: {}", file.getAbsolutePath());
                     if (file.exists()) {
                         if (file.delete()) {
                             log.info("파일이 성공적으로 삭제되었습니다: {}", file.getAbsolutePath());
@@ -124,41 +124,45 @@ public class EntExamServiceImpl implements EntExamService {
         EntExam entExam = entExamRepository.findById(eid)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid eid: " + eid));
         log.info("Fetched EntExam: {}", entExam);
-        log.info("...기존title...{}",dto.getTitle());
-        log.info("...기존content...{}",dto.getContent());
-        log.info("...기존Paths...{}",entExam.getImgPath());
+        log.info("...기존title...{}", dto.getTitle());
+        log.info("...기존content...{}", dto.getContent());
+        log.info("...기존Paths...{}", entExam.getImgPath());
 
         // 새로운 이미지 업로드
         String newImgPath = null;
         if (dto.getFiles() != null && !dto.getFiles().get(0).getOriginalFilename().equals("")) {
             newImgPath = fileUpload(saveFolder, dto.getFiles());
-            log.info("newImgPath...{}",newImgPath);
+            log.info("newImgPath...{}", newImgPath);
         }
 
-        if (entExam.getImgPath() != null && newImgPath !=null) {
+        if (entExam.getImgPath() != null && newImgPath != null) {
             File existingFile = new File(saveFolder + "/" + entExam.getImgPath());
             if (existingFile.exists()) {
                 existingFile.delete();
             }
         }
-
+        log.info("..dto.imgPaths..{}", dto.getImgPaths());
 
         entExam.setTitle(dto.getTitle());
         entExam.setContent(dto.getContent());
-        if(newImgPath!=null){
+
+
+        if (newImgPath != null) {
             entExam.setImgPath(newImgPath);
-        }else if(entExam.getImgPath()!=null){
-            entExam.setImgPath(entExam.getImgPath());
-        }else {
-            entExam.setImgPath(null);
+        } else {
+            if (dto.getImgPaths() != null && dto.getImgPaths().size() > 0) {
+                entExam.setImgPath(null);
+            } else {
+                entExam.setImgPath(entExam.getImgPath());
+            }
         }
+
 
         entExamRepository.save(entExam); // 엔티티 저장
 
         return entExam.getEid();
 
     }
-
 
 
     private String fileUpload(String saveFolder, List<MultipartFile> files) {
@@ -184,6 +188,5 @@ public class EntExamServiceImpl implements EntExamService {
         }
         return imgPaths.toString();
     }
-
 
 }
