@@ -1,4 +1,5 @@
 # MOMSWAY
+![momsway](https://github.com/skd9712/MomsWay/assets/59557044/b932e4fb-dbad-473e-bf3e-e9c48427335a)
 
 ## 프로젝트 소개
 
