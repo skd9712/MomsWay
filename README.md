@@ -1,7 +1,7 @@
-# MOMSWAY
+# 🐸MOMSWAY
 ![momsway](https://github.com/skd9712/MomsWay/assets/59557044/b932e4fb-dbad-473e-bf3e-e9c48427335a)
 
-## 프로젝트 소개
+## 🐸프로젝트 소개
 
 모든 길은 맘스웨이로 통합니다. 
 맘스웨이는 '교육 카페'와 '지역 카페'가 결합된 학부모 커뮤니티입니다. 
