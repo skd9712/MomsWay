@@ -5,6 +5,7 @@ import com.momsway.domain.Report;
 import com.momsway.domain.User;
 import com.momsway.domain.UserRole;
 import com.momsway.dto.ReportDTO;
+import com.momsway.exception.CustomException;
 import com.momsway.repository.entexam.EntExamRepository;
 import com.momsway.repository.report.ReportRepository;
 import com.momsway.repository.user.UserRepository;
@@ -68,7 +69,7 @@ public class ReportServiceImpl implements ReportService {
     public ReportDTO detail(Long rid) {
         // ReportDTO를 얻는 로직
         Report report = reportRepository.findById(rid)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid report id: " + rid));
+                .orElseThrow(() -> new CustomException("from reposrtservice detail"));
 
         return ReportDTO.builder()
                 .rid(report.getRid())

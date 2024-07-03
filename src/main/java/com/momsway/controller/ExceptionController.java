@@ -1,6 +1,7 @@
 package com.momsway.controller;
 
 import com.momsway.exception.CustomException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 import java.nio.file.AccessDeniedException;
 
 @ControllerAdvice
+@Slf4j
 public class ExceptionController {
 
     @ExceptionHandler(AccessDeniedException.class)
@@ -28,6 +30,7 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     public String handlerInternalServerError(Exception e) {
+        log.error("handlerInternalServerError...{}",e);
         return "error/500";
     }
 

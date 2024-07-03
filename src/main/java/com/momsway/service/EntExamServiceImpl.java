@@ -3,6 +3,7 @@ package com.momsway.service;
 import com.momsway.domain.EntExam;
 import com.momsway.domain.User;
 import com.momsway.dto.EntExamDTO;
+import com.momsway.exception.CustomException;
 import com.momsway.repository.entexam.EntExamRepository;
 import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
@@ -69,6 +70,8 @@ public class EntExamServiceImpl implements EntExamService {
     @Override
     public EntExamDTO findByEid(Long eid) {
         EntExamDTO detail = entExamRepository.findByEid(eid);
+        if(detail==null)
+            throw new CustomException("from entexamservice findByEid");
 //조회수 증가
         entExamRepository.incrementReadNo(eid);
         return EntExamDTO.builder()

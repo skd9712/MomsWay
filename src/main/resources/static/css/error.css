@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(244 246 244);
+}
+h1,p{
+    text-align: center;
+    color: #12a60d;
+
+}
+img {
+    display: inline-block;
+    width: 100%;
+    opacity: 0.5;
+}

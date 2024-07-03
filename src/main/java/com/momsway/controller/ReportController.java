@@ -1,6 +1,7 @@
 package com.momsway.controller;
 
 import com.momsway.dto.ReportDTO;
+import com.momsway.exception.CustomException;
 import com.momsway.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,6 +78,8 @@ public class ReportController {
         Map<Long, Long> countReportsByEid = reportService.countReportsByEid();
         Map<Long, String> userNicknames = reportService.userNickName();
         Long count = countReportsByEid.get(eid);
+        if(count==null)
+            throw new CustomException("from reportcontroller reportDetail");
         List<String> comments = reportService.findCommentByEid(eid);
         model.addAttribute("dto", dto);
         model.addAttribute("count", count);
