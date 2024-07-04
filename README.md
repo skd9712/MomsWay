@@ -53,4 +53,16 @@
 ![AJAX](https://img.shields.io/badge/AJAX-0769AD?style=for-the-badge&logo=ajax&logoColor=white)
 ![API](https://img.shields.io/badge/API-FF6F00?style=for-the-badge&logo=api&logoColor=white)
 
+## 🐸 엔티티 설계
+![entities](https://github.com/skd9712/MomsWay/assets/59557044/b2ffbf88-e542-4ae9-a374-2afc382a7df2)
+
+## 🐸 클래스 다이어그램
+![dtos](https://github.com/skd9712/MomsWay/assets/59557044/2ad99b49-c342-4d13-9c45-0d68fd596878)
+![entity3개](https://github.com/skd9712/MomsWay/assets/59557044/39803509-2179-4b14-98df-d20f3b336886)
+![likeClassDiagram](https://github.com/skd9712/MomsWay/assets/59557044/54dcaea6-4c37-431c-9053-00408c5b6620)
+![reportClassDiagram](https://github.com/skd9712/MomsWay/assets/59557044/53d29016-7ed0-49ac-b2af-596c0068f9c7)
+
+## 🐸 시퀀스 다이어그램
+![LikeServiceImpl_insertLike](https://github.com/skd9712/MomsWay/assets/59557044/ca01ea36-fcd1-4569-826b-424733fa58a0)
+![reportseq](https://github.com/skd9712/MomsWay/assets/59557044/95e4a276-9864-457c-8926-19bc51997bb3)
 
