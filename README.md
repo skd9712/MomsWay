@@ -13,6 +13,6 @@
 | 이름 | 역할 | 연락처 | GitHub |
 |------|-----------------------|---------------|---------------|
 | 황현준 | 마이페이지,입시게시판 | skd97122@gmail.com | [황현준](https://github.com/skd9712) |
-| 김혜연 | 학원홍보,공지게시판 | tongueeye1@gmail.com | [김혜](https://github.com/loveyrooney) |
+| 김혜연 | 학원홍보,공지게시판 | tongueeye1@gmail.com | [김혜연](https://github.com/loveyrooney) |
 | 은 별 | 메인페이지, 로그인구현 | ebyeol628@gmail.com | [은 별](https://github.com/Agstarr) |
 | 홍유나 | 신고기능구현 | tongueeye1@gmail.com | [홍유나](https://github.com/yuyuyu1123) |
