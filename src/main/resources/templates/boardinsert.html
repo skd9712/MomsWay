@@ -24,7 +24,7 @@
 		<div class="intop">
 			<span th:text="${top+' 게시글 등록하기'}"></span>
 		</div>
-		<form id="form" th:method="post" action="" th:action="@{${insertAction}}" enctype="multipart/form-data">
+		<form id="form" method="post" th:action="@{${insertAction}}" enctype="multipart/form-data">
 			<ul class="inbody">
 				<th:block th:if="${noticeOnly!=null}">
 					<li class="insertforms">
@@ -50,6 +50,7 @@
 					<label class="writelabel" th:for="content">내용</label>
 					<textarea class="writeinput contentinput" th:name="content" th:id="content" required></textarea>
 				</li>
+				<li>이미지는 각 2MB 이하의 파일만 등록 가능합니다.</li>
 				<li class="insertforms">
 					<label class="writelabel" th:for="files">파일등록</label>
 					<input type="file" th:name="files" id="files" multiple="multiple" accept=".gif, .jpg, .png">

@@ -41,14 +41,21 @@ public class NoticeController {
     public ResponseEntity<byte[]> getNoticeImage(@PathVariable String filename) {
         InputStream in = null;
         ResponseEntity<byte[]> responseEntity;
+        HttpHeaders headers = new HttpHeaders();
         try {
             in = new FileInputStream(saveFolder + "/" + filename);
-            HttpHeaders headers = new HttpHeaders();
             responseEntity = new ResponseEntity<>(FileCopyUtils.copyToByteArray(in)
                     ,headers , HttpStatus.OK);
         } catch(IOException e) {
-            log.error("getImages error...{}",e);
-            responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            log.info("getNotiImages error...{}",e);
+            try{
+                in = new FileInputStream("src/main/resources/static/images/noimg.png");
+                responseEntity = new ResponseEntity<>(FileCopyUtils.copyToByteArray(in)
+                        , headers, HttpStatus.OK);
+            }catch (IOException e2) {
+                log.error("geNotiImages error...{}",e2);
+                responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
         return responseEntity;
     }

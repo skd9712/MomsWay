@@ -9,14 +9,11 @@ import com.momsway.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +29,7 @@ import java.util.*;
 public class AcademyServiceImpl implements AcademyService{
     private final AcademyRepository academyRepository;
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
+
     @Override
     public Page<AcademyDTO> findAcademyList(Pageable pageable, String search_txt) {
         long count = listCount(search_txt);
@@ -47,7 +44,10 @@ public class AcademyServiceImpl implements AcademyService{
 
     @Override
     public AcademyDTO findByAid(Long aid) {
-        return academyRepository.findByAid(aid);
+        AcademyDTO result = academyRepository.findByAid(aid);
+        if(result==null)
+            throw new CustomException("from academyservice findByAid");
+        return result;
     }
 
     @Override

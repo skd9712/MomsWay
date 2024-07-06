@@ -2,6 +2,7 @@ package com.momsway.controller;
 
 import com.momsway.dto.AcademyDTO;
 import com.momsway.dto.NoticeDTO;
+import com.momsway.exception.CustomException;
 import com.momsway.service.AcademyService;
 import com.momsway.service.NoticeService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,18 +46,25 @@ public class AcademyController {
     @Value("${spring.servlet.multipart.location}")
     private String saveFolder;
 
-    @GetMapping( value="/getAcaImages/{filename}")
+    @GetMapping("/getAcaImages/{filename}")
     public ResponseEntity<byte[]> getNoticeImage(@PathVariable String filename) {
         InputStream in = null;
         ResponseEntity<byte[]> responseEntity;
+        HttpHeaders headers = new HttpHeaders();
         try {
             in = new FileInputStream(saveFolder + "/" + filename);
-            HttpHeaders headers = new HttpHeaders();
             responseEntity = new ResponseEntity<>(FileCopyUtils.copyToByteArray(in)
                     ,headers , HttpStatus.OK);
         } catch(IOException e) {
-            log.error("getImages error...{}",e);
-            responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            log.info("getAcaImages error...{}",e);
+            try{
+                in = new FileInputStream("src/main/resources/static/images/noimg.png");
+                responseEntity = new ResponseEntity<>(FileCopyUtils.copyToByteArray(in)
+                        , headers, HttpStatus.OK);
+            }catch (IOException e2) {
+                log.error("getAcaImages error...{}",e2);
+                responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
         return responseEntity;
     }
@@ -64,7 +73,6 @@ public class AcademyController {
     public String academy(Model model
             , @PageableDefault(size=10, sort = "aid", direction = Sort.Direction.ASC) Pageable pageable
             , @RequestParam(required = false, defaultValue = "") String search_txt){
-
         List<NoticeDTO> toplist = noticeService.findTopList();
         Page<AcademyDTO> list = academyService.findAcademyList(pageable, search_txt);
         log.info("currPage... {}",pageable.getPageNumber());
@@ -86,8 +94,8 @@ public class AcademyController {
 
     @GetMapping("/academy/{aid}")
     public String detail(@PathVariable Long aid, Model model){
-        String user = SecurityContextHolder.getContext().getAuthentication().getName();
-        academyService.addAcademyReadNo(aid,user);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        academyService.addAcademyReadNo(aid, auth.getName());
         AcademyDTO dto = academyService.findByAid(aid);
         if(dto.getImgPath()!=null) {
             String[] imgPaths = dto.getImgPath().split(";-;");
@@ -99,14 +107,20 @@ public class AcademyController {
 
     @GetMapping("/delacademy/{aid}")
     public ResponseEntity<String> delAcademy(@PathVariable Long aid){
-        int result = academyService.delAcademy(aid,saveFolder);
-        String msg = "메롱";
-        if(result==0){
-            msg = "삭제가 실패하였습니다.";
-        }else{
-            msg = "삭제 되었습니다.";
+        AcademyDTO dto = academyService.findByAid(aid);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.getName().equals(dto.getEmail())
+                || auth.getAuthorities().toString().equals("[ROLE_ADMIN]")){
+            int result = academyService.delAcademy(aid,saveFolder);
+            String msg = "메롱";
+            if(result==0)
+                msg = "삭제가 실패하였습니다.";
+            else
+                msg = "삭제 되었습니다.";
+            return ResponseEntity.ok().body(msg);
+        } else {
+            throw new CustomException("from academycontroller delacademy");
         }
-        return ResponseEntity.ok().body(msg);
     }
 
     @GetMapping("/insertAcademy")
@@ -119,8 +133,8 @@ public class AcademyController {
 
     @PostMapping("/insertAcademy")
     public String insertAcademyResult(@ModelAttribute AcademyDTO dto){
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        dto.setEmail(email);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        dto.setEmail(auth.getName());
         Long newAid = academyService.insertAcademy(dto,saveFolder);
         return "redirect:/academy/"+newAid;
     }
@@ -128,18 +142,25 @@ public class AcademyController {
     @GetMapping("/updateAcademy/{aid}")
     public String updateAcademy(@PathVariable Long aid, Model model){
         AcademyDTO dto = academyService.findByAid(aid);
-        if(dto.getImgPath()!=null) {
-            String[] imgPaths = dto.getImgPath().split(";-;");
-            for(int i=0; i<imgPaths.length; i++){
-                imgPaths[i] = "/getAcaImages/"+imgPaths[i];
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.getName().equals(dto.getEmail())
+                || auth.getAuthorities().toString().equals("[ROLE_ADMIN]")){
+            if(dto.getImgPath()!=null) {
+                String[] imgPaths = dto.getImgPath().split(";-;");
+                for(int i=0; i<imgPaths.length; i++){
+                    imgPaths[i] = "/getAcaImages/"+imgPaths[i];
+                }
+                model.addAttribute("imgPaths",imgPaths);
             }
-            model.addAttribute("imgPaths",imgPaths);
+            model.addAttribute("dto",dto);
+            System.out.println(dto.getTitle());
+            model.addAttribute("insertAction", "/updateAcademy/"+aid);
+            model.addAttribute("top", "학원홍보");
+            return "boardupdate";
+        } else {
+            throw new CustomException("from academycontroller updateacademy");
         }
-        model.addAttribute("dto",dto);
-        System.out.println(dto.getTitle());
-        model.addAttribute("insertAction", "/updateAcademy/"+aid);
-        model.addAttribute("top", "학원홍보");
-        return "boardupdate";
+
     }
 
     @PostMapping("/updateAcademy/{aid}")

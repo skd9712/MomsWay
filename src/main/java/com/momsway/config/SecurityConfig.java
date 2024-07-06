@@ -60,7 +60,7 @@ public class SecurityConfig {
                                         ,"/entreport").hasAnyRole("PARENT", "ACADEMY", "ADMIN")
 
                                 // 회원(정지회원 포함)
-                                .requestMatchers("/mypage","myinfo").authenticated()
+                                .requestMatchers("/mypage","myinfo","/getAcaImages/*","/getentimages/","/getNotiImages/").authenticated()
 //
                                 .anyRequest().authenticated()
         );
