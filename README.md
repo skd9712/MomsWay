@@ -87,5 +87,4 @@
 ![reportseq](https://github.com/skd9712/MomsWay/assets/59557044/95e4a276-9864-457c-8926-19bc51997bb3)
 
 ## 🐸 시연영상
-https://youtu.be/nCiYZTFm5Nk
-
+[![Video Thumbnail](https://i.ytimg.com/vi/nCiYZTFm5Nk/hqdefault.jpg)](https://youtu.be/nCiYZTFm5Nk)
