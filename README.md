@@ -60,12 +60,8 @@
 - 💡 서로가 구현한 내용 모두 이해한 뒤, 최소한의 변경으로 해결 
 - 📌 공유할 템플릿의 최초 설계를 어떤 방식으로 해야할 지 알게됨
 
-#### Exception 관련 이슈 
-
-- 글 수정/삭제 접근 url에 글번호만 알면 같은 권한의 다른 유저가 수정/삭제 url에 접근이 가능한 문제 발생
-- 💡 해당 메서드마다 authentication 체크하여 작성자 혹은 관리자만 접근 가능하도록 함
-- 💡 그 외의 접근 시도들은 에러 페이지 리턴하는 CustomException 처리
-- 💡 CustomException 은 DB 리턴이 null이거나, parameter 가 null 이거나 type 오류인 경우, 405 상황 등에 적용함
+#### E능
+![신고기능](https://github.com/skd9712/MomsWay/assets/59557044/c3ebb985-c695-4c7d-ac3f-35056807868c)
 
 ## 🐸 유스케이스 다이어그램
 ![스크린샷 2024-06-18 203359](https://github.com/skd9712/MomsWay/assets/59557044/5ceed0bd-14d3-445d-bc39-f35002b9ebf5)
